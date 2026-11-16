@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAR HOBBY - Trình Xem Database CRM (brain.db)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-[#0c0d0e] text-zinc-200 min-h-screen p-4 sm:p-8">
+
+  <div class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-zinc-800 gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="px-2.5 py-0.5 rounded-full bg-red-950 text-red-400 border border-red-800 text-[10px] font-mono uppercase font-bold tracking-wider">
+            SQLite Database Viewer
+          </span>
+          <span class="text-xs text-zinc-500 font-mono">D:\web\brain.db</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          KAR HOBBY // CRM DATABASE
+        </h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-xs font-bold text-zinc-300 border border-zinc-700 transition">
+          ← Về Landing Page
+        </a>
+      </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="flex gap-2 border-b border-zinc-800 pb-3">
+      <button onclick="switchTab('products')" id="tab-btn-products" class="tab-btn px-4 py-2 rounded-xl bg-red-600 text-white text-xs font-bold font-mono transition">
+        📦 SẢN PHẨM (7)
+      </button>
+      <button onclick="switchTab('customers')" id="tab-btn-customers" class="tab-btn px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-400 text-xs font-bold font-mono transition">
+        👥 KHÁCH HÀNG (5)
+      </button>
+      <button onclick="switchTab('orders')" id="tab-btn-orders" class="tab-btn px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-400 text-xs font-bold font-mono transition">
+        📋 ĐƠN HÀNG (0)
+      </button>
+    </div>
+
+    <!-- TAB 1: PRODUCTS -->
+    <div id="tab-products" class="tab-content space-y-4">
+      <div class="bg-zinc-900/80 rounded-2xl border border-zinc-800 overflow-hidden shadow-xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-zinc-950/80 text-zinc-400 font-mono uppercase border-b border-zinc-800">
+              <tr>
+                <th class="p-3.5">ID</th>
+                <th class="p-3.5">Tên sản phẩm / Dịch vụ</th>
+                <th class="p-3.5">Loại</th>
+                <th class="p-3.5">Giá niêm yết</th>
+                <th class="p-3.5">Tồn kho</th>
+                <th class="p-3.5">Mô tả</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-800/60 font-sans">
+
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">1</td>
+                <td class="p-3.5 font-bold text-white">Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 text-[10px] font-mono font-bold">SERVICE</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">180,000 đ</td>
+                <td class="p-3.5"><span class='text-zinc-600 font-mono'>null (theo yêu cầu)</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">Thay mâm kim loại cao cấp, lốp cao su vân bám, hạ gầm JDM, tem decal theo tên.</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">2</td>
+                <td class="p-3.5 font-bold text-white">Độ xe Diecast 1:64 Chuyên sâu (Full Paint & Camber)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 text-[10px] font-mono font-bold">SERVICE</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">380,000 đ</td>
+                <td class="p-3.5"><span class='text-zinc-600 font-mono'>null (theo yêu cầu)</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">Tẩy sơn zin, 2 lớp lót chống tróc, sơn Chameleon/Candy 2K bóng gương, căn góc camber.</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">3</td>
+                <td class="p-3.5 font-bold text-white">Ráp & Weathering Gunpla HG/RG 1/144</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 text-[10px] font-mono font-bold">SERVICE</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">390,000 đ</td>
+                <td class="p-3.5"><span class='text-zinc-600 font-mono'>null (theo yêu cầu)</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">Gọt ghẻ, kẻ line, sa trường rỉ sét sa mạc, ám khói nòng pháo, phủ mờ bảo vệ.</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">4</td>
+                <td class="p-3.5 font-bold text-white">Ráp & Weathering Gunpla MG 1/100 Sa trường khốc liệt</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 text-[10px] font-mono font-bold">SERVICE</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">750,000 đ</td>
+                <td class="p-3.5"><span class='text-zinc-600 font-mono'>null (theo yêu cầu)</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">Chi tiết khung xương cơ khí kim loại, rỉ sét, tróc sơn xước giáp, vết đạn khói súng.</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">5</td>
+                <td class="p-3.5 font-bold text-white">Sa bàn Diorama Garage 1:64 Kèm Đèn LED USB & Hộp Mica</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-mono font-bold">PHYSICAL</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">450,000 đ</td>
+                <td class="p-3.5"><span class='font-mono font-bold text-emerald-400'>15 cái</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">Gồm sàn bê tông garage xước, kệ đồ nghề, lốp xe độ, hệ thống LED 5V và hộp mica chống bụi.</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">6</td>
+                <td class="p-3.5 font-bold text-white">Gói Trọn Gói Xe Độ Độc Bản Mini GT 1-of-1</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px] font-mono font-bold">PHYSICAL</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">890,000 đ</td>
+                <td class="p-3.5"><span class='font-mono font-bold text-emerald-400'>5 cái</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">Bao phôi Mini GT chính hãng, custom mâm + sơn độc bản + biển số cá nhân hóa + hộp mica.</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">7</td>
+                <td class="p-3.5 font-bold text-white">Bản vẽ 3D Decal & Phụ kiện In 3D Resin</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800 text-[10px] font-mono font-bold">DIGITAL</span></td>
+                <td class="p-3.5 font-mono text-red-400 font-bold">99,000 đ</td>
+                <td class="p-3.5"><span class='text-zinc-600 font-mono'>null (theo yêu cầu)</span></td>
+                <td class="p-3.5 text-zinc-400 max-w-xs truncate">File STL phụ kiện cản độ xe, mâm và file vector decal in nước.</td>
+              </tr>
+    
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: CUSTOMERS -->
+    <div id="tab-customers" class="tab-content hidden space-y-4">
+      <div class="bg-zinc-900/80 rounded-2xl border border-zinc-800 overflow-hidden shadow-xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-zinc-950/80 text-zinc-400 font-mono uppercase border-b border-zinc-800">
+              <tr>
+                <th class="p-3.5">ID</th>
+                <th class="p-3.5">Họ và tên</th>
+                <th class="p-3.5">Số điện thoại</th>
+                <th class="p-3.5">Zalo liên hệ</th>
+                <th class="p-3.5">Ngày đăng ký</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-800/60">
+
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">1</td>
+                <td class="p-3.5 font-bold text-white">Duy Nhất</td>
+                <td class="p-3.5 font-mono text-zinc-300">0971986215</td>
+                <td class="p-3.5 font-mono text-emerald-400">0971986215</td>
+                <td class="p-3.5 font-mono text-zinc-500">2026-11-05 09:48:13</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">2</td>
+                <td class="p-3.5 font-bold text-white">Nguyễn Tuấn Kiệt</td>
+                <td class="p-3.5 font-mono text-zinc-300">0908123456</td>
+                <td class="p-3.5 font-mono text-emerald-400">0908123456</td>
+                <td class="p-3.5 font-mono text-zinc-500">2026-11-06 14:20:00</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">3</td>
+                <td class="p-3.5 font-bold text-white">Trần Hoàng Minh</td>
+                <td class="p-3.5 font-mono text-zinc-300">0912345678</td>
+                <td class="p-3.5 font-mono text-emerald-400">0912345678</td>
+                <td class="p-3.5 font-mono text-zinc-500">2026-11-07 10:15:30</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">4</td>
+                <td class="p-3.5 font-bold text-white">Lê Đức Huy</td>
+                <td class="p-3.5 font-mono text-zinc-300">0987654321</td>
+                <td class="p-3.5 font-mono text-emerald-400">0987654321</td>
+                <td class="p-3.5 font-mono text-zinc-500">2026-11-08 16:45:00</td>
+              </tr>
+    
+              <tr class="hover:bg-zinc-800/40 transition">
+                <td class="p-3.5 font-mono text-zinc-500 font-bold">5</td>
+                <td class="p-3.5 font-bold text-white">Võ Quốc Bảo</td>
+                <td class="p-3.5 font-mono text-zinc-300">0933456789</td>
+                <td class="p-3.5 font-mono text-emerald-400">0933456789</td>
+                <td class="p-3.5 font-mono text-zinc-500">2026-11-09 11:30:00</td>
+              </tr>
+    
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: ORDERS -->
+    <div id="tab-orders" class="tab-content hidden space-y-4">
+      <div class="bg-zinc-900/80 rounded-2xl border border-zinc-800 overflow-hidden shadow-xl p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center mx-auto mb-3 text-2xl">
+          📦
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">Chưa có đơn hàng nào phát sinh</h4>
+        <p class="text-xs text-zinc-500 max-w-sm mx-auto leading-relaxed">
+          Bảng đơn hàng đã được làm sạch. Các đơn hàng mới từ hôm nay (12/11) qua SePay sẽ được ghi nhận tại đây.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-red-600', 'text-white');
+        btn.classList.add('bg-zinc-900', 'text-zinc-400');
+      });
+
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      activeBtn.classList.remove('bg-zinc-900', 'text-zinc-400');
+      activeBtn.classList.add('bg-red-600', 'text-white');
+    }
+  </script>
+</body>
+</html>

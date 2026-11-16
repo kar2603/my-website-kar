@@ -1,0 +1,329 @@
+{
+  "customers": [
+    {
+      "id": 8,
+      "name": "A",
+      "phone": "0971986215",
+      "zalo": "0971986215",
+      "registered_at": "05/11/2026 17:23:05"
+    },
+    {
+      "id": 9,
+      "name": "B",
+      "phone": "0976548425",
+      "zalo": "0976548425",
+      "registered_at": "05/11/2026 17:43:40"
+    },
+    {
+      "id": 10,
+      "name": "Thanh Hà",
+      "phone": "0933126122",
+      "zalo": "0933126122",
+      "registered_at": "06/11/2026 9:56:25"
+    },
+    {
+      "id": 11,
+      "name": "Nguyễn Đăng Kha Lê",
+      "phone": "0906349768",
+      "zalo": "0906349768",
+      "registered_at": "08/11/2026 18:21:09"
+    },
+    {
+      "id": 12,
+      "name": "Ân",
+      "phone": "0934565333",
+      "zalo": "0934565333",
+      "registered_at": "08/11/2026 18:22:21"
+    },
+    {
+      "id": 13,
+      "name": "bi",
+      "phone": "0988989098",
+      "zalo": "0988989098",
+      "registered_at": "10/11/2026 15:53:47"
+    },
+    {
+      "id": 14,
+      "name": "Quang",
+      "phone": "0998877444",
+      "zalo": "0998877444",
+      "registered_at": "11/11/2026 12:17:37"
+    },
+    {
+      "id": 15,
+      "name": "Nguyễn Đăng Kha Lê",
+      "phone": "0767897654",
+      "zalo": "0767897654",
+      "registered_at": "12/11/2026 16:13:13"
+    },
+    {
+      "id": 16,
+      "name": "Lê Nguyễn Đăng Kha",
+      "phone": "0905138105",
+      "zalo": "0905138105",
+      "registered_at": "12/11/2026 17:05:08"
+    },
+    {
+      "id": 17,
+      "name": "Test Bot",
+      "phone": "0900000000",
+      "zalo": "0900000000",
+      "registered_at": "12/11/2026 17:13:04"
+    },
+    {
+      "id": 18,
+      "name": "Mỹ",
+      "phone": "0909675456",
+      "zalo": "0909675456",
+      "registered_at": "12/11/2026 17:35:25"
+    },
+    {
+      "id": 19,
+      "name": "test 99",
+      "phone": "09615164631",
+      "zalo": "09615164631",
+      "registered_at": "12/11/2026 17:45:24"
+    },
+    {
+      "id": 20,
+      "name": "teo",
+      "phone": "0976456789",
+      "zalo": "0976456789",
+      "registered_at": "12/11/2026 20:50:51"
+    },
+    {
+      "id": 21,
+      "name": "minh tuấn",
+      "phone": "0845192139",
+      "zalo": "0845192139",
+      "registered_at": "12/11/2026 20:57:13"
+    },
+    {
+      "id": 22,
+      "name": "tèo",
+      "phone": "0987678945",
+      "zalo": "0987678945",
+      "registered_at": "12/11/2026 21:12:22"
+    },
+    {
+      "id": 23,
+      "name": "Thuỷ",
+      "phone": "0978675434",
+      "zalo": "0978675434",
+      "registered_at": "12/11/2026 21:54:39"
+    },
+    {
+      "id": 24,
+      "name": "ly",
+      "phone": "0987656789",
+      "zalo": "0987656789",
+      "registered_at": "12/11/2026 22:24:36"
+    }
+  ],
+  "orders": [
+    {
+      "id": 2,
+      "customer_id": 8,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "05/11/2026 17:23:05",
+      "order_code": "KH5423",
+      "customer_name": "A",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 3,
+      "customer_id": 9,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "05/11/2026 17:43:40",
+      "order_code": "KH3187",
+      "customer_name": "B",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 4,
+      "customer_id": 10,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "06/11/2026 9:56:25",
+      "order_code": "KH8610",
+      "customer_name": "Thanh Hà",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 5,
+      "customer_id": 11,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "08/11/2026 18:21:09",
+      "order_code": "KH3754",
+      "customer_name": "Nguyễn Đăng Kha Lê",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 6,
+      "customer_id": 12,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "08/11/2026 18:22:21",
+      "order_code": "KH7754",
+      "customer_name": "Ân",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 7,
+      "customer_id": 13,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "10/11/2026 15:53:47",
+      "order_code": "KH3634",
+      "customer_name": "bi",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 8,
+      "customer_id": 14,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "11/11/2026 12:17:37",
+      "order_code": "KH8771",
+      "customer_name": "Quang",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 9,
+      "customer_id": 15,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 16:13:13",
+      "order_code": "KH5855",
+      "customer_name": "Nguyễn Đăng Kha Lê",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 10,
+      "customer_id": 16,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 17:05:08",
+      "order_code": "KH2131",
+      "customer_name": "Lê Nguyễn Đăng Kha",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 11,
+      "customer_id": 17,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 17:13:04",
+      "order_code": "KH3310",
+      "customer_name": "Test Bot",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 12,
+      "customer_id": 18,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 17:35:25",
+      "order_code": "KH6724",
+      "customer_name": "Mỹ",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 13,
+      "customer_id": 19,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 17:45:24",
+      "order_code": "KH4005",
+      "customer_name": "test 99",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 14,
+      "customer_id": 20,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 20:50:51",
+      "order_code": "KH2157",
+      "customer_name": "teo",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 15,
+      "customer_id": 21,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "success",
+      "order_date": "12/11/2026 20:57:13",
+      "order_code": "KH3957",
+      "customer_name": "minh tuấn",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 16,
+      "customer_id": 22,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "success",
+      "order_date": "12/11/2026 21:12:22",
+      "order_code": "KH9067",
+      "customer_name": "tèo",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 17,
+      "customer_id": 23,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "success",
+      "order_date": "12/11/2026 21:54:39",
+      "order_code": "KH2101",
+      "customer_name": "Thuỷ",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    },
+    {
+      "id": 18,
+      "customer_id": 24,
+      "product_id": 1,
+      "amount": 2000.0,
+      "status": "pending",
+      "order_date": "12/11/2026 22:24:36",
+      "order_code": "KH2695",
+      "customer_name": "ly",
+      "product_name": "Độ xe Diecast 1:64 Cơ bản (Stance & Wheels Swap)",
+      "product_type": "service"
+    }
+  ]
+}

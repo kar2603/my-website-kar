@@ -1,0 +1,40 @@
+# Secrets & Environment variables
+.env
+.env.local
+.env.*.local
+resend_config.txt
+
+# Database & SQLite files
+brain.db
+*.db
+*.sqlite
+*.sqlite3
+backups/
+*.backup
+*.bak
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Python & Node artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Large zip archives
+*.zip
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp

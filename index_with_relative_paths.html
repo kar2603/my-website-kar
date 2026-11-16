@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAR HOBBY - Xưởng Chế Tác Mô Hình Độc Bản | Diecast 1:64 & Gundam</title>
+  <meta name="description" content="Họ bán mô hình đúc hàng loạt — KAR HOBBY tạo ra tác phẩm độc bản mang linh hồn của riêng bạn. Độ xe diecast 1:64 từ 180K, weathering Gundam từ 390K, sa bàn diorama từ 350K. Nghiệm thu 1-1 qua Zalo, đền bù 100% nếu gãy vỡ.">
+  <meta property="og:title" content="KAR HOBBY - Xưởng Chế Tác Mô Hình Độc Bản">
+  <meta property="og:description" content="Họ bán mô hình đúc hàng loạt — KAR HOBBY tạo ra tác phẩm độc bản mang linh hồn của riêng bạn. Nghiệm thu 1-1 qua Zalo, đền bù 100% khi vận chuyển.">
+  <meta property="og:image" content="images/diorama_custom.png">
+  <link rel="icon" type="image/png" href="images/kar_hobby_logo.png">
+  <!-- Google Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,600;0,800;0,900;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <style>
+    :root {
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-heading: 'Chivo', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: #f2f0eb; /* Chuẩn màu Off-white ấm, chất chơi xe */
+      background-image:
+        radial-gradient(#d5d3cb 0.85px, transparent 0.85px),
+        linear-gradient(to right, rgba(213, 211, 203, 0.25) 1px, transparent 1px);
+      background-size: 24px 24px, 120px 120px;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+    h1, h2, h3, h4, p { overflow-wrap: break-word; word-break: normal; }
+    h1, h2, h3, .font-heading {
+      font-family: var(--font-heading);
+    }
+    .font-mono-tech {
+      font-family: var(--font-mono);
+    }
+    .jdm-shadow {
+      box-shadow: 0 25px 50px -12px rgba(24, 24, 27, 0.12), 0 0 0 1px rgba(24, 24, 27, 0.05);
+    }
+    .product-shadow {
+      filter: drop-shadow(0 20px 25px rgba(24, 24, 27, 0.35));
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-shadow:hover {
+      transform: translateY(-5px);
+      filter: drop-shadow(0 28px 30px rgba(220, 38, 38, 0.25));
+    }
+    #main-hero-img { transition: opacity 0.15s ease; }
+    /* Tránh iOS tự phóng to khi bấm vào ô nhập */
+    input, select, textarea { font-size: 16px; }
+  </style>
+</head>
+<body class="min-h-screen p-3 pb-24 md:p-8 lg:p-10 flex justify-center items-start text-zinc-800">
+
+  <!-- KHUNG CANVAS TRUNG TÂM -->
+  <div class="w-full max-w-7xl bg-[#faf9f5] rounded-[24px] md:rounded-[36px] border border-[#e5e3db] jdm-shadow overflow-hidden relative">
+
+    <!-- HỌA TIẾT KỸ THUẬT -->
+    <div class="hidden md:block absolute top-4 left-4 font-mono-tech text-[10px] text-zinc-400 tracking-widest select-none">
+      BESPOKE WORKSHOP // 15–20 SLOTS/THÁNG // KAR_HOBBY
+    </div>
+    <div class="hidden md:flex absolute top-4 right-6 font-mono-tech text-[10px] text-red-600 font-bold tracking-widest select-none items-center gap-1.5">
+      <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span> ĐỀN BÙ 100% KHI SHIP
+    </div>
+
+    <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="0" y1="90" x2="1400" y2="90" stroke="#71717a" stroke-width="0.8" stroke-dasharray="8 8" />
+      <line x1="680" y1="0" x2="680" y2="1200" stroke="#71717a" stroke-width="0.8" stroke-dasharray="8 8" />
+    </svg>
+
+    <div class="relative z-10 px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-8">
+
+      <!-- ================= 1. HEADER ================= -->
+      <header class="flex items-center justify-between gap-3 border-b border-[#e7e5dc] pb-4 pt-2">
+        <a href="#hero" class="flex items-center gap-3 group min-w-0">
+          <img src="images/kar_hobby_logo.png" alt="KAR HOBBY Logo" width="1024" height="559" class="h-11 md:h-12 w-auto object-contain rounded-xl shadow-sm border border-zinc-900 group-hover:scale-105 transition-transform duration-200">
+          <div class="hidden sm:block">
+            <div class="flex items-center gap-2">
+              <span class="font-heading text-lg font-black tracking-tight text-zinc-950">KAR HOBBY</span>
+              <span class="px-1.5 py-0.5 rounded bg-zinc-200 text-zinc-800 font-mono-tech text-[10px] font-bold">WORKSHOP</span>
+            </div>
+            <span class="text-[10px] text-zinc-500 font-medium tracking-wider uppercase font-mono-tech">Diecast & Model Kit Garage</span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs font-bold tracking-wider uppercase text-zinc-600">
+          <a href="#hero" class="text-zinc-950 border-b-2 border-red-600 pb-1">Trang chủ</a>
+          <a href="#services" class="hover:text-red-600 transition">Bảng giá</a>
+          <a href="#process" class="hover:text-red-600 transition">Quy trình</a>
+          <a href="#contact" class="hover:text-red-600 transition">Liên hệ</a>
+        </nav>
+
+        <a href="tel:0906349768" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-zinc-950 hover:bg-red-600 text-white text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-sm whitespace-nowrap shrink-0">
+          <span aria-hidden="true">☎</span>
+          <span>0906 349 768</span>
+        </a>
+      </header>
+
+      <!-- ================= 2. HERO ================= -->
+      <section id="hero" class="pt-8 pb-14 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+        <div class="lg:col-span-6 space-y-6 min-w-0">
+
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-800 text-xs font-bold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-red-600 shrink-0"></span>
+            <span class="uppercase tracking-widest text-[10px] sm:text-[11px]">Xưởng Chế Tác Thủ Công · Giới Hạn 15–20 Chiếc/Tháng</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl lg:text-[44px] font-black text-zinc-950 tracking-normal sm:tracking-tight leading-[1.4] sm:leading-[1.3] lg:leading-[1.25]">
+            <span class="block">HỌ BÁN MÔ HÌNH HÀNG LOẠT —</span>
+            <span class="block mt-1.5 sm:mt-2.5">
+              KAR HOBBY TẠO RA <span class="text-red-600 inline-block font-black">TÁC PHẨM ĐỘC BẢN</span>
+            </span>
+          </h1>
+
+          <p class="text-zinc-600 text-sm sm:text-base leading-[1.75] sm:leading-relaxed max-w-xl font-normal mt-4 sm:mt-5">
+            Không bán những chiếc hộp đúc sẵn vô hồn để bạn tự xoay xở, <strong>KAR HOBBY</strong> trực tiếp độ thủ công từng chi tiết theo ý tưởng của riêng bạn: hạ gầm JDM, camber bánh béo, sơn đổi màu 2 lớp lót chống tróc, kẻ line và tạo hiệu ứng sa trường sống động. Nghiệm thu 1-1 qua Zalo từng công đoạn, trao tận tay bạn một tác phẩm độc nhất để tự hào trưng bày.
+          </p>
+
+          <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 pt-2">
+            <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="px-8 py-3.5 rounded-full bg-zinc-950 hover:bg-red-600 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-zinc-950/20 inline-flex items-center justify-center gap-2 group">
+              <span>Nhắn Zalo đặt lịch độ</span>
+              <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a href="tel:0906349768" class="px-7 py-3.5 rounded-full bg-[#f0ede6] hover:bg-white text-zinc-800 font-bold text-xs uppercase tracking-wider border border-zinc-300 transition inline-flex items-center justify-center gap-2">
+              <span aria-hidden="true">☎</span> Gọi 0906 349 768
+            </a>
+          </div>
+
+          <div class="pt-6 grid grid-cols-3 gap-3 sm:gap-4 border-t border-zinc-200/80 font-mono-tech">
+            <div class="min-w-0">
+              <span class="block text-[10px] sm:text-[11px] text-zinc-400 uppercase">Khung độ từ</span>
+              <span class="text-xs sm:text-sm font-bold text-zinc-900">180.000đ</span>
+            </div>
+            <div class="min-w-0">
+              <span class="block text-[10px] sm:text-[11px] text-zinc-400 uppercase">Nghiệm thu</span>
+              <span class="text-xs sm:text-sm font-bold text-zinc-900">1-1 Qua Zalo</span>
+            </div>
+            <div class="min-w-0">
+              <span class="block text-[10px] sm:text-[11px] text-zinc-400 uppercase">Bảo hiểm ship</span>
+              <span class="text-xs sm:text-sm font-bold text-red-600 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600 shrink-0"></span> Đền bù 100%
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cột phải: Khung ảnh + Mini-slider -->
+        <div class="lg:col-span-6 relative flex flex-col items-center min-w-0">
+
+          <div class="relative w-full max-w-lg aspect-[4/3] rounded-2xl md:rounded-3xl overflow-hidden bg-zinc-950 border-2 border-zinc-800 jdm-shadow product-shadow">
+            <img id="main-hero-img" src="images/diorama_custom.png" alt="Sa bàn diorama 1:64 xe Liberty Walk do KAR HOBBY thực hiện" class="w-full h-full object-cover">
+
+            <div id="hero-tag" class="absolute top-3.5 left-3.5 bg-zinc-950/90 backdrop-blur-md text-white text-[10px] font-mono-tech font-bold px-3 py-1 rounded border border-zinc-700 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+              <span id="hero-tag-text">DIORAMA GARAGE // 350K – 650K</span>
+            </div>
+            <div class="absolute bottom-3.5 right-3.5 bg-red-600 text-white text-[10px] font-mono-tech font-bold px-2 py-0.5 rounded uppercase">
+              1-OF-1 BUILD
+            </div>
+          </div>
+
+          <div class="w-full max-w-lg mt-5 bg-[#f0eee8] rounded-2xl p-2.5 border border-zinc-300 flex items-center justify-between gap-2 sm:gap-3">
+
+            <div id="mini-card-preview" class="flex items-center gap-3 bg-white p-2 rounded-xl border border-zinc-200 flex-1 min-w-0 cursor-pointer transition hover:border-red-500">
+              <img id="mini-thumb" src="images/barbatos_weathered.png" alt="Gundam Barbatos weathering" class="w-12 h-12 rounded-lg object-cover bg-zinc-900 border border-zinc-200 shrink-0">
+              <div class="min-w-0">
+                <p id="mini-title" class="text-xs font-bold text-zinc-900 leading-tight">Gundam Barbatos Weathered</p>
+                <p id="mini-desc" class="text-[11px] text-red-600 font-mono-tech font-semibold leading-snug">HG/RG sa trường · 390K – 650K</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1 px-1 sm:px-2 shrink-0">
+              <button type="button" data-key="diorama" onclick="switchHero('diorama')" class="hero-dot w-7 h-7 flex items-center justify-center cursor-pointer" title="Sa bàn Diorama" aria-label="Xem sa bàn Diorama"><span class="block w-3.5 h-3.5 rounded-full bg-zinc-950 border-2 border-red-600 transition-all"></span></button>
+              <button type="button" data-key="barbatos" onclick="switchHero('barbatos')" class="hero-dot w-7 h-7 flex items-center justify-center cursor-pointer" title="Gundam Weathered" aria-label="Xem Gundam weathering"><span class="block w-2.5 h-2.5 rounded-full bg-zinc-300 hover:bg-zinc-500 transition-all"></span></button>
+              <button type="button" data-key="minigt" onclick="switchHero('minigt')" class="hero-dot w-7 h-7 flex items-center justify-center cursor-pointer" title="Mô hình Mini GT" aria-label="Xem xe Mini GT"><span class="block w-2.5 h-2.5 rounded-full bg-zinc-300 hover:bg-zinc-500 transition-all"></span></button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ================= 3. NỖI ĐAU CỦA DÂN CHƠI ================= -->
+      <section class="py-12 border-t border-zinc-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-3">
+          <div>
+            <span class="text-[11px] font-mono-tech font-bold uppercase tracking-wider text-red-600">REAL PROBLEMS // TRỞ NGẠI SƯU TẬP</span>
+            <h2 class="text-2xl md:text-3xl font-black text-zinc-950 mt-1">Vì Sao Nên Gửi Xe & Kit Cho Xưởng Làm?</h2>
+          </div>
+          <p class="text-xs text-zinc-500 max-w-sm">Xe 1:64 và kit Gundam bán đại trà ra hộp đều giống nhau. Muốn có bản riêng thì cần đồ nghề, thời gian và tay nghề.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <div class="p-5 rounded-2xl bg-[#f4f2ec] border border-zinc-200/90 hover:bg-white hover:border-zinc-300 transition">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">01 // STOCK LOOK</span>
+            <h3 class="font-bold text-zinc-900 text-sm mb-1.5">Xe nguyên bản thiếu cá tính</h3>
+            <p class="text-xs text-zinc-600 leading-relaxed">Mâm nhựa, gầm cao, màu sơn hãng ai cũng có giống nhau, không có tem hay decal theo ý bạn.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#f4f2ec] border border-zinc-200/90 hover:bg-white hover:border-zinc-300 transition">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">02 // NO TIME & TOOLS</span>
+            <h3 class="font-bold text-zinc-900 text-sm mb-1.5">Không có thời gian tự làm</h3>
+            <p class="text-xs text-zinc-600 leading-relaxed">Một kit MG ráp, gọt ghẻ, đi line mất nhiều buổi tối. Tự sơn còn cần máy nén khí, súng airbrush và dung môi.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#f4f2ec] border border-zinc-200/90 hover:bg-white hover:border-zinc-300 transition">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">03 // FIRST-TIME MISTAKES</span>
+            <h3 class="font-bold text-zinc-900 text-sm mb-1.5">Tự làm lần đầu dễ hỏng phôi</h3>
+            <p class="text-xs text-zinc-600 leading-relaxed">Sơn dính bụi, nổi hạt, decal bong mép, gãy gương hoặc cánh gió của mẫu xe khó mua lại.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#f4f2ec] border border-zinc-200/90 hover:bg-white hover:border-zinc-300 transition">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">04 // DAMAGE RISK</span>
+            <h3 class="font-bold text-zinc-900 text-sm mb-1.5">Rủi ro gãy vỡ khi ship</h3>
+            <p class="text-xs text-zinc-600 leading-relaxed">Xe sau khi độ có nhiều chi tiết nhỏ. Đóng gói không có lớp chống sốc dễ làm bung cánh gió và mâm.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= 4. BẢNG GIÁ SẢN PHẨM & DỊCH VỤ ================= -->
+      <section id="services" class="py-12 border-t border-zinc-200">
+        <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-3">
+          <div>
+            <span class="text-[11px] font-mono-tech font-bold uppercase tracking-wider text-red-600">PREMIUM BESPOKE PRICING // KHUNG GIÁ DỊCH VỤ</span>
+            <h2 class="text-2xl md:text-3xl font-black text-zinc-950 mt-1">Khung Giá Chế Tác Tại KAR HOBBY</h2>
+          </div>
+          <p class="text-xs text-zinc-500 max-w-sm">Mỗi tác phẩm mất từ 10–25 tiếng nắn nót thủ công. Giới hạn 15–20 slot/tháng để đảm bảo chất lượng hoàn thiện tuyệt đối.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- 1. Custom Diecast 1:64 -->
+          <div class="bg-white rounded-2xl border border-zinc-300 p-4 hover:border-zinc-900 transition flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-zinc-950 border border-zinc-200">
+              <img src="images/minigt_cars.png" alt="Xe diecast 1:64 sau khi custom" loading="lazy" class="w-full h-full object-cover">
+            </div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-mono-tech font-bold text-red-600 uppercase">CUSTOM DIECAST 1:64</span>
+              <span class="text-[10px] font-mono-tech text-zinc-400">KHÁCH GỬI PHÔI</span>
+            </div>
+            <h3 class="font-bold text-zinc-950 text-base mb-1">Độ Xe Diecast 1:64 Theo Yêu Cầu</h3>
+            <p class="font-heading font-black text-red-600 text-xl mb-2">180.000đ – 580.000đ</p>
+            <p class="text-xs text-zinc-600 leading-relaxed mb-4 flex-1">
+              <strong>Độ cơ bản (180k–280k):</strong> Thay mâm hợp kim (TE37/BBS), hạ gầm chuẩn JDM, dán tem độc bản.<br>
+              <strong>Độ chuyên sâu (380k–580k):</strong> Tẩy sơn zin, sơn đổi màu Chameleon/Matte 2 lớp lót chống tróc, camber bánh béo.
+            </p>
+            <div class="pt-3 border-t border-zinc-100 flex items-center justify-between gap-2 text-[11px] font-bold text-zinc-900">
+              <span>Nghiệm thu 1-1 qua Zalo</span>
+              <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="text-red-600 whitespace-nowrap">Hỏi giá Zalo →</a>
+            </div>
+          </div>
+
+          <!-- 2. Gundam HG/RG -->
+          <div class="bg-white rounded-2xl border border-zinc-300 p-4 hover:border-zinc-900 transition flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-zinc-950 border border-zinc-200">
+              <img src="images/barbatos_weathered.png" alt="Gundam Barbatos HG weathering" loading="lazy" class="w-full h-full object-cover">
+            </div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-mono-tech font-bold text-red-600 uppercase">GUNDAM HG / RG</span>
+              <span class="text-[10px] font-mono-tech text-zinc-400">TỈ LỆ 1/144</span>
+            </div>
+            <h3 class="font-bold text-zinc-950 text-base mb-1">Ráp & Weathering Sa Trường HG/RG</h3>
+            <p class="font-heading font-black text-red-600 text-xl mb-2">180.000đ – 650.000đ</p>
+            <p class="text-xs text-zinc-600 leading-relaxed mb-4 flex-1">
+              <strong>Ráp & kẻ line (180k–290k):</strong> Gọt sạch vết nub mark, mài nhám, kẻ lằn panel line sắc sảo.<br>
+              <strong>Weathering sa trường (390k–650k):</strong> Hiệu ứng rỉ sét kim loại, vết đạn xước, ám khói bám sa trường, phủ topcoat.
+            </p>
+            <div class="pt-3 border-t border-zinc-100 flex items-center justify-between gap-2 text-[11px] font-bold text-zinc-900">
+              <span>Sống động như thật</span>
+              <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="text-red-600 whitespace-nowrap">Hỏi giá Zalo →</a>
+            </div>
+          </div>
+
+          <!-- 3. Gundam MG -->
+          <div class="bg-white rounded-2xl border border-zinc-300 p-4 hover:border-zinc-900 transition flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-zinc-950 border border-zinc-200">
+              <img src="images/gundam_collection.png" alt="Bộ sưu tập Gundam Master Grade" loading="lazy" class="w-full h-full object-cover">
+            </div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-mono-tech font-bold text-red-600 uppercase">GUNDAM MG</span>
+              <span class="text-[10px] font-mono-tech text-zinc-400">TỈ LỆ 1/100</span>
+            </div>
+            <h3 class="font-bold text-zinc-950 text-base mb-1">Weathering Sa Trường Gundam MG</h3>
+            <p class="font-heading font-black text-red-600 text-xl mb-2">750.000đ – 1.200.000đ</p>
+            <p class="text-xs text-zinc-600 leading-relaxed mb-4 flex-1">
+              Kỹ thuật hoàn thiện cấp độ triển lãm cho dòng Master Grade: xử lý khung xương kim loại, vết đạn pháo chiến trường khốc liệt trên giáp mở và phủ lớp bảo vệ bề mặt cao cấp.
+            </p>
+            <div class="pt-3 border-t border-zinc-100 flex items-center justify-between gap-2 text-[11px] font-bold text-zinc-900">
+              <span>Khung xương + sa trường</span>
+              <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="text-red-600 whitespace-nowrap">Hỏi giá Zalo →</a>
+            </div>
+          </div>
+
+          <!-- 4. Sa bàn Diorama Garage -->
+          <div class="bg-white rounded-2xl border border-zinc-300 p-4 hover:border-zinc-900 transition flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-zinc-950 border border-zinc-200">
+              <img src="images/diorama_custom.png" alt="Sa bàn diorama 1:64 có đèn LED" loading="lazy" class="w-full h-full object-cover">
+            </div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-mono-tech font-bold text-red-600 uppercase">DIORAMA 1:64</span>
+              <span class="text-[10px] font-mono-tech text-zinc-400">GARAGE CÓ ĐÈN LED</span>
+            </div>
+            <h3 class="font-bold text-zinc-950 text-base mb-1">Sa Bàn Diorama Garage 1:64</h3>
+            <p class="font-heading font-black text-red-600 text-xl mb-2">350.000đ – 650.000đ</p>
+            <p class="text-xs text-zinc-600 leading-relaxed mb-4 flex-1">
+              Sa bàn garage hoặc góc phố JDM tích hợp hệ thống đèn LED vàng ấm, phụ kiện lốp xe, thảm garage chi tiết. Tôn vinh vẻ đẹp chiếc xe độc bản khi trưng bày bàn làm việc.
+            </p>
+            <div class="pt-3 border-t border-zinc-100 flex items-center justify-between gap-2 text-[11px] font-bold text-zinc-900">
+              <span>Đèn LED + Phụ kiện garage</span>
+              <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="text-red-600 whitespace-nowrap">Hỏi giá Zalo →</a>
+            </div>
+          </div>
+
+          <!-- 5. Trọn gói xe độ độc bản (Bao phôi) -->
+          <div class="bg-white rounded-2xl border border-zinc-300 p-4 hover:border-zinc-900 transition flex flex-col md:col-span-2 lg:col-span-1">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-zinc-950 border border-zinc-200 flex items-center">
+              <img src="images/minigt_cars.png" alt="Xe mô hình Mini GT độ độc bản" loading="lazy" class="w-full h-auto object-contain">
+            </div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-mono-tech font-bold text-red-600 uppercase">TRỌN GÓI BESPOKE</span>
+              <span class="text-[10px] font-mono-tech text-zinc-400">BAO PHÔI MINI GT</span>
+            </div>
+            <h3 class="font-bold text-zinc-950 text-base mb-1">Trọn Gói Xe Độ Độc Bản 1:64</h3>
+            <p class="font-heading font-black text-red-600 text-xl mb-2">790.000đ – 990.000đ</p>
+            <p class="text-xs text-zinc-600 leading-relaxed mb-4 flex-1">
+              Xưởng bao sẵn phôi xe Mini GT chính hãng + độ full từ mâm kim loại, hạ gầm, sơn đổi màu đến tem độc quyền 1-of-1. Bạn nhận về tác phẩm hoàn thiện kèm hộp mica trưng bày.
+            </p>
+            <div class="pt-3 border-t border-zinc-100 flex items-center justify-between gap-2 text-[11px] font-bold text-zinc-900">
+              <span>Độc bản 100% không đụng hàng</span>
+              <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="text-red-600 whitespace-nowrap">Đặt lịch Zalo →</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= 5. QUY TRÌNH 4 BƯỚC ================= -->
+      <section id="process" class="py-12 border-t border-zinc-200">
+        <div class="text-center max-w-xl mx-auto mb-10">
+          <span class="text-[11px] font-mono-tech font-bold uppercase tracking-wider text-zinc-400">TRANSPARENT PROCESS</span>
+          <h2 class="text-2xl font-black text-zinc-950 mt-1">4 Bước Đặt Hàng Online</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-[#f4f2ec] p-5 rounded-2xl border border-zinc-200">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">STEP 01 //</span>
+            <h4 class="font-bold text-sm text-zinc-950 mb-1">Gửi ý tưởng qua Zalo</h4>
+            <p class="text-xs text-zinc-600">Nhắn Zalo 0906 349 768 ảnh xe/kit bạn có và ảnh mẫu phong cách muốn làm.</p>
+          </div>
+
+          <div class="bg-[#f4f2ec] p-5 rounded-2xl border border-zinc-200">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">STEP 02 //</span>
+            <h4 class="font-bold text-sm text-zinc-950 mb-1">Chốt phương án & giá</h4>
+            <p class="text-xs text-zinc-600">Thống nhất màu sơn, decal, bộ mâm hoặc hiệu ứng weathering và báo giá trọn gói.</p>
+          </div>
+
+          <div class="bg-[#f4f2ec] p-5 rounded-2xl border border-zinc-200">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">STEP 03 //</span>
+            <h4 class="font-bold text-sm text-zinc-950 mb-1">Thi công 7–14 ngày</h4>
+            <p class="text-xs text-zinc-600">Thời gian tùy mức chi tiết của xe diecast hoặc độ khó của kit Gundam. Có ảnh cập nhật qua Zalo.</p>
+          </div>
+
+          <div class="bg-[#f4f2ec] p-5 rounded-2xl border border-zinc-200">
+            <span class="font-mono-tech text-xs text-red-600 font-bold block mb-2">STEP 04 //</span>
+            <h4 class="font-bold text-sm text-zinc-950 mb-1">Đóng gói & ship toàn quốc</h4>
+            <p class="text-xs text-zinc-600">Gửi ảnh/video thành phẩm để bạn xem trước, sau đó đóng hộp chống sốc và giao tận nhà.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6. LIÊN HỆ & FORM ================= -->
+      <section id="contact" class="py-8 border-t border-zinc-200">
+        <div class="bg-zinc-950 rounded-2xl md:rounded-3xl p-5 pl-7 sm:p-8 md:p-12 text-white relative overflow-hidden border border-zinc-800">
+
+          <div class="absolute top-0 left-0 w-2 sm:w-2.5 h-full bg-red-600"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10 sm:pl-2">
+
+            <div class="lg:col-span-6 space-y-4 min-w-0">
+              <span class="inline-block text-[11px] font-mono-tech font-bold uppercase tracking-wider text-red-500 bg-red-950/60 px-3 py-1 rounded border border-red-800/60">
+                SHOP ONLINE · SHIP TOÀN QUỐC
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white">Đặt Hàng & Nhận Báo Giá</h2>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Nhắn Zalo hoặc gọi trực tiếp để gửi ảnh mẫu và nhận báo giá. Nếu bận, để lại tên, số điện thoại và nhu cầu ở form, KAR HOBBY sẽ gọi lại cho bạn.
+              </p>
+
+              <div class="pt-2 space-y-2.5 text-sm">
+                <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="flex items-center gap-3 text-zinc-200 hover:text-white">
+                  <span class="w-8 h-8 shrink-0 rounded-lg bg-zinc-900 border border-zinc-700 flex items-center justify-center font-mono-tech text-[10px] font-bold text-red-500">ZL</span>
+                  <span class="min-w-0"><span class="block text-[10px] font-mono-tech uppercase text-zinc-500">Zalo</span>0906 349 768</span>
+                </a>
+                <a href="tel:0906349768" class="flex items-center gap-3 text-zinc-200 hover:text-white">
+                  <span class="w-8 h-8 shrink-0 rounded-lg bg-zinc-900 border border-zinc-700 flex items-center justify-center text-red-500">☎</span>
+                  <span class="min-w-0"><span class="block text-[10px] font-mono-tech uppercase text-zinc-500">Điện thoại</span>0906 349 768</span>
+                </a>
+                <a href="mailto:lenguyendangkhoavta@gmail.com" class="flex items-center gap-3 text-zinc-200 hover:text-white">
+                  <span class="w-8 h-8 shrink-0 rounded-lg bg-zinc-900 border border-zinc-700 flex items-center justify-center text-red-500">@</span>
+                  <span class="min-w-0 break-all"><span class="block text-[10px] font-mono-tech uppercase text-zinc-500">Email</span>lenguyendangkhoavta@gmail.com</span>
+                </a>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3 pt-3">
+                <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider font-mono-tech transition">
+                  Nhắn Zalo đặt hàng →
+                </a>
+                <a href="tel:0906349768" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-white font-bold text-xs uppercase tracking-wider font-mono-tech transition">
+                  ☎ Gọi ngay
+                </a>
+              </div>
+
+              <div class="pt-2 space-y-2 font-mono-tech text-xs text-zinc-400">
+                <div class="flex items-start gap-2">
+                  <span class="text-red-500 font-bold">✓</span> <span>Custom hoàn thiện trong 7–14 ngày tùy độ chi tiết</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-red-500 font-bold">✓</span> <span>Xem ảnh/video thành phẩm trước khi gửi hàng</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-red-500 font-bold">✓</span> <span>Xe Mini GT bán sẵn là hàng chính hãng</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form gửi về Google Form -->
+            <div class="lg:col-span-6 bg-zinc-900/90 p-5 sm:p-6 rounded-2xl border border-zinc-800 min-w-0">
+              <h3 class="font-bold text-white text-base mb-1">Để lại thông tin, shop gọi lại</h3>
+              <p class="text-xs text-zinc-500 mb-4">Thông tin chỉ dùng để liên hệ báo giá cho bạn.</p>
+              <form id="lead-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLScpde7oKZPWB7Trg_QZUb0AUkA9ohpLQ01suZOKaycRkokIKw/formResponse" target="_blank" class="space-y-3.5">
+
+                <div>
+                  <label for="name" class="block text-xs font-mono-tech uppercase text-zinc-300 mb-1">Họ tên *</label>
+                  <input type="text" id="name" name="entry.1577715208" required autocomplete="name" placeholder="Ví dụ: Minh Tuấn" class="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-red-600">
+                </div>
+
+                <div>
+                  <label for="phone" class="block text-xs font-mono-tech uppercase text-zinc-300 mb-1">Số điện thoại / Zalo *</label>
+                  <input type="tel" id="phone" name="entry.1080250473" required autocomplete="tel" inputmode="tel" pattern="[0-9+ .\-]{9,15}" placeholder="Ví dụ: 0901 234 567" class="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-red-600">
+                </div>
+
+                <div>
+                  <label for="service" class="block text-xs font-mono-tech uppercase text-zinc-300 mb-1">Bạn cần gì? *</label>
+                  <select id="service" name="entry.1866004278" required class="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-white focus:outline-none focus:border-red-600">
+                    <option value="custom diecast 1:64">custom diecast 1:64</option>
+                    <option value="Lắp rắp gundam/model kit">Lắp rắp gundam/model kit</option>
+                    <option value="Lắp ráp+Sơn+Weathering gundam/model kit">Lắp ráp+Sơn+Weathering gundam/model kit</option>
+                    <option value="Làm sa bàn diograma">Làm sa bàn diograma</option>
+                    <option value="Mua xe/mô hình">Mua xe/mô hình</option>
+                    <option value="Khác">Khác</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="note" class="block text-xs font-mono-tech uppercase text-zinc-300 mb-1">Mô tả thêm</label>
+                  <textarea id="note" name="entry.1696636209" rows="3" placeholder="Ví dụ: Độ Mini GT Nissan GT-R sang màu xanh, thay mâm BBS" class="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-red-600"></textarea>
+                </div>
+
+                <button type="submit" id="lead-submit" class="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white font-bold text-xs uppercase tracking-wider font-mono-tech transition duration-200 cursor-pointer shadow-lg shadow-red-900/40">
+                  GỬI THÔNG TIN →
+                </button>
+              </form>
+              <div id="form-msg" class="hidden mt-3 p-2.5 text-center text-xs font-mono-tech text-emerald-400 bg-emerald-950/60 border border-emerald-800 rounded-lg">
+                ✓ ĐÃ NHẬN THÔNG TIN. KAR HOBBY SẼ LIÊN HỆ BẠN SỚM.
+              </div>
+              <div id="form-err" class="hidden mt-3 p-2.5 text-center text-xs font-mono-tech text-red-300 bg-red-950/60 border border-red-800 rounded-lg">
+                Gửi chưa được. Vui lòng nhắn Zalo hoặc gọi 0906 349 768.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="pt-6 pb-2 text-center text-xs font-mono-tech text-zinc-400 flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-zinc-200 mt-4">
+        <span>© 2026 KAR HOBBY // WORKSHOP</span>
+        <span class="text-zinc-600 font-medium">Zalo/ĐT: <a href="tel:0906349768" class="hover:text-red-600">0906 349 768</a> · <a href="mailto:lenguyendangkhoavta@gmail.com" class="hover:text-red-600 break-all">lenguyendangkhoavta@gmail.com</a></span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- THANH LIÊN HỆ NHANH TRÊN ĐIỆN THOẠI -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-50 p-3 bg-[#faf9f5]/95 backdrop-blur border-t border-zinc-300 grid grid-cols-2 gap-2">
+    <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="flex items-center justify-center py-3 rounded-full bg-zinc-950 text-white text-xs font-bold uppercase tracking-wider">Nhắn Zalo đặt hàng</a>
+    <a href="tel:0906349768" class="flex items-center justify-center gap-1.5 py-3 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider">☎ Gọi ngay</a>
+  </div>
+
+  <script>
+    const products = {
+      diorama: {
+        img: 'images/diorama_custom.png',
+        tag: 'DIORAMA GARAGE // 350K – 650K',
+        alt: 'Sa bàn diorama 1:64 xe Liberty Walk do KAR HOBBY thực hiện'
+      },
+      barbatos: {
+        img: 'images/barbatos_weathered.png',
+        title: 'Gundam Barbatos Weathered',
+        desc: 'HG/RG sa trường · 390K – 650K',
+        tag: 'GUNDAM SA TRƯỜNG // TỪ 390K',
+        alt: 'Gundam Barbatos HG weathering'
+      },
+      minigt: {
+        img: 'images/minigt_cars.png',
+        title: 'Trọn Gói Xe Độ Độc Bản 1:64',
+        desc: 'Bao phôi Mini GT + full độ · 790K – 990K',
+        tag: 'XE ĐỘ FULL // 790K – 990K',
+        alt: 'Xe mô hình Mini GT độ độc bản'
+      }
+    };
+    let currentKey = 'diorama';
+
+    function switchHero(key) {
+      const item = products[key];
+      if (!item) return;
+      currentKey = key;
+      const heroImg = document.getElementById('main-hero-img');
+      heroImg.style.opacity = '0.3';
+      setTimeout(() => {
+        heroImg.src = item.img;
+        heroImg.alt = item.alt;
+        heroImg.style.opacity = '1';
+      }, 150);
+      document.getElementById('hero-tag-text').innerText = item.tag;
+
+      // Thẻ mini luôn gợi ý sản phẩm kế tiếp
+      const keys = Object.keys(products);
+      const nextKey = keys[(keys.indexOf(key) + 1) % keys.length];
+      const next = products[nextKey];
+      const thumb = document.getElementById('mini-thumb');
+      thumb.src = next.img; thumb.alt = next.alt;
+      document.getElementById('mini-title').innerText = next.title || 'Sa bàn Diorama 1:64';
+      document.getElementById('mini-desc').innerText = next.desc || 'Đèn LED ấm cúng · 350K – 650K';
+      document.getElementById('mini-card-preview').dataset.next = nextKey;
+
+      document.querySelectorAll('.hero-dot').forEach(btn => {
+        const dot = btn.firstElementChild;
+        const active = btn.dataset.key === key;
+        dot.className = active
+          ? 'block w-3.5 h-3.5 rounded-full bg-zinc-950 border-2 border-red-600 transition-all'
+          : 'block w-2.5 h-2.5 rounded-full bg-zinc-300 hover:bg-zinc-500 transition-all';
+      });
+    }
+
+    document.getElementById('mini-card-preview').addEventListener('click', function () {
+      switchHero(this.dataset.next || 'barbatos');
+    });
+
+    // Gửi form về Google Form bằng AJAX, hiện thông báo ngay trên trang
+    document.getElementById('lead-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('lead-submit');
+      const ok = document.getElementById('form-msg');
+      const err = document.getElementById('form-err');
+      ok.classList.add('hidden'); err.classList.add('hidden');
+      btn.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+        .then(() => {
+          ok.classList.remove('hidden');
+          form.reset();
+        })
+        .catch(() => err.classList.remove('hidden'))
+        .finally(() => { btn.disabled = false; });
+    });
+  </script>
+
+  <!-- ================= CHATBOT TƯ VẤN KAR HOBBY (GÓC DƯỚI BÊN PHẢI) ================= -->
+  <div id="kar-chatbot-root" class="fixed z-50 font-sans">
+    
+    <!-- CỬA SỔ CHATBOT (MẶC ĐỊNH ẨN) -->
+    <div id="kar-chat-window" class="hidden fixed bottom-20 md:bottom-6 right-3 md:right-6 w-[92vw] sm:w-[380px] h-[520px] max-h-[80vh] bg-[#faf9f5] rounded-3xl border border-[#e5e3db] jdm-shadow flex flex-col overflow-hidden animate-fade-in">
+      
+      <!-- Header Chatbot -->
+      <div class="bg-zinc-950 text-white p-3.5 px-4 flex items-center justify-between border-b-2 border-red-600 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-zinc-900 border border-red-600 flex items-center justify-center font-mono-tech text-xs font-black text-red-500 shadow-xs">
+            KAR
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-heading text-sm font-black tracking-tight text-white">KAR HOBBY WORKSHOP</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+            <span class="text-[10px] text-zinc-400 font-mono-tech block leading-none">Thợ xưởng tư vấn 1-1</span>
+          </div>
+        </div>
+        <button onclick="toggleKarChat()" class="w-7 h-7 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center transition text-xs cursor-pointer" title="Đóng chat">
+          ✕
+        </button>
+      </div>
+
+      <!-- Khu vực nội dung tin nhắn (Scrollable) -->
+      <div id="kar-chat-messages" class="flex-1 p-3.5 overflow-y-auto space-y-3 text-xs bg-[#f4f2ec]">
+        <!-- Tin nhắn mở đầu của bot -->
+        <div class="flex items-start gap-2">
+          <div class="w-6 h-6 rounded-lg bg-zinc-950 text-red-500 border border-zinc-700 flex items-center justify-center text-[9px] font-black shrink-0 font-mono-tech">
+            KH
+          </div>
+          <div class="bg-white rounded-2xl rounded-tl-sm p-3 border border-zinc-200/90 shadow-xs max-w-[88%] space-y-1.5 text-zinc-800 leading-relaxed">
+            <p class="font-bold text-zinc-950">Chào bác! Xưởng KAR HOBBY nghe đây ạ 🏎️</p>
+            <p>Bác đang muốn lên bài độ cho xe 1:64, làm sa trường Gundam hay dựng góc sa bàn garage vậy ạ? Bác cứ chọn nhanh câu hỏi bên dưới hoặc nhắn trực tiếp ý tưởng cho em nhé!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh gợi ý câu hỏi nhanh (Gợi ý dựa trên sales_script.md) -->
+      <div class="p-2 bg-zinc-100/90 border-t border-zinc-200 shrink-0">
+        <div class="text-[10px] font-mono-tech text-zinc-400 font-bold uppercase mb-1.5 px-1 flex items-center justify-between">
+          <span>GỢI Ý CÂU HỎI NHANH</span>
+          <span class="text-[9px] text-red-600">BẤM ĐỂ HỎI</span>
+        </div>
+        <div class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[11px]">
+          <button onclick="askQuickQuestion('gia-xe-164')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            🏎️ Giá độ xe 1:64?
+          </button>
+          <button onclick="askQuickQuestion('gundam-weathering')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            🤖 Ráp & Sa trường Gunpla?
+          </button>
+          <button onclick="askQuickQuestion('diorama-led')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            💡 Sa bàn garage có đèn LED?
+          </button>
+          <button onclick="askQuickQuestion('gui-xe-xa')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            📦 Ở xa gửi phôi thế nào?
+          </button>
+          <button onclick="askQuickQuestion('thoi-gian')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            ⚡ Làm bao lâu xong?
+          </button>
+          <button onclick="askQuickQuestion('lan-banh')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            🚗 Hạ gầm có lăn được không?
+          </button>
+          <button onclick="askQuickQuestion('bao-hiem-ship')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            🛡️ Ship xa có gãy vỡ không?
+          </button>
+          <button onclick="askQuickQuestion('tron-goi')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-red-50 text-zinc-800 hover:text-red-600 border border-zinc-200 font-medium transition cursor-pointer">
+            👑 Gói xe độ trọn gói 1-of-1?
+          </button>
+          <button onclick="askQuickQuestion('dat-lich-mua')" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold transition cursor-pointer">
+            🎯 ĐẶT LỊCH ĐỘ / GIỮ SLOT
+          </button>
+        </div>
+      </div>
+
+      <!-- Ô nhập chat -->
+      <form id="kar-chat-form" onsubmit="handleUserChat(event)" class="p-2.5 bg-white border-t border-zinc-200 flex items-center gap-2 shrink-0">
+        <input type="text" id="kar-chat-input" placeholder="Nhập câu hỏi hoặc ý tưởng độ xe..." class="flex-1 px-3 py-2 text-xs bg-[#f4f2ec] rounded-xl border border-zinc-300 focus:outline-none focus:border-red-600 text-zinc-900 placeholder-zinc-400">
+        <button type="submit" class="w-9 h-9 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shrink-0 transition cursor-pointer shadow-xs" title="Gửi">
+          <svg class="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+        </button>
+      </form>
+
+    </div>
+
+    <!-- NÚT BẤM CHATBOT NỔI Ở GÓC DƯỚI BÊN PHẢI -->
+    <div id="kar-chatbot-btn" class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-50 flex items-center gap-2 group cursor-pointer select-none" onclick="toggleKarChat()">
+      
+      <!-- Nhãn chữ nổi bật trên desktop -->
+      <div class="hidden sm:flex items-center gap-2 bg-zinc-950/95 backdrop-blur-md text-white text-xs font-bold py-2.5 px-4 rounded-full border border-zinc-700 shadow-xl font-mono-tech transition group-hover:border-red-600 group-hover:scale-105">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>HỎI THỢ XƯỞNG 1-1</span>
+      </div>
+
+      <!-- Icon tròn nút bấm -->
+      <div class="relative w-13 h-13 md:w-14 md:h-14 rounded-full bg-zinc-950 border-2 border-red-600 shadow-2xl flex items-center justify-center text-white transition-all transform group-hover:scale-110 group-active:scale-95">
+        <!-- Huy hiệu chấm đỏ chớp tắt -->
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-600 rounded-full border-2 border-white"></span>
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+        </svg>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPT HOẠT ĐỘNG CỦA CHATBOT DỰA TRÊN SALES_SCRIPT.MD -->
+  <script>
+    // Dữ liệu kịch bản chuẩn từ sales_script.md
+    const karScriptDB = {
+      'gia-xe-164': {
+        q: 'Giá độ một chiếc xe 1:64 là bao nhiêu và gồm những gì?',
+        a: 'Dạ, khung giá độ xe gửi phôi ở xưởng mình chia làm 2 mức rõ ràng bác nhé:\n\n• <strong>Gói cơ bản (180k – 280k):</strong> Thay mâm hợp kim kim loại phay sắc nét (TE37, BBS...), lốp cao su có vân, hạ gầm Stance chuẩn JDM và lên bộ tem decal nước / biển số tên bác.\n• <strong>Gói chuyên sâu (380k – 580k):</strong> Tẩy sạch sơn zin, đi 2 lớp sơn lót primer chống tróc, sơn màu Chameleon hoặc Candy bóng 2K, căn chỉnh camber bánh béo.\n\nBác đang có sẵn phôi xe nào rồi? Bác gửi ảnh qua Zalo em báo giá chuẩn cho dòng xe đó nhé!',
+        hasLeadAction: true
+      },
+      'gundam-weathering': {
+        q: 'Ráp và làm sa trường (weathering) Gunpla HG / MG giá bao nhiêu?',
+        a: 'Dạ tùy dòng kit và độ khốc liệt của sa trường bác nhé:\n\n• <strong>Dòng HG/RG (1/144):</strong> Ráp gọt sạch ghẻ + kẻ panel line là <strong>180k – 290k</strong>; Làm full sa trường rỉ sét, ám khói súng, vết đạn xước giáp và phủ topcoat mờ là <strong>390k – 650k</strong>.\n• <strong>Dòng MG (1/100):</strong> Chi tiết khung xương nhiều, gói sa trường khốc liệt chuyên sâu từ <strong>750k – 1.200k</strong>.\n\nBác tính làm con kit nào, gửi hộp qua em xem độ chi tiết để báo chuẩn cho bác nhé!',
+        hasLeadAction: true
+      },
+      'diorama-led': {
+        q: 'Sa bàn Diorama Garage 1:64 có đèn LED giá bao nhiêu?',
+        a: 'Dạ sa bàn garage 1:64 bên em có giá từ <strong>350.000đ – 650.000đ / bộ</strong> bác nhé. Đã tích hợp sẵn hệ thống đèn LED vàng ấm 5V cắm cổng USB (laptop, sạc dự phòng), sàn bê tông xước, lốp xe thể thao, thùng đồ nghề và tặng kèm hộp mica chống bụi trong suốt tôn dáng xe cực đỉnh!',
+        hasLeadAction: true
+      },
+      'gui-xe-xa': {
+        q: 'Tôi ở xa gửi phôi vào xưởng thế nào, có sợ thất lạc hay tráo đồ không?',
+        a: 'Bác hoàn toàn yên tâm ạ:\n\n1. Bác bọc chống sốc phôi xe gửi qua bưu điện (Viettel Post, GHTK) vào xưởng em ở TP.HCM.\n2. Ngay khi nhận bưu phẩm, xưởng sẽ quay video khui hộp đồng kiểm, quay rõ số series đáy xe gửi Zalo để bác xác nhận đúng phôi của mình.\n3. Xưởng cam kết <strong>Bảo hiểm đền bù 100%</strong> nếu có bất kỳ rủi ro nào. Uy tín làm cho anh em cả nước quan trọng hơn một chiếc phôi nhiều bác ạ!'
+      },
+      'thoi-gian': {
+        q: 'Làm mất bao lâu? Có lấy liền trong ngày được không?',
+        a: 'Dạ thật ra nếu sơn ẩu bằng sơn lon xịt qua loa thì 1 ngày là xong ngay bác ạ. Nhưng ở xưởng mình làm đồ chơi sưu tập lâu năm, mỗi lớp lót và màu đều để khô tự nhiên trong phòng lọc bụi, riêng lớp bóng 2K cần 48–72h để đóng rắn hoàn toàn tạo độ sâu gương không tróc. Thời gian nắn nót từ <strong>7–10 ngày (với xe)</strong> hoặc <strong>7–14 ngày (với Gunpla)</strong>. Bác đợi thêm vài ngày nhưng nhận về chiếc xe để đời 5–10 năm không bay màu, tính ra xứng đáng hơn nhiều bác ạ.'
+      },
+      'lan-banh': {
+        q: 'Xe sau khi hạ gầm Stance / Camber bánh béo có lăn được không?',
+        a: 'Đơn giản thôi bác ơi, xe hạ gầm khít rạt hốc bánh và bẻ góc camber nghiêng là dòng chuyên để <strong>trưng bày tĩnh (Display Model)</strong> để đạt dáng thể thao nhất như xe thật nằm sàn ngoài đời. Bánh xe sẽ được căn chỉnh cố định hoặc nhích nhẹ để không cạ vào vè chắn bùn làm xước nước sơn.\n\nCòn nếu bác thích giữ cữ lăn bánh trơn tru 100%, bác cứ dặn trước, thợ xưởng sẽ căn chỉnh độ cao gầm vừa đủ cho bác nhé!'
+      },
+      'bao-hiem-ship': {
+        q: 'Ship xa mô hình có sợ gãy cánh gió, rụng bánh không?',
+        a: 'Mô hình sau độ rất nhiều tiểu tiết nên xưởng đóng gói theo <strong>chuẩn 3 lớp chống sốc</strong>: chèn mút mềm định hình giữ chết bánh và cánh gió -> cho vào hộp mica cứng -> bọc xốp bóng khí 3 lớp đặt trong thùng carton 5 lớp.\n\nĐặc biệt, xưởng cam kết <strong>Đền bù 100% hoặc sửa chữa miễn phí</strong> nếu có bất kỳ sự cố gãy vỡ nào do vận chuyển. Bác nhận hàng có vấn đề gì chỉ việc nhắn Zalo, xưởng chịu toàn bộ trách nhiệm ạ.'
+      },
+      'tron-goi': {
+        q: 'Xưởng có nhận làm trọn gói bao luôn phôi xe Mini GT không?',
+        a: 'Dạ có bác nhé! Xưởng có <strong>Gói Trọn Gói Xe Độ Độc Bản (790k – 990k)</strong>: Xưởng bao sẵn 100% phôi xe Mini GT chính hãng (R35, Civic Type R, Porsche, LBWK...), độ full mâm hợp kim, hạ gầm, sơn màu độc bản, dán tem/biển số theo tên bác và tặng kèm hộp mica trưng bày. Bác chỉ việc chọn mẫu, xưởng làm xong giao tận tay bác.',
+        hasLeadAction: true
+      },
+      'dat-lich-mua': {
+        q: 'Tôi muốn đặt lịch độ / Giữ slot tháng này!',
+        a: 'Dạ bài độ này lên con xe của bác thì bao chiến luôn rồi bác ạ! Đơn giản thôi, tháng này xưởng chỉ nhận <strong>giới hạn 15–20 chiếc</strong> để đảm bảo độ nắn nót từng chi tiết, hiện thợ cũng chỉ còn trống đúng 3 slot cho tuần này.\n\nBác bấm nút bên dưới để <strong>điền form danh sách chờ</strong> hoặc nhắn Zalo xưởng ngay để em khóa slot lên lịch cho bác trước nhé!',
+        hasLeadAction: true
+      }
+    };
+
+    function toggleKarChat() {
+      const win = document.getElementById('kar-chat-window');
+      win.classList.toggle('hidden');
+      if (!win.classList.contains('hidden')) {
+        document.getElementById('kar-chat-input').focus();
+        scrollToBottomChat();
+      }
+    }
+
+    function scrollToBottomChat() {
+      const container = document.getElementById('kar-chat-messages');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendUserMessage(text) {
+      const container = document.getElementById('kar-chat-messages');
+      const div = document.createElement('div');
+      div.className = 'flex items-start justify-end gap-2';
+      div.innerHTML = `
+        <div class="bg-zinc-950 text-white rounded-2xl rounded-tr-sm p-3 shadow-xs max-w-[85%] text-zinc-100 leading-relaxed">
+          ${text}
+        </div>
+      `;
+      container.appendChild(div);
+      scrollToBottomChat();
+    }
+
+    function appendBotResponse(text, showLeadBtn = false) {
+      const container = document.getElementById('kar-chat-messages');
+      const div = document.createElement('div');
+      div.className = 'flex items-start gap-2';
+      
+      let actionButtons = '';
+      if (showLeadBtn) {
+        actionButtons = `
+          <div class="pt-2.5 mt-2 border-t border-zinc-100 space-y-1.5">
+            <button onclick="goToLeadForm()" class="w-full py-2.5 px-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider font-mono-tech transition flex items-center justify-center gap-1.5 shadow-md shadow-red-950/20 cursor-pointer">
+              <span>📋 ĐIỀN FORM DANH SÁCH CHỜ (GIỮ SLOT)</span>
+            </button>
+            <a href="https://zalo.me/0906349768" target="_blank" rel="noopener" class="w-full py-2 px-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-bold font-mono-tech transition flex items-center justify-center gap-1.5">
+              <span>💬 Nhắn Zalo thợ: 0906 349 768</span>
+            </a>
+          </div>
+        `;
+      }
+
+      div.innerHTML = `
+        <div class="w-6 h-6 rounded-lg bg-zinc-950 text-red-500 border border-zinc-700 flex items-center justify-center text-[9px] font-black shrink-0 font-mono-tech mt-0.5">
+          KH
+        </div>
+        <div class="bg-white rounded-2xl rounded-tl-sm p-3 border border-zinc-200/90 shadow-xs max-w-[88%] text-zinc-800 leading-relaxed">
+          <div>${text.replace(/\n/g, '<br>')}</div>
+          ${actionButtons}
+        </div>
+      `;
+      container.appendChild(div);
+      scrollToBottomChat();
+    }
+
+    function askQuickQuestion(key) {
+      const item = karScriptDB[key];
+      if (!item) return;
+      appendUserMessage(item.q);
+      setTimeout(() => {
+        appendBotResponse(item.a, item.hasLeadAction);
+      }, 350);
+    }
+
+    function handleUserChat(e) {
+      e.preventDefault();
+      const input = document.getElementById('kar-chat-input');
+      const val = input.value.trim();
+      if (!val) return;
+      
+      appendUserMessage(val);
+      input.value = '';
+
+      const lower = val.toLowerCase();
+      setTimeout(() => {
+        // Phân loại phản hồi thông minh dựa trên sales_script.md
+        if (lower.includes('giá') && (lower.includes('xe') || lower.includes('1:64') || lower.includes('diecast') || lower.includes('độ'))) {
+          const item = karScriptDB['gia-xe-164'];
+          appendBotResponse(item.a, true);
+        } else if (lower.includes('gundam') || lower.includes('kit') || lower.includes('weathering') || lower.includes('ráp') || lower.includes('sa trường')) {
+          const item = karScriptDB['gundam-weathering'];
+          appendBotResponse(item.a, true);
+        } else if (lower.includes('diorama') || lower.includes('sa bàn') || lower.includes('led') || lower.includes('garage')) {
+          const item = karScriptDB['diorama-led'];
+          appendBotResponse(item.a, true);
+        } else if (lower.includes('xa') || lower.includes('gửi') || lower.includes('hà nội') || lower.includes('ship phôi') || lower.includes('ở xa')) {
+          const item = karScriptDB['gui-xe-xa'];
+          appendBotResponse(item.a, false);
+        } else if (lower.includes('lâu') || lower.includes('thời gian') || lower.includes('bao lâu') || lower.includes('lấy liền') || lower.includes('ngày')) {
+          const item = karScriptDB['thoi-gian'];
+          appendBotResponse(item.a, false);
+        } else if (lower.includes('lăn') || lower.includes('chạy') || lower.includes('bánh') || lower.includes('camber') || lower.includes('hạ gầm')) {
+          const item = karScriptDB['lan-banh'];
+          appendBotResponse(item.a, false);
+        } else if (lower.includes('gãy') || lower.includes('vỡ') || lower.includes('hư') || lower.includes('bảo hiểm') || lower.includes('đền')) {
+          const item = karScriptDB['bao-hiem-ship'];
+          appendBotResponse(item.a, false);
+        } else if (lower.includes('trọn gói') || lower.includes('bao phôi') || lower.includes('mua xe') || lower.includes('có sẵn')) {
+          const item = karScriptDB['tron-goi'];
+          appendBotResponse(item.a, true);
+        } else if (lower.includes('mua') || lower.includes('đặt') || lower.includes('cọc') || lower.includes('chốt') || lower.includes('slot') || lower.includes('làm xe') || lower.includes('báo giá')) {
+          const item = karScriptDB['dat-lich-mua'];
+          appendBotResponse(item.a, true);
+        } else if (lower.includes('suy nghĩ') || lower.includes('chưa') || lower.includes('đắt') || lower.includes('để sau') || lower.includes('từ từ')) {
+          appendBotResponse('Dạ không sao đâu bác ơi, sưu tập xe với Gunpla là đam mê cả đời mà, bác cứ ngắm nghía cân nhắc kỹ cho thật ưng bụng nhé!\n\nDù sao thì, bác cứ để lại thông tin nhanh ở form danh sách chờ bên dưới, khi nào xưởng có đợt phôi xe hiếm về hoặc có slot ưu đãi tặng hộp mica trưng bày, em sẽ ưu tiên nhắn Zalo báo bác trước nha!', true);
+        } else {
+          appendBotResponse('Dạ em đã nhận được tin nhắn của bác. Đơn giản thôi, bác gửi kèm ảnh mẫu xe/kit bác thích qua Zalo <strong>0906 349 768</strong> để thợ xưởng trực tiếp ngó và tư vấn cấu hình chi tiết cho bác nhé! Hoặc bác bấm nút bên dưới để điền form danh sách chờ, xưởng sẽ gọi lại cho bác ngay ạ.', true);
+        }
+      }, 400);
+    }
+
+    function goToLeadForm() {
+      // Ẩn cửa sổ chat
+      const win = document.getElementById('kar-chat-window');
+      win.classList.add('hidden');
+
+      // Cuộn mượt mà đến khu vực form
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+        // Nhấp nháy nhẹ form để gây chú ý
+        const formInput = document.getElementById('name') || document.getElementById('phone');
+        if (formInput) {
+          setTimeout(() => {
+            formInput.focus();
+            formInput.classList.add('ring-2', 'ring-red-600');
+            setTimeout(() => formInput.classList.remove('ring-2', 'ring-red-600'), 2500);
+          }, 600);
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
