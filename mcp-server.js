@@ -409,4 +409,124 @@ function setupMcpServer(app, { dbAll, dbGet, dbRun, sendResendEmail }) {
   console.log('🛠️  [MCP] Endpoints đã sẵn sàng tại /api/mcp/sse & /api/mcp/messages');
 }
 
+// -------------------------------------------------------------
+// STANDALONE SERVER RUNNER (Port 3001)
+// Cho phép chạy độc lập như 1 systemd service riêng (mcp-server.service)
+// -------------------------------------------------------------
+if (require.main === module) {
+  require('dotenv').config();
+  const express = require('express');
+  const cors = require('cors');
+  const path = require('path');
+  const sqlite3 = require('sqlite3').verbose();
+
+  const standaloneApp = express();
+  const PORT = process.env.MCP_PORT || 3001;
+  const DB_PATH = path.join(__dirname, process.env.DATABASE_PATH || 'brain.db');
+
+  standaloneApp.use(cors());
+  standaloneApp.use(express.json());
+  standaloneApp.use(express.urlencoded({ extended: true }));
+
+  // Database connection
+  const db = new sqlite3.Database(DB_PATH, (err) => {
+    if (err) {
+      console.error('❌ [MCP-Standalone] Lỗi kết nối SQLite:', err.message);
+    } else {
+      console.log(`✅ [MCP-Standalone] Đã kết nối cơ sở dữ liệu SQLite: ${DB_PATH}`);
+      db.run("PRAGMA journal_mode = WAL;");
+      db.run("PRAGMA busy_timeout = 30000;");
+    }
+  });
+
+  const dbAll = (sql, params = []) => new Promise((resolve, reject) => {
+    db.all(sql, params, (err, rows) => err ? reject(err) : resolve(rows));
+  });
+  const dbGet = (sql, params = []) => new Promise((resolve, reject) => {
+    db.get(sql, params, (err, row) => err ? reject(err) : resolve(row));
+  });
+  const dbRun = (sql, params = []) => new Promise((resolve, reject) => {
+    db.run(sql, params, function (err) {
+      err ? reject(err) : resolve({ id: this.lastID, changes: this.changes });
+    });
+  });
+
+  // Resend email helper
+  async function sendResendEmail(to, subject, html, scheduledAt = null) {
+    if (!process.env.RESEND_API_KEY) return null;
+    try {
+      const payload = {
+        from: process.env.RESEND_FROM_EMAIL || 'KAR HOBBY <contact@karhobby.io.vn>',
+        to: [to],
+        subject: subject,
+        html: html
+      };
+      if (scheduledAt) payload.scheduled_at = scheduledAt;
+      const data = JSON.stringify(payload);
+      return new Promise((resolve, reject) => {
+        const req = https.request({
+          hostname: 'api.resend.com',
+          port: 443,
+          path: '/emails',
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(data)
+          }
+        }, (res) => {
+          let body = '';
+          res.on('data', chunk => body += chunk);
+          res.on('end', () => {
+            try { resolve(JSON.parse(body)); } catch (_) { resolve(body); }
+          });
+        });
+        req.on('error', reject);
+        req.write(data);
+        req.end();
+      });
+    } catch (e) {
+      console.error('Error sending email:', e.message);
+      return null;
+    }
+  }
+
+  // Health check endpoint for /mcp, /api/mcp and /health
+  standaloneApp.get(['/mcp', '/api/mcp', '/health'], (req, res) => {
+    res.json({
+      status: 'ok',
+      server: 'karhobby-mcp',
+      transport: 'sse',
+      port: Number(PORT),
+      endpoints: {
+        sse: '/mcp/sse',
+        messages: '/mcp/messages'
+      },
+      tools: ['get_daily_summary', 'lookup_order_info', 'sync_sepay_deposits']
+    });
+  });
+
+  // Also mount /mcp/sse and /mcp/messages in addition to /api/mcp/...
+  standaloneApp.get('/mcp/sse', (req, res, next) => {
+    req.url = '/api/mcp/sse';
+    standaloneApp.handle(req, res, next);
+  });
+  standaloneApp.post('/mcp/messages', (req, res, next) => {
+    req.url = '/api/mcp/messages';
+    standaloneApp.handle(req, res, next);
+  });
+
+  setupMcpServer(standaloneApp, { dbAll, dbGet, dbRun, sendResendEmail });
+
+  standaloneApp.listen(PORT, '0.0.0.0', () => {
+    console.log(`=================================================`);
+    console.log(`🚀 KAR HOBBY Standalone MCP Server is running!`);
+    console.log(`📡 URL: http://127.0.0.1:${PORT}`);
+    console.log(`🔍 Health Check: http://127.0.0.1:${PORT}/mcp`);
+    console.log(`⚙️  SSE Endpoint: http://127.0.0.1:${PORT}/mcp/sse`);
+    console.log(`💾 Database: ${DB_PATH}`);
+    console.log(`=================================================`);
+  });
+}
+
 module.exports = { setupMcpServer };
