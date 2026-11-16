@@ -442,6 +442,10 @@ app.get('/api/sync-sepay', async (req, res) => {
   }
 });
 
+// 3.5. MODEL CONTEXT PROTOCOL (MCP) SERVER CHO AI AGENT (GOCLAW / TELEGRAM)
+const { setupMcpServer } = require('./mcp-server');
+setupMcpServer(app, { dbAll, dbGet, dbRun, sendResendEmail });
+
 // 4. ĐỊNH TUYẾN GIAO DIỆN (STATIC FILES & ADMIN)
 // Phục vụ trang Admin tại /admin hoặc /admin-index
 app.get(['/admin', '/admin-index', '/admin/index.html'], (req, res) => {
