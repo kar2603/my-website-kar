@@ -118,6 +118,107 @@ function setupMcpServer(app, { dbAll, dbGet, dbRun, sendResendEmail }) {
     );
 
     // -------------------------------------------------------------
+    // TOOL 4: get_morning_report (Báo cáo sáng / Tổng kết 24h qua)
+    // -------------------------------------------------------------
+    server.tool(
+      'get_morning_report',
+      'Báo cáo sáng tổng kết hoạt động xưởng trong 24 giờ qua: số khách mới điền form, số đơn cọc thành công, tổng tiền cọc thu về và các đơn hàng phát sinh tối qua/sáng nay.',
+      {
+        hours: z.number().optional().describe('Số giờ quét lùi về trước (mặc định: 24)')
+      },
+      async ({ hours }) => {
+        try {
+          const scanHours = typeof hours === 'number' && hours > 0 ? hours : 24;
+          const now = new Date();
+
+          // Chuyển sang giờ Việt Nam (UTC+7)
+          const offset = 7 * 60;
+          const nowVN = new Date(now.getTime() + offset * 60 * 1000);
+          const cutoffVN = new Date(nowVN.getTime() - scanHours * 60 * 60 * 1000);
+
+          const formatDT = (d) => d.toISOString().replace('T', ' ').slice(0, 19);
+          const reportTime = formatDT(nowVN);
+          const cutoffTime = formatDT(cutoffVN);
+
+          // 1. Số lead mới điền form trong 24h qua
+          const leadsRow = await dbGet(
+            "SELECT COUNT(*) as count FROM customers WHERE registered_at >= ?",
+            [cutoffTime]
+          );
+          const newLeadsCount = leadsRow ? leadsRow.count : 0;
+
+          // 2. Đơn hàng trong 24h qua
+          const orders = await dbAll(`
+            SELECT o.*, c.name as customer_name, c.phone as customer_phone, p.name as product_name
+            FROM orders o
+            LEFT JOIN customers c ON o.customer_id = c.id
+            LEFT JOIN products p ON o.product_id = p.id
+            WHERE o.order_date >= ?
+            ORDER BY o.id DESC
+          `, [cutoffTime]);
+
+          const paidOrders = orders.filter(o => o.status === 'success');
+          const pendingOrders = orders.filter(o => o.status === 'pending');
+          const totalRevenue = paidOrders.reduce((sum, o) => sum + (Number(o.amount) || 0), 0);
+
+          let recentPaid = paidOrders.map(o => ({
+            code: o.order_code,
+            customer: o.customer_name || 'Khách hàng',
+            amount: o.amount,
+            service: o.product_name || 'Độ xe 1:64'
+          }));
+
+          let previousContextNote = '';
+          if (recentPaid.length === 0) {
+            const recentOverall = await dbAll(`
+              SELECT o.order_code, o.amount, o.order_date, c.name as customer_name, p.name as product_name
+              FROM orders o
+              LEFT JOIN customers c ON o.customer_id = c.id
+              LEFT JOIN products p ON o.product_id = p.id
+              WHERE o.status = 'success'
+              ORDER BY o.id DESC LIMIT 3
+            `);
+            if (recentOverall.length > 0) {
+              previousContextNote = ` Trong 24h qua chưa có đơn cọc mới phát sinh. Đơn cọc gần nhất trước đó là #${recentOverall[0].order_code} của khách ${recentOverall[0].customer_name} (${Number(recentOverall[0].amount).toLocaleString('vi-VN')}đ).`;
+            }
+          }
+
+          let digestMessage = `Chào buổi sáng anh Kha! Báo cáo hoạt động xưởng ${scanHours}h qua (tính đến ${reportTime}):\n` +
+            `- Khách mới điền form: ${newLeadsCount}\n` +
+            `- Đơn đã cọc thành công: ${paidOrders.length} (Tổng thu: ${totalRevenue.toLocaleString('vi-VN')}đ)\n` +
+            `- Đơn đang chờ xử lý / chờ cọc: ${pendingOrders.length}`;
+
+          if (paidOrders.length > 0) {
+            digestMessage += `\nCác đơn đã cọc: ${paidOrders.map(p => `#${p.order_code} (${p.customer_name} - ${Number(p.amount).toLocaleString('vi-VN')}đ)`).join(', ')}`;
+          } else if (previousContextNote) {
+            digestMessage += `\n${previousContextNote}`;
+          }
+
+          const responseData = {
+            period: `${scanHours}h qua`,
+            cutoff_time: cutoffTime,
+            report_time: reportTime,
+            new_leads_count: newLeadsCount,
+            paid_deposits_count: paidOrders.length,
+            total_revenue: totalRevenue,
+            pending_orders_count: pendingOrders.length,
+            recent_paid_orders: recentPaid,
+            digest: digestMessage
+          };
+
+          return {
+            content: [{ type: 'text', text: JSON.stringify(responseData, null, 2) }]
+          };
+        } catch (err) {
+          return {
+            content: [{ type: 'text', text: JSON.stringify({ error: err.message }) }],
+            isError: true
+          };
+        }
+      }
+    );
+
+    // -------------------------------------------------------------
     // TOOL 2: lookup_order_info
     // -------------------------------------------------------------
     server.tool(
@@ -502,7 +603,7 @@ if (require.main === module) {
         sse: '/mcp/sse',
         messages: '/mcp/messages'
       },
-      tools: ['get_daily_summary', 'lookup_order_info', 'sync_sepay_deposits']
+      tools: ['get_daily_summary', 'lookup_order_info', 'sync_sepay_deposits', 'get_morning_report']
     });
   });
 
