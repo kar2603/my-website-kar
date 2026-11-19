@@ -360,37 +360,146 @@ app.post('/api/submit-form', async (req, res) => {
   }
 });
 
-// Check Payment / Confirm Deposit API
+// Helper: Kiểm tra giao dịch thực tế có mã đơn hàng trên Google Sheet SePay
+function checkSepaySheetForOrder(orderCode) {
+  if (!orderCode) return Promise.resolve(false);
+  const sheetUrl = process.env.SEPAY_SHEET_CSV_URL || "https://docs.google.com/spreadsheets/d/1EoLQtiL1cfjNnou5AHLcqaGi60aJJiahvAVXXnPCcC4/export?format=csv";
+  return new Promise((resolve) => {
+    https.get(sheetUrl + '&t=' + Date.now(), { headers: { 'User-Agent': 'Mozilla/5.0' } }, (resp) => {
+      let data = '';
+      resp.on('data', chunk => data += chunk);
+      resp.on('end', () => {
+        const normalized = data.toLowerCase();
+        const codeNorm = orderCode.toLowerCase();
+        if (normalized.includes(codeNorm)) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    }).on('error', (err) => {
+      console.warn('Lỗi đọc Google Sheet SePay:', err.message);
+      resolve(false);
+    });
+  });
+}
+
+// Check Payment / Confirm Deposit API (Chỉ xác nhận thành công khi SePay ĐÃ NHẬN TIỀN THỰC SỰ)
 app.all('/api/check-payment', async (req, res) => {
   try {
-    const code = (req.body && req.body.code) || req.query.code || '';
-    const email = (req.body && req.body.email) || req.query.email || '';
-    const name = (req.body && req.body.name) || req.query.name || 'Khách hàng';
+    const code = ((req.body && (req.body.code || req.body.order_code)) || req.query.code || '').trim().toUpperCase();
+    const email = ((req.body && req.body.email) || req.query.email || '').trim();
+    const name = ((req.body && req.body.name) || req.query.name || 'Khách hàng').trim();
     const amount = (req.body && req.body.amount) || req.query.amount || 2000;
 
-    if (code) {
-      await dbRun("UPDATE orders SET status = 'success' WHERE order_code = ?", [code]);
+    if (!code) {
+      return res.json({ success: false, paid: false, message: 'Thiếu mã đơn hàng' });
     }
 
-    if (email && process.env.RESEND_API_KEY) {
-      const subject = `[Kar Hobby] Xác nhận đặt cọc thành công đơn hàng #${code || 'KH0000'}`;
-      const html = `<div style="font-family: Arial; padding: 20px; background: #09090b; color: #22c55e;">
-        <h2>XÁC NHẬN ĐẶT CỌC THÀNH CÔNG #${code}</h2>
-        <p style="color: #fff;">Chào ${name}, xưởng Kar Hobby đã nhận được số tiền cọc ${Number(amount).toLocaleString('vi-VN')}đ.</p>
-        <p style="color: #aaa;">Đơn hàng của bạn đã được chuyển sang trạng thái chuẩn bị chế tác!</p>
-      </div>`;
-      await sendResendEmail(email, subject, html);
+    // 1. Kiểm tra đơn hàng trong SQLite
+    let order = await dbGet("SELECT o.*, c.name as customer_name, c.email as customer_email FROM orders o LEFT JOIN customers c ON o.customer_id = c.id WHERE o.order_code = ?", [code]);
+
+    let isActuallyPaid = false;
+    if (order && order.status === 'success') {
+      isActuallyPaid = true;
+    } else {
+      // 2. Nếu đơn chưa có trạng thái success -> Kiểm tra trên SePay Google Sheet
+      const foundInSheet = await checkSepaySheetForOrder(code);
+      if (foundInSheet) {
+        isActuallyPaid = true;
+        if (order) {
+          await dbRun("UPDATE orders SET status = 'success' WHERE id = ?", [order.id]);
+        } else {
+          // Thêm mới nếu đơn chưa kịp ghi nhận trong DB
+          const cRes = await dbRun(
+            "INSERT OR IGNORE INTO customers (name, phone, registered_at) VALUES (?, ?, ?)",
+            [`Khách SePay (${code})`, `SP_${code}`, new Date().toLocaleString('vi-VN')]
+          );
+          const cust = await dbGet("SELECT id FROM customers WHERE phone = ?", [`SP_${code}`]);
+          const custId = cust ? cust.id : cRes.id;
+          await dbRun(
+            "INSERT INTO orders (customer_id, product_id, amount, status, order_date, order_code) VALUES (?, 1, ?, 'success', ?, ?)",
+            [custId, amount, new Date().toLocaleString('vi-VN'), code]
+          );
+        }
+
+        // Gửi email xác nhận cọc qua Resend nếu có email và chưa gửi
+        const targetEmail = email || (order && order.customer_email);
+        const targetName = (name !== 'Khách hàng' ? name : (order && order.customer_name)) || 'Quý khách';
+        if (targetEmail && process.env.RESEND_API_KEY) {
+          const subject = `[Kar Hobby] Xác nhận đặt cọc thành công đơn hàng #${code}`;
+          const html = `<div style="font-family: Arial; padding: 20px; background: #09090b; color: #22c55e;">
+            <h2>XÁC NHẬN ĐẶT CỌC THÀNH CÔNG #${code}</h2>
+            <p style="color: #fff;">Chào ${targetName}, xưởng Kar Hobby đã nhận được số tiền cọc ${Number(amount).toLocaleString('vi-VN')}đ qua VietQR SePay.</p>
+            <p style="color: #aaa;">Đơn hàng của bạn đã được chuyển sang trạng thái chuẩn bị chế tác!</p>
+          </div>`;
+          await sendResendEmail(targetEmail, subject, html);
+        }
+      }
     }
 
-    res.json({
-      success: true,
-      paid: true,
-      order_code: code,
-      amount: amount,
-      email_sent: !!email,
-      message: 'Đã xác nhận thanh toán cọc thành công!'
-    });
+    if (isActuallyPaid) {
+      return res.json({
+        success: true,
+        paid: true,
+        order_code: code,
+        amount: order ? order.amount : amount,
+        message: 'Đã xác nhận thanh toán cọc thành công từ SePay!'
+      });
+    } else {
+      return res.json({
+        success: true,
+        paid: false,
+        order_code: code,
+        message: 'Đang chờ khách chuyển khoản qua SePay...'
+      });
+    }
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// SePay Webhook Endpoint (Nhận thông báo biến động số dư tức thì từ docs.sepay.vn)
+app.post('/api/sepay-webhook', async (req, res) => {
+  try {
+    const { gateway, transactionDate, accountNumber, content, transferType, transferAmount } = req.body || {};
+    console.log(`[SePay Webhook] Nhận giao dịch: ${transferAmount}đ, Nội dung: "${content}", Type: ${transferType}`);
+
+    if (transferType === 'in' || !transferType) {
+      const match = (content || '').match(/(?:SEVQR\s*)?(KH\d{4,})/i);
+      if (match) {
+        const orderCode = match[1].toUpperCase();
+        console.log(`[SePay Webhook] Khớp mã đơn hàng: #${orderCode}`);
+
+        const existing = await dbGet("SELECT o.*, c.email as customer_email, c.name as customer_name FROM orders o LEFT JOIN customers c ON o.customer_id = c.id WHERE o.order_code = ?", [orderCode]);
+        if (existing) {
+          await dbRun("UPDATE orders SET status = 'success', amount = ? WHERE id = ?", [transferAmount || existing.amount, existing.id]);
+          if (existing.customer_email && process.env.RESEND_API_KEY) {
+            const subject = `[Kar Hobby] Xác nhận đặt cọc thành công đơn hàng #${orderCode}`;
+            const html = `<div style="font-family: Arial; padding: 20px; background: #09090b; color: #22c55e;">
+              <h2>XÁC NHẬN ĐẶT CỌC THÀNH CÔNG #${orderCode}</h2>
+              <p style="color: #fff;">Chào ${existing.customer_name || 'Quý khách'}, xưởng Kar Hobby đã nhận được số tiền cọc ${Number(transferAmount || existing.amount).toLocaleString('vi-VN')}đ qua SePay.</p>
+            </div>`;
+            await sendResendEmail(existing.customer_email, subject, html);
+          }
+        } else {
+          // Thêm mới
+          const cRes = await dbRun(
+            "INSERT OR IGNORE INTO customers (name, phone, registered_at) VALUES (?, ?, ?)",
+            [`Khách SePay (${orderCode})`, `SP_${orderCode}`, new Date().toLocaleString('vi-VN')]
+          );
+          const cust = await dbGet("SELECT id FROM customers WHERE phone = ?", [`SP_${orderCode}`]);
+          const custId = cust ? cust.id : cRes.id;
+          await dbRun(
+            "INSERT INTO orders (customer_id, product_id, amount, status, order_date, order_code) VALUES (?, 1, ?, 'success', ?, ?)",
+            [custId, transferAmount || 2000, new Date().toLocaleString('vi-VN'), orderCode]
+          );
+        }
+      }
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Lỗi SePay Webhook:', err);
     res.status(500).json({ error: err.message });
   }
 });

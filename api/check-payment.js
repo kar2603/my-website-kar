@@ -155,10 +155,8 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // Nếu là POST xác nhận cọc từ client, coi như đã có xác nhận
-    if (req.method === 'POST') {
-      isPaid = true;
-    }
+    // CHỈ xác nhận thanh toán khi thực sự tìm thấy mã đơn hàng trên Google Sheet SePay
+    // Không tự động gán isPaid = true nếu chưa có giao dịch thực tế
 
     let emailSent = false;
     if (isPaid && email) {
