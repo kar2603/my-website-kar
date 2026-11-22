@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP Pack: Bộ Quy Trình Chuẩn Độ Xe Diecast 1:64 — KAR HOBBY</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-light: #fef3c7;
+      --accent: #dc2626;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --text: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --success: #16a34a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: #f1f5f9;
+      padding: 30px 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    /* Print bar */
+    .print-bar {
+      position: sticky;
+      top: 15px;
+      z-index: 999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 12px 24px;
+      margin: 0 auto 20px auto;
+      max-width: 900px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .print-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+    }
+
+    /* Header / Cover */
+    .header-banner {
+      background: linear-gradient(135deg, #090d16 0%, #111827 60%, #1e293b 100%);
+      color: #fff;
+      padding: 45px 50px;
+      border-bottom: 4px solid var(--primary);
+      position: relative;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    .header-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .header-title span {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-desc {
+      font-size: 15px;
+      color: #94a3b8;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .meta-bar {
+      display: flex;
+      gap: 25px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      color: #cbd5e1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Content Area */
+    .content-body {
+      padding: 40px 50px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+      margin: 35px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title:first-child {
+      margin-top: 0;
+    }
+
+    /* SOP Cards */
+    .sop-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .sop-header {
+      background: #f8fafc;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sop-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      background: #0f172a;
+      color: #fbbf24;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .sop-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      flex-grow: 1;
+      margin-left: 15px;
+    }
+
+    .sop-time {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #e2e8f0;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .sop-body {
+      padding: 22px;
+    }
+
+    .sop-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      background: #f8fafc;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 13px;
+    }
+
+    .sop-meta-grid strong {
+      color: var(--dark);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sop-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .sop-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 14.5px;
+    }
+
+    .step-number {
+      width: 26px;
+      height: 26px;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Pass / Fail criteria */
+    .criteria-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+      font-size: 13px;
+    }
+
+    .criteria-pass {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: #166534;
+    }
+
+    .criteria-fail {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: #991b1b;
+    }
+
+    .criteria-pass strong, .criteria-fail strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .takeaway-tag {
+      background: #fffbeb;
+      border-left: 3px solid var(--primary);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #92400e;
+      margin-top: 14px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Tables */
+    .sop-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13.5px;
+    }
+
+    .sop-table th {
+      background: #1e293b;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12.5px;
+    }
+
+    .sop-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .sop-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    /* Diagram */
+    .diagram-code {
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      padding: 14px 18px;
+      border-radius: 6px;
+      line-height: 1.45;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    /* Checklist 1 page */
+    .checklist-wrapper {
+      background: #fdfdfd;
+      border: 2px dashed #cbd5e1;
+      padding: 25px;
+      border-radius: 10px;
+      margin: 25px 0;
+    }
+
+    .checklist-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .checklist-header h3 {
+      font-size: 18px;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .box-square {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #64748b;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    .sop-footer {
+      background: #0f172a;
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .sop-footer a {
+      color: #fbbf24;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Print settings */
+    @media print {
+      body {
+        background: #fff !important;
+        padding: 0 !important;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .container {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+      }
+      .page-break {
+        page-break-before: always;
+        break-before: page;
+      }
+      .no-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 15mm 12mm 15mm 12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating print bar -->
+  <div class="print-bar no-print">
+    <div>
+      <strong style="color: #fbbf24;">KAR HOBBY Workshop</strong>
+      <span style="margin-left: 10px; color: #94a3b8; font-size: 13px;">SOP Pack Xuất Bản • Chuẩn In A4</span>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      In ra PDF (Ctrl + P)
+    </button>
+  </div>
+
+  <div class="container">
+
+    <!-- HEADER / BANNER -->
+    <div class="header-banner">
+      <div class="badge">KAR HOBBY WORKSHOP • STANDARD OPERATING PROCEDURE</div>
+      <h1 class="header-title">BỘ QUY TRÌNH CHUẨN 6 BƯỚC<br><span>ĐỘ XE DIECAST 1:64 TẠI NHÀ</span></h1>
+      <p class="header-desc">Quy trình thao tác chuẩn hóa từng milimet — Bảng thông số kỹ thuật, kỹ thuật hạ gầm Stance JDM, xịt lót chống tróc và Ma trận cứu xe khẩn cấp.</p>
+      
+      <div class="meta-bar">
+        <span>PHIÊN BẢN: SOP-1.0</span>
+        <span>THỜI LƯỢNG THỰC HIỆN: 1 BUỔI TỐI</span>
+        <span>CHI PHÍ ĐỒ NGHỀ: &lt;150.000 VNĐ</span>
+      </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <div class="content-body">
+
+      <!-- MODULE 0 -->
+      <h2 class="section-title">MODULE 0: CHUẨN BỊ MẶT BẰNG & CHECKLIST ĐỒ NGHỀ DƯỚI 150K</h2>
+
+      <div class="sop-card no-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-00</span>
+          <span class="sop-name">Thiết lập mặt bằng thao tác & Kiểm tra dụng cụ</span>
+          <span class="sop-time">2 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mặt bằng:</strong> Góc bàn 50x50cm, lót khay nhựa A4 viền cao 2cm</div>
+            <div><strong>Ánh sáng:</strong> Đèn bàn chiếu xiên 45° từ phía trước</div>
+          </div>
+
+          <table class="sop-table">
+            <thead>
+              <tr>
+                <th>Dụng cụ</th>
+                <th>Thông số chuẩn</th>
+                <th>Giá ước tính</th>
+                <th>Từ khóa tìm mua Shopee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Khoan tay mini</strong></td>
+                <td>Kèm mũi khoan sắt 2.5mm & 3.0mm</td>
+                <td>~40.000đ</td>
+                <td><em>khoan tay mini thủ công</em></td>
+              </tr>
+              <tr>
+                <td><strong>2. Nhíp gắp y tế</strong></td>
+                <td>Đầu cong, thép không gỉ nhọn</td>
+                <td>~15.000đ</td>
+                <td><em>nhíp gắp linh kiện đầu cong</em></td>
+              </tr>
+              <tr>
+                <td><strong>3. Giấy nhám nước</strong></td>
+                <td>Độ mịn P1000 và P1500 (2 tờ)</td>
+                <td>~10.000đ</td>
+                <td><em>giấy nhám nước P1000 P1500</em></td>
+              </tr>
+              <tr>
+                <td><strong>4. Keo dán dẻo B-7000</strong></td>
+                <td>Tuýp 15ml / 25ml đầu kim nhỏ</td>
+                <td>~20.000đ</td>
+                <td><em>keo dán màn hình B7000</em></td>
+              </tr>
+              <tr>
+                <td><strong>5. Gel tẩy sơn</strong></td>
+                <td>Dạng sệt không loãng (hoặc cồn 90°)</td>
+                <td>~40.000đ</td>
+                <td><em>dung dịch tẩy sơn mô hình</em></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="criteria-box">
+            <div class="criteria-pass">
+              <strong>PASS CRITERIA:</strong>
+              Đủ 5 món đồ nghề, khay gom vụn kim loại sẵn sàng, có nắp chai chứa ốc li ti.
+            </div>
+            <div class="criteria-fail">
+              <strong>FAIL / CẤM KỴ:</strong>
+              TUYỆT ĐỐI KHÔNG DÙNG KEO 502 (hơi keo làm đục mờ kính chắn gió mica vĩnh viễn).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 1 -->
+      <h2 class="section-title page-break">MODULE 1: BỘ 6 QUY TRÌNH THAO TÁC CHUẨN XƯỞNG (CORE SOPS)</h2>
+
+      <!-- SOP 01 -->
+      <div class="sop-card no-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-01</span>
+          <span class="sop-name">Khoan mở tán Rivet gầm xe bằng tay</span>
+          <span class="sop-time">3 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mục tiêu:</strong> Tách gầm không nứt kính, giữ nguyên chân trụ</div>
+            <div><strong>Dụng cụ:</strong> Khoan tay + Mũi 2.5mm & 3.0mm + Nhíp bẩy</div>
+          </div>
+
+          <div class="diagram-code">
+       [ CẤU TRÚC ĐẦU TÁN RIVET ]
+       ┌────────────────────────┐
+       │   VÀNH MŨ LOE (GỌT BỎ) │  <-- Dùng mũi 2.5mm xoay 25-30 vòng
+       ├────────────────────────┤
+       │   CHÂN TRỤ (GIỮ NGUYÊN)│  <-- CẤM KHOAN LỦNG VÀO PHẦN NÀY
+       └────────────────────────┘
+          </div>
+
+          <ul class="sop-steps">
+            <li class="sop-step-item">
+              <span class="step-number">1</span>
+              <div><strong>Định tâm:</strong> Lắp mũi 2.5mm vào cán khoan. Đặt mũi khoan ngay tâm lõm của tán rivet dưới gầm xe. Giữ cán khoan vuông góc 90° so với mặt gầm.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">2</span>
+              <div><strong>Khoan gọt vành mũ:</strong> Dùng ngón tay xoay đều theo chiều kim đồng hồ <strong>đúng 25 – 30 vòng</strong>. Thấy phoi kim loại bạc đùn ra từng sợi mỏng. Dừng lại khi vành mũ loe tròn mòn sát mép nhựa.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">3</span>
+              <div><strong>Dọn mép:</strong> Đổi sang mũi 3.0mm, xoay nhẹ thêm 5 – 7 vòng để gọt phẳng rìa gờ kim loại còn sót lại.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">4</span>
+              <div><strong>Bẩy nảy gầm:</strong> Đưa đầu nhíp vào khe tiếp giáp đuôi gầm và thân xe, nhích nhẹ cổ tay lên. Nghe tiếng <em>"tách"</em> êm ái, gầm xe tự bật ra. Nhấc kính mica và nội thất cất vào khay.</div>
+            </li>
+          </ul>
+
+          <div class="criteria-box">
+            <div class="criteria-pass"><strong>PASS:</strong> Chân trụ gầm nguyên vẹn, kính không nứt, sàn gầm phẳng phiu.</div>
+            <div class="criteria-fail"><strong>FAIL:</strong> Khoan thủng lủng sàn xe lên nóc hoặc toét đứt trụ gầm.</div>
+          </div>
+          <div class="takeaway-tag"><strong>Key Takeaway:</strong> Bản chất là gọt mỏng vành mũ kim loại chứ không phải khoan xuyên thủng xe. Đếm vòng xoay là không bao giờ hỏng.</div>
+        </div>
+      </div>
+
+      <!-- SOP 02 -->
+      <div class="sop-card no-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-02</span>
+          <span class="sop-name">Tẩy sơn zin & Xả nhám tạo chân bám phôi Zamak</span>
+          <span class="sop-time">15 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mục tiêu:</strong> Lột sạch sơn zin, phôi sáng bóng sẵn sàng ăn sơn mới</div>
+            <div><strong>Vật tư:</strong> Gel tẩy sơn, cọ, chén sứ, bàn chải cũ, nhám P1000/1500</div>
+          </div>
+
+          <ul class="sop-steps">
+            <li class="sop-step-item">
+              <span class="step-number">1</span>
+              <div><strong>Cách ly chi tiết:</strong> Đảm bảo trên vỏ xe KHÔNG CÒN chi tiết nhựa nào (kính, đèn pha). Gel tẩy sơn sẽ làm chảy biến dạng nhựa ngay lập tức.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">2</span>
+              <div><strong>Quét gel & Đợi sùi (10–15 phút):</strong> Đặt phôi vào chén sứ, quét gel phủ kín từ trong ra ngoài. Để nơi thoáng gió cho sơn sùi rộp lên như da rắn.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">3</span>
+              <div><strong>Cọ rửa xả sạch:</strong> Đeo găng tay, dùng bàn chải cũ chà miết dưới vòi nước chảy. Dùng tăm khều sạch sơn trong rãnh cửa và hốc đèn.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">4</span>
+              <div><strong>Đánh nhám P1000/P1500:</strong> Nhúng ướt giấy nhám, xoa đều tay tạo chân bám vi mô trên phôi kẽm Zamak. Lau khô bằng khăn giấy ăn không bụi.</div>
+            </li>
+          </ul>
+
+          <div class="criteria-box">
+            <div class="criteria-pass"><strong>PASS:</strong> Phôi xám bạc đồng đều, các rãnh cửa sắc nét, sờ tay không dính dầu mỡ.</div>
+            <div class="criteria-fail"><strong>FAIL:</strong> Còn vệt sơn cũ đóng cục trong hốc gió hoặc phôi còn ẩm ướt.</div>
+          </div>
+          <div class="takeaway-tag"><strong>Key Takeaway:</strong> 3 phút đánh nhám nước P1000 giúp lớp sơn sau này không bao giờ bong mảng khi va quẹt.</div>
+        </div>
+      </div>
+
+      <!-- SOP 03 -->
+      <div class="sop-card page-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-03</span>
+          <span class="sop-name">Xịt lót Primer 2 lớp chống tróc, giữ trọn gân xe</span>
+          <span class="sop-time">20 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mục tiêu:</strong> Tạo chân bám lì mịn, chống rỗ, giữ nguyên gân dập cửa</div>
+            <div><strong>Vật tư:</strong> Lon Primer Tamiya xám, tô nước ấm 40°C, đũa tre tay cầm</div>
+          </div>
+
+          <div class="diagram-code">
+       [ QUY TẮC PHUN LƯỚT 2 LỚP PRIMER ]
+       
+       Bắt đầu bấm cò                  Nhả cò
+            ○ ─────────> [ XE ] ─────────> ○
+       (Ngoài không gian)             (Ngoài không gian)
+       
+       <--------- Khoảng cách: 20 - 25 cm --------->
+          </div>
+
+          <ul class="sop-steps">
+            <li class="sop-step-item">
+              <span class="step-number">1</span>
+              <div><strong>Kích hoạt hạt sơn mịn (3 phút):</strong> Ngâm đáy lon sơn vào tô nước ấm 40°C trong 3 phút. Lắc dọc dứt khoát 60 giây (nghe bi sắt va đập đều đặn).</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">2</span>
+              <div><strong>Cố định phôi:</strong> Luồn đũa tre quấn băng keo vào mặt trong nóc xe làm tay cầm. Không chạm tay vào phôi kim loại.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">3</span>
+              <div><strong>Lớp 1 (Dust Coat):</strong> Cách xe 20–25cm, bấm cò ngoài không gian rồi lia ngang lướt qua xe. Phủ mờ 50% diện tích. <strong>BẤM GIỜ NGHỈ ĐÚNG 15 PHÚT.</strong></div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">4</span>
+              <div><strong>Lớp 2 (Full Coverage):</strong> Sau 15 phút, lia thêm 1–2 đường ngang đều tay. Màu lót xám phủ kín 100% mịn màng. Để khô tự nhiên 60 phút trước khi sơn màu.</div>
+            </li>
+          </ul>
+
+          <div class="criteria-box">
+            <div class="criteria-pass"><strong>PASS:</strong> Mặt sơn lì mịn như nhung, màu xám đều, các rãnh cửa vẫn sắc nét.</div>
+            <div class="criteria-fail"><strong>FAIL:</strong> Đọng giọt hoặc nổi bọt khí do dí quá gần (&lt;15cm).</div>
+          </div>
+          <div class="takeaway-tag"><strong>Key Takeaway:</strong> 2 lớp mỏng cách nhau 15 phút luôn bền gấp 10 lần một lớp xịt dày ép khô.</div>
+        </div>
+      </div>
+
+      <!-- SOP 04 -->
+      <div class="sop-card no-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-04</span>
+          <span class="sop-name">Độ dàn chân Stance JDM & Căn Camber âm bánh béo</span>
+          <span class="sop-time">10 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mục tiêu:</strong> Bánh sát mí vè (khoảng hở 0.5mm), camber âm 5°, bánh vẫn lăn mượt</div>
+            <div><strong>Vật tư:</strong> Bộ mâm TE37/BBS lốp cao su, 2 kìm mỏ nhọn, dao trổ, keo B7000</div>
+          </div>
+
+          <ul class="sop-steps">
+            <li class="sop-step-item">
+              <span class="step-number">1</span>
+              <div><strong>Đo chiều dài trục:</strong> Bề ngang tổng thể từ mép bánh trái sang mép bánh phải phải bằng đúng bề ngang thân xe (không thò, không thụt).</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">2</span>
+              <div><strong>Mài bệ ghế (0.5mm - 0.8mm):</strong> Dùng dao trổ gọt bớt nhựa ở đáy ghế lái nơi tiếp giáp với trục bánh xe, tạo khoảng trống cho trục nâng lên khi hạ gầm mà không bị cấn kẹt.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">3</span>
+              <div><strong>Bẻ góc Camber âm 5°:</strong> Dùng 2 kìm nhọn kẹp cách đầu trục 3mm, dùng ngón tay bẻ nhẹ một góc 3°–5° hướng lên nóc xe. Căn đối xứng 2 bên.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">4</span>
+              <div><strong>Khóa cữ bằng keo B-7000:</strong> Chấm một giọt keo B-7000 dẻo vào lưng trục để giữ cữ (không để keo tràn vào ổ mâm).</div>
+            </li>
+          </ul>
+
+          <div class="criteria-box">
+            <div class="criteria-pass"><strong>PASS:</strong> Mép lốp cách vè xe đúng 0.5mm (lọt vừa tờ A4); đẩy nhẹ xe lướt êm ái trên mặt kính.</div>
+            <div class="criteria-fail"><strong>FAIL:</strong> Bánh bị dán chết cứng không quay được hoặc góc camber lệch nhau.</div>
+          </div>
+          <div class="takeaway-tag"><strong>Key Takeaway:</strong> Độ xe đỉnh cao là hạ sát sàn cực ngầu nhưng đẩy nhẹ bốn bánh vẫn lướt êm ái.</div>
+        </div>
+      </div>
+
+      <!-- SOP 05 -->
+      <div class="sop-card page-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-05</span>
+          <span class="sop-name">Dán Decal nước & Phủ bóng Clear Coat khóa tem</span>
+          <span class="sop-time">35 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mục tiêu:</strong> Tem dán thẳng tắp, không nhăn, xóa mờ viền tem dưới lớp Clear Coat</div>
+            <div><strong>Vật tư:</strong> Decal nước, dao trổ mổ nhọn, tăm bông (1 ướt, 1 khô), lon Top Coat Clear</div>
+          </div>
+
+          <ul class="sop-steps">
+            <li class="sop-step-item">
+              <span class="step-number">1</span>
+              <div><strong>Cắt tỉa sát viền:</strong> Dùng dao mổ cắt tỉa miếng tem chừa mép trong suốt 0.3–0.5mm.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">2</span>
+              <div><strong>Kích hoạt màng trượt (15–20 giây):</strong> Thả miếng decal vào nắp chai nước sạch. Khi màng tem bắt đầu trượt nhẹ trên giấy đế thì vớt ra ngay bằng nhíp.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">3</span>
+              <div><strong>Trượt tem bằng đệm nước:</strong> Chấm 1 giọt nước sạch lên vị trí dán trên thân xe làm đệm bôi trơn. Trượt tem sang, xoay trở căn chỉnh ngay ngắn. Dùng tăm bông khô lăn nhẹ ép sạch bọt khí. Để khô 30 phút.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">4</span>
+              <div><strong>Phủ bóng khóa tem 2 lớp:</strong> Xịt 2 lớp Top Coat Clear cách nhau 20 phút. Lớp phủ bóng trong suốt sẽ chôn miếng tem xuống dưới, xóa tan hoàn toàn viền tem, sờ tay phẳng lì.</div>
+            </li>
+          </ul>
+
+          <div class="criteria-box">
+            <div class="criteria-pass"><strong>PASS:</strong> Tem thẳng đối xứng, không nhăn, không bọt khí, viền tem biến mất hoàn toàn.</div>
+            <div class="criteria-fail"><strong>FAIL:</strong> Tem bị bong tróc mép do quên xịt lớp bóng Clear Coat bảo vệ.</div>
+          </div>
+          <div class="takeaway-tag"><strong>Key Takeaway:</strong> Decal nước cần sự điềm tĩnh và nước bôi trơn. Lớp bóng Clear Coat chính là chiếc áo giáp giữ tem vĩnh viễn.</div>
+        </div>
+      </div>
+
+      <!-- SOP 06 -->
+      <div class="sop-card no-break">
+        <div class="sop-header">
+          <span class="sop-tag">SOP-06</span>
+          <span class="sop-name">Siết khóa gầm & Lắp ráp hoàn thiện</span>
+          <span class="sop-time">5 Phút</span>
+        </div>
+        <div class="sop-body">
+          <div class="sop-meta-grid">
+            <div><strong>Mục tiêu:</strong> Thân vỏ, kính, nội thất và gầm gắn chặt cứng ngắc, không cần máy ép tán</div>
+            <div><strong>Vật tư:</strong> 2 vít tự tiêu 1.5mm (ốc mắt kính/laptop) hoặc tăm tre + B7000, khăn lau kính</div>
+          </div>
+
+          <ul class="sop-steps">
+            <li class="sop-step-item">
+              <span class="step-number">1</span>
+              <div><strong>Vệ sinh kính mica:</strong> Lấy khăn mềm lau sạch bụi và vân tay mặt trong kính chắn gió trước khi lắp.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">2</span>
+              <div><strong>Lắp ráp theo thứ tự:</strong> Thân vỏ úp ngược ➔ Kính mica vào chốt nóc ➔ Khay ghế nội thất ➔ Trục bánh xe ➔ Đế gầm xe.</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">3</span>
+              <div><strong>Siết khóa gầm:</strong> Vặn 2 vít tự tiêu 1.5mm trực tiếp vào lỗ chân trụ gầm. Đầu ren sẽ tự siết chặt vào hợp kim kẽm Zamak cứng ngắc. (Hoặc nhét tăm tre chấm keo B-7000 dẻo).</div>
+            </li>
+            <li class="sop-step-item">
+              <span class="step-number">4</span>
+              <div><strong>Nghiệm thu bàn chill:</strong> Đặt xe xuống bàn kính kiểm tra độ khít mép đầu đuôi và độ lăn mượt của bánh.</div>
+            </li>
+          </ul>
+
+          <div class="criteria-box">
+            <div class="criteria-pass"><strong>PASS:</strong> Xe đầm chắc, lắc không lạch cạch, gầm khít rịt không vênh đầu đuôi.</div>
+            <div class="criteria-fail"><strong>FAIL:</strong> Gầm xe bị hở toác hoặc lỏng lẻo khi cầm trên tay.</div>
+          </div>
+          <div class="takeaway-tag"><strong>Key Takeaway:</strong> Vít 1.5mm tự tạo ren là giải pháp thông minh: vừa chắc chắn vừa cho phép tháo mở thay mâm sau này.</div>
+        </div>
+      </div>
+
+      <!-- MODULE 2: EMERGENCY MATRIX -->
+      <h2 class="section-title page-break">MODULE 2: MA TRẬN "CỨU XE KHẨN CẤP" (EMERGENCY TROUBLESHOOTING)</h2>
+      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px;">Khi gặp sự cố, bình tĩnh tra cứu ngay bảng ma trận phản xạ nhanh chuẩn xưởng này:</p>
+
+      <table class="sop-table no-break" style="margin-bottom: 30px;">
+        <thead>
+          <tr>
+            <th style="width: 28%;">Hiện tượng sự cố</th>
+            <th style="width: 32%;">Nguyên nhân gốc rễ</th>
+            <th style="width: 40%;">Thao tác cấp cứu trong 5 phút</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #b91c1c;">1. Lỡ khoan lủng gầm / Toét chân trụ</strong></td>
+            <td>Đè tay quá mạnh hoặc mũi khoan quá sâu làm đứt chân trụ hợp kim Zamak.</td>
+            <td>Cắt đoạn tăm tre 5mm nhét chặt vào ống trụ + chấm keo B-7000; hoặc dùng vít 1.5mm vặn xiết tự tạo ren mới cứng ngắc.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #b91c1c;">2. Sơn chảy đọng giọt / Nổi da cam</strong></td>
+            <td>Dí lon sơn quá gần (&lt;15cm) hoặc xịt ép lớp quá dày khi dung môi chưa bay.</td>
+            <td><strong>CẤM LAU KHI ƯỚT.</strong> Để yên khô đanh 24 tiếng. Lấy nhám nước P1500 chà nhẹ cho phẳng lỳ mặt sơn rồi xịt lại 1 lớp mỏng.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #b91c1c;">3. Rách decal khi đang căn chỉnh</strong></td>
+            <td>Thao tác vội vàng khi màng tem chưa đủ ẩm bôi trơn.</td>
+            <td>Nhỏ ngay 1 giọt nước sạch lên vết rách, dùng nhíp và tăm bông ướt đẩy khít 2 mép rách lại như xếp hình. Phủ bóng Clear Coat sẽ hàn vô hình.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #b91c1c;">4. Bánh xe sau khi ráp bị kẹt cứng</strong></td>
+            <td>Trục bánh cạ vào đáy bệ ghế lái hoặc lốp cao su cạ vào mép vè kim loại.</td>
+            <td>Lấy dao trổ gọt bớt 0.5mm nhựa ở đáy bệ ghế. Nếu cạ vè kim loại: dùng dũa móng tay mài bớt 0.3mm ở mặt trong hốc vè.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- MODULE 3: PRINTABLE CHECKLIST -->
+      <h2 class="section-title page-break">MODULE 3: BẢNG CHECKLIST 12 BƯỚC IN 1 TRANG A4</h2>
+      
+      <div class="checklist-wrapper no-break">
+        <div class="checklist-header">
+          <h3>KAR HOBBY WORKSHOP — BẢNG CHECKLIST NGHIỆM THU XE 1:64</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Kẹp trước bàn làm việc • Đánh dấu tích [✓] từng ô trước khi hoàn thiện</p>
+        </div>
+
+        <div class="checklist-grid">
+          <div class="check-item"><div class="box-square"></div><div><strong>01. Mặt bằng sạch sẽ:</strong> Khay nhựa A4 gom vụn kim loại đã trải sẵn sàng.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>02. Đủ 5 món đồ nghề:</strong> Khoan tay, nhíp cong, nhám P1000/1500, keo B7000.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>03. Mở gầm an toàn:</strong> Tán rivet gọt phẳng vành mũ, chân trụ gầm nguyên vẹn.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>04. Bảo vệ kính mica:</strong> Kính tháo nhẹ nhàng, không nứt vỡ, cất riêng trong hộp.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>05. Phôi sạch sơn zin:</strong> Đã tẩy sạch 100% sơn zin và xả nhám mịn P1000.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>06. Lớp Primer chuẩn:</strong> Xịt đủ 2 lớp lót mỏng, nghỉ đúng 15 phút giữa 2 lớp.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>07. Nước sơn màu đều:</strong> Màu sắc đồng nhất, các rãnh gân cửa sắc lẹm.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>08. Dàn chân vừa vặn:</strong> Mâm độ lắp đồng trục, mép ngoài bánh phẳng mí vè.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>09. Hạ gầm Stance:</strong> Khoảng hở vè đạt chuẩn 0.5mm (lọt vừa tờ giấy A4).</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>10. Decal & Phủ bóng:</strong> Tem dán ngay ngắn và đã khóa bằng 2 lớp Clear Coat.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>11. Bánh lăn mượt mà:</strong> Đặt trên mặt kính đẩy nhẹ, 4 bánh xe lăn êm không rít.</div></div>
+          <div class="check-item"><div class="box-square"></div><div><strong>12. Khóa gầm chắc chắn:</strong> Siết vít 1.5mm khít rịt, xe đầm chắc lên bàn chill.</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="sop-footer no-break">
+      <h4 style="color: #fbbf24; font-size: 16px; margin-bottom: 6px;">KAR HOBBY WORKSHOP</h4>
+      <p style="color: #94a3b8; font-size: 13px; margin-bottom: 12px;">Thế giới mô hình chuyên nghiệp — Nhận độ xe diecast 1:64 & ráp weathering Gunpla độc bản theo yêu cầu.</p>
+      <p style="color: #cbd5e1;">Website: <a href="https://karhobby.io.vn">https://karhobby.io.vn</a> | Hotline/Zalo: Tư vấn kỹ thuật 1-1</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

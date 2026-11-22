@@ -703,6 +703,10 @@ app.get('/ke-hoach/:file.md', (req, res) => {
 // Phục vụ các file khác (HTML, hình ảnh, assets) trong /ke-hoach
 app.use('/ke-hoach', express.static(path.join(__dirname, 'ke-hoach')));
 
+// 4.3. FLOW BÁN SẢN PHẨM SỐ (DIGITAL PRODUCTS FLOW)
+const { setupDigitalFlow } = require('./digital_flow');
+setupDigitalFlow(app, { dbGet, dbRun, dbAll, sendResendEmail, checkSepaySheetForOrder });
+
 // Phục vụ file tĩnh (CSS, JS, hình ảnh, assets)
 app.use(express.static(__dirname));
 
