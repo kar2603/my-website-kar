@@ -1175,5 +1175,20 @@
     </div>
   </footer>
 
+  <script>
+    // Tự động chuyển hướng link .md sang viewer.html nếu đang xem trên GitHub Pages hoặc mở file trực tiếp
+    document.querySelectorAll('a[href$=".md"]').forEach(link => {
+      const rawHref = link.getAttribute('href');
+      if (!rawHref.startsWith('http') && !rawHref.startsWith('/')) {
+        link.addEventListener('click', function(e) {
+          if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+            e.preventDefault();
+            window.open('viewer.html?file=' + encodeURIComponent(rawHref), '_blank');
+          }
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
