@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cẩm Nang Thực Chiến Tự Custom Diecast 1:64 — KAR HOBBY</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-light: #fef3c7;
+      --accent: #dc2626;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --text: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: #f1f5f9;
+      padding: 30px 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .book-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    /* Print toolbar floating */
+    .print-bar {
+      position: sticky;
+      top: 15px;
+      z-index: 999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 12px 24px;
+      margin: 0 auto 20px auto;
+      max-width: 860px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .print-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+    }
+
+    /* Cover Page */
+    .cover-page {
+      background: linear-gradient(160deg, #090d16 0%, #111827 50%, #1e1b4b 100%);
+      color: #fff;
+      padding: 70px 60px;
+      min-height: 900px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border-bottom: 5px solid var(--primary);
+    }
+
+    .brand-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+    }
+
+    .cover-title {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-title span {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      color: #cbd5e1;
+      margin-bottom: 35px;
+      line-height: 1.5;
+    }
+
+    .cover-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 24px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .hl-icon {
+      color: #fbbf24;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .hl-text strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .hl-text p {
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .author-info h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .author-info p {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .edition-tag {
+      font-size: 12px;
+      color: #fbbf24;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Table of contents */
+    .toc-section {
+      padding: 50px 60px;
+      background: #fafaf9;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .section-header::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 45px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+
+    .toc-item:hover {
+      border-color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .toc-number {
+      color: var(--primary);
+      margin-right: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Content Body */
+    .content-area {
+      padding: 50px 60px;
+    }
+
+    .chapter {
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #eef2f6;
+    }
+
+    .chapter:last-child {
+      border-bottom: none;
+    }
+
+    .chapter-tag {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .chapter-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 28px 0 14px 0;
+    }
+
+    ol, ul {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    /* Callout & Takeaways */
+    .takeaway-box {
+      background: linear-gradient(to right, #fffbeb, #fef3c7);
+      border-left: 4px solid var(--primary);
+      padding: 18px 22px;
+      border-radius: 0 8px 8px 0;
+      margin: 28px 0;
+    }
+
+    .takeaway-box strong {
+      display: block;
+      color: #92400e;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .takeaway-box p {
+      color: #78350f;
+      font-size: 14px;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Diagram / Code Block */
+    .ascii-box {
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 18px 22px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 22px 0;
+      line-height: 1.45;
+      border: 1px solid #1e293b;
+    }
+
+    /* Comparison Table */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 22px 0;
+      font-size: 14px;
+    }
+
+    .custom-table th {
+      background: #1e293b;
+      color: #fff;
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .custom-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .custom-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    /* Checklist */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 24px 0;
+    }
+
+    .check-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .check-text strong {
+      display: block;
+      color: var(--dark);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .check-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #fff !important;
+        padding: 0 !important;
+        color: #000 !important;
+      }
+
+      .print-bar {
+        display: none !important;
+      }
+
+      .book-container {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+      }
+
+      .cover-page {
+        min-height: 100vh !important;
+        page-break-after: always;
+        break-after: page;
+        padding: 50px 40px !important;
+      }
+
+      .page-break {
+        page-break-before: always;
+        break-before: page;
+      }
+
+      .no-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 18mm 15mm 20mm 15mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Print floating bar -->
+  <div class="print-bar no-print">
+    <div>
+      <strong style="font-size: 15px; color: #fbbf24;">KAR HOBBY Workshop</strong>
+      <span style="margin-left: 10px; color: #94a3b8; font-size: 13px;">Bản in xuất sắc • Chuẩn A4</span>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      In ra PDF (Ctrl + P)
+    </button>
+  </div>
+
+  <div class="book-container">
+
+    <!-- COVER PAGE -->
+    <div class="cover-page">
+      <div>
+        <div class="brand-badge">KAR HOBBY WORKSHOP • BẢN ĐỘ ĐỘC BẢN</div>
+        <h1 class="cover-title">CẨM NANG THỰC CHIẾN<br><span>TỰ CUSTOM DIECAST 1:64</span></h1>
+        <p class="cover-subtitle">Từ phôi xe thô đến bản độ độc bản trên bàn làm việc — Không cần máy nén khí, đồ nghề dưới 150k cho người mới bắt đầu.</p>
+
+        <div class="cover-highlights">
+          <div class="hl-item">
+            <span class="hl-icon">⚡</span>
+            <div class="hl-text">
+              <strong>Mở gầm không nứt kính</strong>
+              <p>Khoan tay mở tán rivet ngọt lịm không làm cong vênh sàn xe.</p>
+            </div>
+          </div>
+          <div class="hl-item">
+            <span class="hl-icon">⚡</span>
+            <div class="hl-text">
+              <strong>Xịt lót 2 lớp chuẩn xưởng</strong>
+              <p>Công thức cách nhau 15 phút, sơn không tróc, không mất gân cửa.</p>
+            </div>
+          </div>
+          <div class="hl-item">
+            <span class="hl-icon">⚡</span>
+            <div class="hl-text">
+              <strong>Hạ gầm Stance & Camber</strong>
+              <p>Bánh sát vè phong cách JDM mà xe vẫn lướt mượt trên mặt bàn.</p>
+            </div>
+          </div>
+          <div class="hl-item">
+            <span class="hl-icon">⚡</span>
+            <div class="hl-text">
+              <strong>Bảng cứu xe 4 tai nạn</strong>
+              <p>Cứu nhanh khi lủng gầm, chảy sơn, rách decal hay kẹt bánh.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-footer">
+        <div class="author-info">
+          <h4>KAR HOBBY Workshop</h4>
+          <p>Thế giới mô hình chuyên nghiệp — Độ xe & Kit theo cá tính của bạn</p>
+        </div>
+        <div class="edition-tag">PHÁT HÀNH NỘI BỘ • 2026</div>
+      </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-section page-break">
+      <h2 class="section-header">MỤC LỤC NỘI DUNG</h2>
+      <div class="toc-list">
+        <div class="toc-item"><span><span class="toc-number">00.</span> Lời ngỏ từ Xưởng KAR HOBBY</span> <span>Trang 03</span></div>
+        <div class="toc-item"><span><span class="toc-number">01.</span> Hộp đồ nghề "nhập môn" dưới 150k — Đừng vội mua máy bạc triệu</span> <span>Trang 04</span></div>
+        <div class="toc-item"><span><span class="toc-number">02.</span> "Phẫu thuật" gầm xe — Mở tán Rivet ngọt lịm không nứt kính</span> <span>Trang 06</span></div>
+        <div class="toc-item"><span><span class="toc-number">03.</span> Tẩy sơn zin & Kỹ thuật xịt lót Primer 2 lớp không bít gân cửa</span> <span>Trang 08</span></div>
+        <div class="toc-item"><span><span class="toc-number">04.</span> Độ dàn chân Stance JDM — Chỉnh Camber bánh béo mà xe vẫn lăn mượt</span> <span>Trang 10</span></div>
+        <div class="toc-item"><span><span class="toc-number">05.</span> Lên màu nghệ thuật, dán Decal nước & Phủ bóng bảo vệ 2K</span> <span>Trang 12</span></div>
+        <div class="toc-item"><span><span class="toc-number">06.</span> Bảng "Cứu xe khẩn cấp" — Xử lý 4 tai nạn kinh điển</span> <span>Trang 14</span></div>
+        <div class="toc-item"><span><span class="toc-number">07.</span> Phụ lục: Checklist 12 bước nghiệm thu chuẩn xưởng</span> <span>Trang 16</span></div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-area">
+
+      <!-- LỜI NGỎ -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Lời Mở Đầu</span>
+        <h2 class="chapter-title">Lời ngỏ từ Xưởng KAR HOBBY</h2>
+        <p>Chào bác,</p>
+        <p><em>Thật ra</em>, bước chân vào một cửa hàng mô hình lớn, cầm vài trăm nghìn hay một triệu trên tay là bác đã có thể rước về một chiếc xe nguyên seal bóng loáng từ nhà máy. Nhưng bác có đồng ý với xưởng mình không: chiếc xe đó ai có tiền cũng mua được. Một nghìn người bước vào tiệm, một nghìn người cầm về những chiếc xe giống hệt nhau, từ màu sơn cho tới cái mâm đúc nhựa nguyên bản.</p>
+        <p>Còn cảm giác tự tay bác ngồi xuống bàn làm việc vào một buổi tối yên tĩnh, mở từng con ốc gầm, xả lớp sơn công nghiệp vô hồn, nắn nót hạ từng milimet gầm xe cho bánh vừa khít hốc, rồi ngắm nhìn chiếc xe độc nhất vô nhị mang đúng cá tính của mình dưới ánh đèn bàn... cảm giác đó nó đã và gây nghiện hơn rất nhiều.</p>
+        <p>Nhiều anh em nhắn hỏi xưởng mình: <em>"Em không khéo tay, không có phòng sơn xịn, liệu có tự làm được không?"</em>.</p>
+        <p>Câu trả lời của xưởng mình luôn là: Hoàn toàn được, và <em>đơn giản thôi</em>. Bác không cần phải là một thợ cơ khí lành nghề, cũng chẳng cần ném tiền qua cửa sổ cho những cỗ máy nén khí cồng kềnh bạc triệu ngay từ ngày đầu. Thứ bác cần chỉ là một phôi xe tầm vài chục nghìn, một chút kiên nhẫn và cẩm nang thực chiến này.</p>
+        <p><em>Dù sao thì</em>, một tác phẩm độc bản trên bàn làm việc bao giờ cũng xứng đáng để bác <em>thử xem</em> một lần.</p>
+      </div>
+
+      <!-- CHƯƠNG 1 -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Chương 01</span>
+        <h2 class="chapter-title">Hộp đồ nghề "nhập môn" dưới 150k — Đừng vội mua máy nén khí bạc triệu</h2>
+        <p>Cái bẫy lớn nhất của anh em mới tập chơi mô hình là: chưa kịp mở xong con ốc xe đầu tiên đã vội lên mạng lùng mua máy nén khí, súng phun sơn airbrush xịn sò hết 2-3 triệu. Để rồi khi bận rộn công việc, cả đống máy móc đóng bụi trong góc phòng, vừa chật chội vừa lãng phí.</p>
+        <p><em>Thật ra</em>, để hoàn thiện một chiếc xe độ chuẩn dáng JDM, bác chỉ cần đúng 5 món đồ nghề cơ bản với tổng chi phí chưa tới 150.000 VNĐ:</p>
+
+        <h3>1. Danh mục 5 món đồ nghề cốt lõi (Mua trên Shopee/kim khí)</h3>
+        <ol>
+          <li><strong>Bộ cán khoan tay thủ công + 2 mũi khoan sắt (2.5mm và 3.0mm):</strong> Giá tầm 35.000 – 45.000đ. Đừng dùng máy khoan pin tốc độ cao vì trượt tay một phát là bay luôn sàn xe. Khoan tay xoay tròn bằng ngón tay cho cảm giác ăn kim loại cực kỳ chuẩn xác.</li>
+          <li><strong>Kẹp gắp nhíp y tế đầu cong (Tweezer):</strong> Giá tầm 15.000đ. Dùng để gắp nhả tem decal in nước li ti và căn chỉnh mâm xe mà không run tay.</li>
+          <li><strong>Giấy nhám nước độ mịn P1000 và P1500:</strong> Giá 10.000đ / 2 tờ. Giúp chà láng bề mặt phôi sau khi tẩy sơn mà không để lại vết xước sâu.</li>
+          <li><strong>Keo dán gầm chuyên dụng (B-7000):</strong> Giá tầm 20.000đ/tuýp. <em>Tuyệt đối không dùng keo 502!</em> Hơi cyanoacrylate của keo 502 bốc lên sẽ làm đục mờ toàn bộ kính chắn gió mica trong veo của xe trong chớp mắt.</li>
+          <li><strong>Dung dịch tẩy sơn dạng gel hoặc cồn tẩy rửa:</strong> Giá tầm 40.000đ/hũ.</li>
+        </ol>
+
+        <table class="custom-table no-break">
+          <thead>
+            <tr>
+              <th>Dụng cụ</th>
+              <th>Mới bắt đầu (Khuyên dùng)</th>
+              <th>Đầu tư quá tay (Nên tránh)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mở gầm xe</td>
+              <td>Khoan tay + mũi 2.5mm (~40k)</td>
+              <td>Máy khoan pin công suất lớn (~400k)</td>
+            </tr>
+            <tr>
+              <td>Sơn phủ</td>
+              <td>Sơn xịt lon Tamiya/Samurai (~80k)</td>
+              <td>Máy nén khí + súng Airbrush (~2.5tr)</td>
+            </tr>
+            <tr>
+              <td>Keo dán</td>
+              <td>Keo B-7000 dẻo trong suốt (~20k)</td>
+              <td>Keo 502 (Gây đục mờ kính mica)</td>
+            </tr>
+            <tr>
+              <td>Không gian</td>
+              <td>Góc bàn làm việc lót giấy báo</td>
+              <td>Phòng sơn chuyên dụng có quạt hút</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="takeaway-box no-break">
+          <strong>Key Takeaway Chương 1</strong>
+          <p>Đồ nghề xịn không làm nên một thợ giỏi — chính sự tỉ mỉ của đôi tay mới quyết định độ sắc nét của xe. Hãy bắt đầu với hộp đồ nghề dưới 150k, khi nào độ xong 5 chiếc đầu tiên trơn tru thì hẵng nghĩ tới việc nâng cấp công cụ.</p>
+        </div>
+      </div>
+
+      <!-- CHƯƠNG 2 -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Chương 02</span>
+        <h2 class="chapter-title">"Phẫu thuật" gầm xe — Mở tán Rivet ngọt lịm không nứt kính, cong trục</h2>
+        <p>Bất kỳ chiếc xe diecast 1:64 nào trên thị trường (từ Hot Wheels, Matchbox cho tới Tomica, Mini GT) đều được nhà máy dập cố định bằng 2 chốt tán kim loại tròn ở gầm xe (gọi là tán Rivet). Để độ xe, bước đầu tiên là phải "mổ gầm".</p>
+        <p>Nếu dùng búa hay kìm cạy bậy, bác sẽ làm cong vênh sàn xe, nứt vỡ kính mica bên trong hoặc biến chiếc xe thành đống sắt vụn. <em>Đơn giản thôi</em>, hãy làm đúng kỹ thuật xoay mũi khoan tay của xưởng mình:</p>
+
+        <div class="ascii-box no-break">
+       ┌────────────────────────┐
+       │   1. BODY KIM LOẠI     │  <-- Nơi sơn đổi màu, dán decal
+       └───────────┬────────────┘
+       ┌───────────┴────────────┐
+       │   2. CỤM KÍNH MICA     │  <-- Dễ gãy lẫy nhựa, cấm dính keo 502
+       └───────────┬────────────┘
+       ┌───────────┴────────────┐
+       │   3. NỘI THẤT GHẾ LÁI   │  <-- Sơn chi tiết taplo, dây an toàn
+       └───────────┬────────────┘
+       ┌───────────┴────────────┐
+       │   4. TRỤC BÁNH XE      │  <-- Thay mâm độ kim loại TE37, BBS
+       └───────────┬────────────┘
+       ┌───────────┴────────────┐
+       │   5. KHUNG GẦM (BASE)  │  <-- Khoan tán Rivet tại đây
+       └────────────────────────┘
+        </div>
+
+        <h3>Kỹ thuật khoan mở tán Rivet chuẩn xác</h3>
+        <ul>
+          <li><strong>Bước 1: Chọn mũi khoan mồi:</strong> Lắp mũi 2.5mm vào cán khoan tay. Đặt mũi khoan ngay vào tâm lõm của đầu tán rivet dưới gầm xe.</li>
+          <li><strong>Bước 2: Xoay đều tay không đè ép:</strong> Dùng lực ngón tay xoay theo chiều kim đồng hồ khoảng 25–30 vòng. Vụn kim loại màu bạc sẽ đùn ra từng sợi nhỏ. Mục đích của bước này là gọt bay cái vành mũ loe tròn của rivet, chứ không phải khoan thủng sàn xe.</li>
+          <li><strong>Bước 3: Đổi sang mũi 3.0mm dọn mép:</strong> Xoay thêm 5–7 vòng để gọt phẳng mép vành rivet tiếp giáp với mặt nhựa của gầm xe.</li>
+          <li><strong>Bước 4: Nảy gầm nhẹ nhàng:</strong> Lấy đầu nhíp hoặc tuốc nơ vít dẹt nhỏ chêm vào khe đuôi xe, lắc nhẹ cổ tay, gầm xe sẽ tự động bật tách ra khỏi thân vỏ với một tiếng <em>"tách"</em> êm ái.</li>
+        </ul>
+
+        <div class="takeaway-box no-break">
+          <strong>Key Takeaway Chương 2</strong>
+          <p>Đừng bao giờ vội vàng khi mở gầm. Bản chất của việc mở tán rivet là gọt mỏng vành mũ kim loại chứ không phải đâm thủng xe. Bảo vệ nguyên vẹn cụm kính mica và chân trụ gầm chính là chìa khóa để chiếc xe sau khi độ xong ráp lại khít khao như xe xuất xưởng.</p>
+        </div>
+      </div>
+
+      <!-- CHƯƠNG 3 -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Chương 03</span>
+        <h2 class="chapter-title">Tẩy sơn zin & Kỹ thuật xịt lót Primer 2 lớp không bít gân cửa</h2>
+        <p>Nhiều anh em vừa tháo phôi xe ra là tiện tay cầm chai sơn xịt đè ngay lên lớp sơn zin của hãng. Kết quả là chỉ sau 2 ngày, lớp sơn mới cộm lên như vỏ cam, các đường gân chỉ cửa xe bị lấp kín mít như cục kẹo đường, quẹt nhẹ móng tay là tróc.</p>
+        <p><em>Thật ra</em>, 80% vẻ đẹp và độ bền của một bản độ không nằm ở nước sơn màu bóng bẩy bên ngoài, mà nằm ở <strong>lớp lót kim loại (Primer)</strong> bên dưới. Làm lót chuẩn thì sơn màu gì cũng bám chắc như đinh đóng cột.</p>
+
+        <div class="ascii-box no-break">
+   [ 4. CLEAR COAT ] (Bóng gương 2K / Mờ matte - Áo giáp bảo vệ)
+─────────────────────────────────────────────────────────────
+   [ 3. BASE COLOR ] (Màu chủ đạo JDM / Candy / Chameleon)
+─────────────────────────────────────────────────────────────
+   [ 2. PRIMER ]     (2 lớp lót mỏng cách nhau 15 phút - Chân bám)
+─────────────────────────────────────────────────────────────
+   [ 1. METAL BODY ] (Phôi kim loại Zamak đã tẩy sạch & đánh nhám)
+        </div>
+
+        <h3>Quy trình 4 bước chuẩn xưởng</h3>
+        <ol>
+          <li><strong>Quét gel tẩy sơn:</strong> Đặt phôi kim loại vào chén sứ/nhựa, quét đều gel phủ kín thân xe. Chờ 10-15 phút lớp sơn zin sùi bọt như da rắn.</li>
+          <li><strong>Cọ sạch dưới vòi nước:</strong> Dùng bàn chải đánh răng cũ chà nhẹ dưới vòi nước chảy. Lớp sơn sùi sẽ trôi tuột, để lộ khung phôi kim loại sáng bóng.</li>
+          <li><strong>Đánh nhám P1000 - P1500:</strong> Nhúng ướt nhám chà nhẹ nhàng các hốc đèn, mép cửa để tạo chân bám vi mô cho sơn mới.</li>
+          <li><strong>Xịt lót Primer 2 lớp mỏng (Công thức sống còn):</strong>
+            <ul>
+              <li><em>Mẹo ngâm nước ấm:</em> Ngâm đáy lon sơn vào tô nước ấm 40°C trong 3 phút, lắc đều 60 giây để hạt sơn mịn như sương khói súng airbrush.</li>
+              <li><em>Lớp 1 (Bụi mờ):</em> Cách xe 20–25cm, lia lướt ngang thân xe, phủ mờ khoảng 50% bề mặt kim loại. <strong>Nghỉ đúng 15 phút.</strong></li>
+              <li><em>Lớp 2 (Phủ kín mỏng):</em> Lia thêm một đường ngang đều tay. Phôi xe phủ kín màu xám lót lì đồng nhất, mọi đường gân cửa vẫn lộ rõ sắc lẹm.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="takeaway-box no-break">
+          <strong>Key Takeaway Chương 3</strong>
+          <p>Sơn mô hình là trò chơi của sự nhẫn nại. Hai lớp mỏng cách nhau 15 phút luôn bền đẹp gấp mười lần một lớp xịt dày ép khô. Khi lớp primer xám lì hoàn hảo, bác đã nắm chắc 80% cơ hội sở hữu một lớp sơn màu tuyệt đẹp.</p>
+        </div>
+      </div>
+
+      <!-- CHƯƠNG 4 -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Chương 04</span>
+        <h2 class="chapter-title">Độ dàn chân Stance & Hạ gầm JDM — Chỉnh Camber bánh béo mà xe vẫn lăn mượt</h2>
+        <p>Trong giới chơi xe mô hình, người ta có một câu thế này: <em>"Gầm cao thì đi chợ, hạ gầm sát đất mới là dân chơi"</em>. Một chiếc Nissan Skyline GT-R hay Honda Civic Type R dù sơn có đẹp đến đâu mà bánh xe thụt sâu vào trong hốc, gầm cao lênh khênh thì nhìn vẫn rất "đồ chơi trẻ con".</p>
+        <p>Hạ gầm phong cách Stance JDM là nghệ thuật đưa mép bánh xe nằm sát rạt mí vè (Flush fitment), nghiêng bánh một góc nhẹ (Camber âm) để tạo thế đứng đầm chắc, cơ bắp.</p>
+
+        <div class="ascii-box no-break">
+       [ DÁNG NGUYÊN BẢN ]                  [ HẠ GẦM STANCE JDM ]
+       (Gầm cao, bánh thụt sâu)             (Bánh sát mép vè, hạ sát đất)
+       
+       ┌──────────────────┐                 ┌──────────────────┐
+       │   THÂN XE        │                 │   THÂN XE        │
+      ┌┴──────────────────┴┐               ┌┴──────────────────┴┐
+      │   ┌────────────┐   │               │ ╱ ┌────────────┐ ╲ │
+      │   │Khoảng hở to│   │               │   │Khít rịt    │   │
+     [│]  └────────────┘  [│]             [│]  └────────────┘  [│]
+     Bánh lọt thỏm        Bánh             Bánh nghiêng Camber âm
+        </div>
+
+        <h3>Kỹ thuật căn cữ hạ gầm và bẻ góc Camber</h3>
+        <ul>
+          <li><strong>Thước đo vàng:</strong> Chiều rộng tổng thể từ mép bánh trái sang mép bánh phải phải bằng đúng bề ngang thân xe. Không thụt, không lồi.</li>
+          <li><strong>Hạ gầm bằng ống cữ:</strong> Đẩy trục bánh xe lên hướng nội thất, dùng dao rọc giấy dũa bớt 0.5mm ở bệ ghế lái để tránh cấn trục, chêm đệm nhựa và chấm keo B-7000 dẻo để khóa cữ.</li>
+          <li><strong>Căn góc Camber âm 5 độ:</strong> Dùng 2 kìm kẹp cách đầu trục 3mm, bẻ nhẹ một góc 5 độ hướng lên trên.</li>
+          <li><strong>Tiêu chuẩn nghiệm thu KAR HOBBY:</strong> Mép lốp cao su cách vè kim loại đúng 0.5mm (lọt vừa tờ giấy A4) và đặt tay đẩy nhẹ xe vẫn lướt đi êm ái trên mặt bàn.</li>
+        </ul>
+
+        <div class="takeaway-box no-break">
+          <strong>Key Takeaway Chương 4</strong>
+          <p>Hạ gầm không phải là dán chết bánh xe vào thân. Giá trị của một chiếc xe độ đẳng cấp nằm ở chỗ: gầm hạ sát sàn cực ngầu nhưng đặt tay đẩy nhẹ, bốn bánh xe vẫn lướt đi êm ái trên mặt bàn.</p>
+        </div>
+      </div>
+
+      <!-- CHƯƠNG 5 -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Chương 05</span>
+        <h2 class="chapter-title">Lên màu nghệ thuật, dán Decal nước & Phủ bóng bảo vệ 2K</h2>
+        <p>Sau khi lớp sơn lót Primer xám lì đã khô ráo hoàn toàn (tối thiểu 1 tiếng sau khi xịt), chiếc xe của bác đã sẵn sàng để khoác lên mình bộ cánh mới. Đây là công đoạn mang lại cảm xúc thị giác mạnh mẽ nhất trong cả quá trình độ xe.</p>
+
+        <h3>1. Lên màu chủ đạo (Base Color)</h3>
+        <ul>
+          <li><strong>Ngâm lon nước ấm 40°C:</strong> Đảm bảo áp suất đẩy hạt sơn mịn tơi, không vón cục.</li>
+          <li><strong>Quy tắc 2 lớp:</strong> Lớp 1 tạo màu nền phơn phớt, nghỉ 15 phút, lớp 2 phủ kín đều màu.</li>
+          <li><strong>Tone màu JDM kinh điển:</strong> Trắng thể thao Championship White, Xanh ngọc Bayside Blue hoặc Tím Midnight Purple đổi màu huyền bí.</li>
+        </ul>
+
+        <h3>2. Kỹ thuật dán Decal in nước mượt như xe hãng</h3>
+        <ul>
+          <li><strong>Cắt sát viền:</strong> Dùng dao trổ mổ chừa mép trong suốt 0.5mm.</li>
+          <li><strong>Ngâm nước 15–20 giây:</strong> Màng decal bắt đầu trượt nhẹ trên giấy đế thì vớt ra bằng nhíp.</li>
+          <li><strong>Trượt tem bằng tăm bông ướt:</strong> Chấm giọt nước lên thân xe làm đệm bôi trơn, trượt tem qua, tha hồ xoay trở căn chỉnh ngay ngắn mà không sợ rách.</li>
+          <li><strong>Thấm khô ép bọt:</strong> Dùng tăm bông khô lăn nhẹ từ tâm ra mép ngoài để đẩy sạch bọt khí.</li>
+        </ul>
+
+        <h3>3. Phủ bóng Clear Coat — Áo giáp khóa tem</h3>
+        <p>Xịt 2 lớp Top Coat Clear Gloss (bóng gương sâu) hoặc Matte (lì bụi bặm) cách nhau 20 phút. Lớp màng trong suốt sẽ chôn miếng tem decal xuống dưới, biến mất viền tem, nhìn như thể vẽ tay trực tiếp lên xe.</p>
+
+        <div class="takeaway-box no-break">
+          <strong>Key Takeaway Chương 5</strong>
+          <p>Decal nước cần sự điềm tĩnh và một chút nước bôi trơn. Lớp phủ bóng cuối cùng chính là chiếc áo giáp niêm phong thành quả của bác, giữ cho nước sơn và từng chiếc tem nhỏ bền đẹp hàng chục năm không phai màu.</p>
+        </div>
+      </div>
+
+      <!-- CHƯƠNG 6 -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Chương 06</span>
+        <h2 class="chapter-title">Bảng "Cứu xe khẩn cấp" — Xử lý 4 tai nạn kinh điển của dân mới tập độ</h2>
+        <p>Trong nghề làm mô hình thủ công, không có sai lầm nào là không cứu được. Khi gặp sự cố, đừng vội vứt chiếc xe vào thùng rác — hãy mở ngay bảng cứu xe này:</p>
+
+        <table class="custom-table no-break">
+          <thead>
+            <tr>
+              <th>Sự cố</th>
+              <th>Nguyên nhân</th>
+              <th>Cách cứu chuẩn xưởng KAR HOBBY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Lỡ khoan thủng gầm</strong></td>
+              <td>Đè tay quá mạnh, đứt chân trụ</td>
+              <td>Nhồi tăm tre/ruột nhựa + keo B-7000 hoặc bắt ốc vít 1.5mm tự tạo ren.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Sơn chảy / nổi da cam</strong></td>
+              <td>Dí lon xịt quá sát (&lt;15cm)</td>
+              <td><em>Tuyệt đối không lau khi ướt!</em> Để khô 24h, xả nhám P1500 chà phẳng rồi xịt lại.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Rách decal khi dán</strong></td>
+              <td>Thiếu nước bôi trơn khi căn</td>
+              <td>Nhỏ giọt nước ghép khít 2 mép rách lại như xếp hình; lớp Clear Coat sẽ hàn vô hình.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Bánh kẹt không lăn</strong></td>
+              <td>Trục cạ ghế hoặc cạ vè kim loại</td>
+              <td>Gọt bớt 0.5mm bệ ghế hoặc dũa mài mặt trong hốc vè kim loại thêm 0.3mm.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="takeaway-box no-break">
+          <strong>Key Takeaway Chương 6</strong>
+          <p>Đỉnh cao của thợ độ xe không phải là không bao giờ phạm sai lầm, mà là biết cách biến lỗi sai thành một điểm nhấn hoàn hảo. Giữ cái đầu lạnh, <em>đơn giản thôi</em>, chiếc xe nào cũng có thể hồi sinh rực rỡ.</p>
+        </div>
+      </div>
+
+      <!-- PHỤ LỤC CHECKLIST -->
+      <div class="chapter page-break">
+        <span class="chapter-tag">Phụ Lục Thực Chiến</span>
+        <h2 class="chapter-title">Checklist 12 bước nghiệm thu chuẩn xưởng KAR HOBBY</h2>
+        <p>Trước khi đặt xe lên kệ kính hay mang lên góc bàn làm việc ngắm chill, hãy gạch đầu dòng kiểm tra đủ 12 tiêu chí này:</p>
+
+        <div class="checklist-grid no-break">
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>1. Mở gầm hoàn hảo</strong><p>Hai trụ tán gầm nguyên vẹn, sàn xe phẳng phiu, không nứt bể.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>2. Kính mica trong veo</strong><p>Kính sáng 100%, không dính vân tay, không ám khói keo dán.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>3. Sạch sẽ phôi kim loại</strong><p>Đã tẩy sạch sơn zin trong các khe kẽ nắp capo, hốc bánh.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>4. Lớp Primer chuẩn 2 lớp</strong><p>Xịt cách nhau 15 phút, mọi đường gân cửa xe nổi rõ sắc lẹm.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>5. Nước sơn màu đồng nhất</strong><p>Màu phủ đều, không bọt khí, không chảy giọt ở mép dưới.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>6. Decal tem đấu thẳng thớm</strong><p>Tem nằm đúng vị trí đối xứng, không nhăn nhúm, không rách mép.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>7. Áo giáp Clear Coat</strong><p>Bề mặt sờ êm tay, khô đanh, khóa chặt màng decal vĩnh viễn.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>8. Dàn chân & Mâm độ</strong><p>Mâm lắp ngay ngắn, mép ngoài bánh xe nằm phẳng mí vè (flush fitment).</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>9. Góc Camber đều đặn</strong><p>Hai bên bánh nghiêng cùng một góc thể thao, không cọc cạch.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>10. Độ lăn bánh trơn tru</strong><p>Đặt xe xuống mặt kính phẳng, đẩy nhẹ bằng ngón tay xe lướt êm ru.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>11. Khít rịt khi ráp hoàn thiện</strong><p>Thân vỏ và gầm khóa chặt, không có khe hở vênh đầu đuôi.</p></div></div>
+          <div class="check-card"><div class="check-box">✓</div><div class="check-text"><strong>12. Nghiệm thu bàn chill</strong><p>Đặt xe dưới đèn bàn góc 45 độ, ngắm nhìn chiếc xe độc bản của chính mình.</p></div></div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 24px; background: #0f172a; color: #fff; border-radius: 10px; text-align: center;" class="no-break">
+          <h3 style="color: #fbbf24; margin-top: 0; margin-bottom: 8px;">KAR HOBBY WORKSHOP</h3>
+          <p style="color: #94a3b8; font-size: 14px; margin-bottom: 14px;">Thế giới mô hình chuyên nghiệp — Nhận custom diecast 1:64 & ráp weathering Gunpla độc bản theo yêu cầu.</p>
+          <p style="color: #cbd5e1; font-size: 13px; margin: 0;">Website: <strong style="color: #fff;">https://karhobby.io.vn</strong> | Hotline/Zalo Xưởng: Đăng ký tư vấn 1-1</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

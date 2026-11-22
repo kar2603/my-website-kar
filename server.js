@@ -561,6 +561,148 @@ app.get(['/admin', '/admin-index', '/admin/index.html'], (req, res) => {
   res.sendFile(path.join(__dirname, 'admin-index.html'));
 });
 
+// 4.1. HỖ TRỢ RENDER MARKDOWN ĐẸP MẮT CHO /ke-hoach
+function renderMarkdownPage(fileName, markdownText) {
+  const safeName = fileName.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return `<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${safeName} — KAR HOBBY Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #090D14;
+      --card: #121824;
+      --border: #202B3E;
+      --text: #E2E8F0;
+      --muted: #94A3B8;
+      --primary: #38BDF8;
+      --gold: #F59E0B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 30px 20px 80px;
+    }
+    .top-bar {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 6px 14px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      background: var(--gold);
+      color: #000;
+    }
+    .doc-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .content-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 45px 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .content-box h1 { font-size: 2rem; color: #FFF; margin: 24px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .content-box h2 { font-size: 1.5rem; color: #FFF; margin: 28px 0 14px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; }
+    .content-box h3 { font-size: 1.25rem; color: var(--gold); margin: 20px 0 10px; }
+    .content-box h4 { font-size: 1.1rem; color: var(--primary); margin: 16px 0 8px; }
+    .content-box p { margin-bottom: 16px; color: #CBD5E1; }
+    .content-box ul, .content-box ol { margin: 0 0 18px 24px; color: #CBD5E1; }
+    .content-box li { margin-bottom: 8px; }
+    .content-box hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+    .content-box blockquote {
+      border-left: 3px solid var(--gold);
+      background: rgba(245, 158, 11, 0.06);
+      padding: 14px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 18px 0;
+      color: #E2E8F0;
+      font-style: italic;
+    }
+    .content-box table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+    .content-box th, .content-box td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .content-box th { background: rgba(255,255,255,0.04); color: #FFF; font-weight: 700; }
+    .content-box code { font-family: 'JetBrains Mono', monospace; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.88rem; color: var(--primary); }
+    .content-box pre code { display: block; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; border: 1px solid var(--border); background: #0B0F17; }
+    .content-box a { color: var(--primary); text-decoration: underline; }
+    @media (max-width: 768px) {
+      .content-box { padding: 24px 20px; }
+      .content-box h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="/ke-hoach" class="back-btn">⬅ Quay lại Kế Hoạch Kinh Doanh</a>
+    <span class="doc-badge">${safeName}</span>
+  </div>
+  <div class="content-box" id="markdown-container">
+    <div style="text-align: center; color: var(--muted); padding: 40px 0;">Đang tải và hiển thị tài liệu...</div>
+  </div>
+  <textarea id="raw-markdown" style="display: none;">${markdownText.replace(/<\/textarea>/gi, '&lt;/textarea&gt;')}</textarea>
+  <script>
+    const raw = document.getElementById('raw-markdown').value;
+    document.getElementById('markdown-container').innerHTML = marked.parse(raw);
+  </script>
+</body>
+</html>`;
+}
+
+// 4.2. ĐỊNH TUYẾN TRUY CẬP KẾ HOẠCH KINH DOANH (/ke-hoach)
+app.get(['/ke-hoach', '/ke-hoach/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'ke-hoach', 'index.html'));
+});
+
+// Intercept các file .md trong /ke-hoach để render giao diện đẹp mắt (không hiển thị code raw)
+app.get('/ke-hoach/:file.md', (req, res) => {
+  const fileName = `${req.params.file}.md`;
+  const filePath = path.join(__dirname, 'ke-hoach', fileName);
+  if (fs.existsSync(filePath)) {
+    const content = fs.readFileSync(filePath, 'utf8');
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.send(renderMarkdownPage(fileName, content));
+  }
+  res.status(404).send('Không tìm thấy tài liệu ' + fileName);
+});
+
+// Phục vụ các file khác (HTML, hình ảnh, assets) trong /ke-hoach
+app.use('/ke-hoach', express.static(path.join(__dirname, 'ke-hoach')));
+
 // Phục vụ file tĩnh (CSS, JS, hình ảnh, assets)
 app.use(express.static(__dirname));
 

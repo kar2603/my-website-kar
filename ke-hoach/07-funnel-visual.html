@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sơ Đồ Phễu Khách Hàng (Funnel Visual Blueprint) — KAR HOBBY Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0B0F17;
+      --bg-card: #131A26;
+      --bg-card-hover: #1A2332;
+      --border-color: #232E42;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      
+      /* Funnel Color Standards */
+      --color-ads: #F59E0B;
+      --color-ads-bg: rgba(245, 158, 11, 0.12);
+      --color-ads-border: #F59E0B;
+      
+      --color-capture: #3B82F6;
+      --color-capture-bg: rgba(59, 130, 246, 0.12);
+      --color-capture-border: #3B82F6;
+      
+      --color-nurture: #10B981;
+      --color-nurture-bg: rgba(16, 185, 129, 0.12);
+      --color-nurture-border: #10B981;
+      
+      --color-sales: #8B5CF6;
+      --color-sales-bg: rgba(139, 92, 246, 0.12);
+      --color-sales-border: #8B5CF6;
+      
+      --color-upsell: #EAB308;
+      --color-upsell-bg: rgba(234, 179, 8, 0.12);
+      --color-upsell-border: #EAB308;
+      
+      --color-deliver: #14B8A6;
+      --color-deliver-bg: rgba(20, 184, 166, 0.12);
+      --color-deliver-border: #14B8A6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--color-ads);
+      color: var(--color-ads);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #FFF 30%, #94A3B8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* Key Metrics Banner */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-3px);
+      border-color: #384860;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .metric-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .metric-sub {
+      font-size: 0.75rem;
+      color: #10B981;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Color Legend */
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      padding: 14px 20px;
+      background: rgba(19, 26, 38, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    /* Funnel Flow Canvas */
+    .funnel-canvas {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    /* Flow Step Card */
+    .flow-step {
+      width: 100%;
+      max-width: 860px;
+      border-radius: 16px;
+      padding: 24px 28px;
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: all 0.25s ease;
+    }
+
+    .flow-step:hover {
+      transform: scale(1.01);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+    }
+
+    .flow-step.ads {
+      border-color: var(--color-ads-border);
+      background: linear-gradient(180deg, var(--color-ads-bg) 0%, var(--bg-card) 100%);
+    }
+
+    .flow-step.capture {
+      border-color: var(--color-capture-border);
+      background: linear-gradient(180deg, var(--color-capture-bg) 0%, var(--bg-card) 100%);
+    }
+
+    .flow-step.nurture {
+      border-color: var(--color-nurture-border);
+      background: linear-gradient(180deg, var(--color-nurture-bg) 0%, var(--bg-card) 100%);
+    }
+
+    .flow-step.sales {
+      border-color: var(--color-sales-border);
+      background: linear-gradient(180deg, var(--color-sales-bg) 0%, var(--bg-card) 100%);
+    }
+
+    .flow-step.upsell {
+      border-color: var(--color-upsell-border);
+      background: linear-gradient(180deg, var(--color-upsell-bg) 0%, var(--bg-card) 100%);
+    }
+
+    .flow-step.deliver {
+      border-color: var(--color-deliver-border);
+      background: linear-gradient(180deg, var(--color-deliver-bg) 0%, var(--bg-card) 100%);
+    }
+
+    /* Step Header */
+    .step-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+
+    .step-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .step-agent {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #1E293B;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: #CBD5E1;
+      margin-bottom: 14px;
+    }
+
+    .step-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+    }
+
+    .step-detail-item strong {
+      color: #FFF;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .step-detail-item span {
+      color: var(--text-muted);
+    }
+
+    /* Arrow Connector */
+    .arrow-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      margin: 4px 0;
+    }
+
+    .arrow-line {
+      width: 3px;
+      height: 36px;
+      background: linear-gradient(180deg, #3B82F6, #10B981);
+    }
+
+    .conv-pill {
+      background: #1E293B;
+      border: 1px solid #334155;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #38BDF8;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .conv-pill span.metric {
+      color: #4ADE80;
+    }
+
+    .arrow-head {
+      width: 0; 
+      height: 0; 
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid #10B981;
+      margin-top: -2px;
+    }
+
+    /* Branch Container */
+    .branch-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    @media (max-width: 768px) {
+      .branch-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer Table */
+    .matrix-section {
+      margin-top: 60px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .matrix-section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #FFF;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      background: rgba(255,255,255,0.02);
+    }
+
+    td {
+      color: #E2E8F0;
+    }
+
+    td.agent-col {
+      font-weight: 700;
+      color: #60A5FA;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      border: 1px solid #059669;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge-tag">ASSP Framework · Agent 07</div>
+      <h1>SƠ ĐỒ PHỄU KHÁCH HÀNG — KAR HOBBY WORKSHOP</h1>
+      <p class="subtitle">Mô hình: HVCO Nurture & Desk Therapy Funnel — Tự động hóa từ người lạ đến 34 khách đặt cọc bản độ độc bản mỗi tháng</p>
+    </header>
+
+    <!-- Key Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Ngân sách Ads / Tháng</div>
+        <div class="metric-val">5.500.000₫</div>
+        <div class="metric-sub">~183k / ngày</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Chi phí mỗi Lead (CPL)</div>
+        <div class="metric-val" style="color: #60A5FA;">5.238₫</div>
+        <div class="metric-sub">Thu 1.050 leads / tháng</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Khách Hàng Mục Tiêu</div>
+        <div class="metric-val" style="color: #4ADE80;">34 Khách</div>
+        <div class="metric-sub">~8 xe / tuần (Full công suất)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Chi phí / Khách (CPA)</div>
+        <div class="metric-val" style="color: #FBBF24;">161.765₫</div>
+        <div class="metric-sub">Lead-to-Sale: 3.24%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Doanh Thu Trực Tiếp</div>
+        <div class="metric-val" style="color: #A78BFA;">22.899.000₫</div>
+        <div class="metric-sub">ROAS Tháng 1: 4.16x</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Tỷ Lệ Sức Khỏe LTV/CPA</div>
+        <div class="metric-val" style="color: #34D399;">7.72x</div>
+        <div class="metric-sub">Chuẩn thị trường: > 3.0x</div>
+      </div>
+    </div>
+
+    <!-- Color Legend -->
+    <div class="legend-bar">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--color-ads);"></div>
+        <span>Quảng cáo (Ads)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--color-capture);"></div>
+        <span>Thu thập Lead (Capture)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--color-nurture);"></div>
+        <span>Nuôi dưỡng (Nurture)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--color-sales);"></div>
+        <span>Bán hàng (Sales / VSL)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--color-upsell);"></div>
+        <span>Bán thêm (Upsell)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--color-deliver);"></div>
+        <span>Giao xe & Hội viên (Deliver)</span>
+      </div>
+    </div>
+
+    <!-- Funnel Steps Visual Flow -->
+    <div class="funnel-canvas">
+
+      <!-- STEP 1: ADS -->
+      <div class="flow-step ads">
+        <div class="step-top">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="step-badge" style="background: var(--color-ads); color: #000;">BƯỚC 1 · ADS</span>
+            <span class="step-title">Quảng Cáo Đầu Phễu (Facebook / TikTok / Reels)</span>
+          </div>
+          <span class="step-agent">Phụ trách: Agent 08 (Ad Copy)</span>
+        </div>
+        <p class="step-desc">Nhắm vào nam 24–35 tuổi mê xe, dân IT/văn phòng. Hook đánh trúng 7 sai lầm tự độ xe bị kẹt bánh và giải pháp Desk Therapy giải tỏa căng thẳng sau giờ làm.</p>
+        <div class="step-details-grid">
+          <div class="step-detail-item">
+            <strong>Headline chạy Ads:</strong>
+            <span>"7 Sai Lầm Khiến 90% Anh Em Tự Độ Xe 1:64 Bị Kẹt Bánh & Tróc Sơn"</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>CTA mục tiêu:</strong>
+            <span>Tải Cẩm Nang & Checklist 12 Bước SOP Miễn Phí</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>KPI kỳ vọng:</strong>
+            <span>CTR: 2.50% · Clicks: 3.750 lượt · CPC: 1.467đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow-connector">
+        <div class="arrow-line" style="background: var(--color-ads);"></div>
+        <div class="conv-pill">CTR: <span class="metric">2.5%</span> ➔ 3.750 Clicks ghé thăm</div>
+        <div class="arrow-head" style="border-top-color: var(--color-capture);"></div>
+      </div>
+
+      <!-- STEP 2: CAPTURE -->
+      <div class="flow-step capture">
+        <div class="step-top">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="step-badge" style="background: var(--color-capture); color: #FFF;">BƯỚC 2 · CAPTURE</span>
+            <span class="step-title">Trang Nhận Cẩm Nang Ebook (Opt-in Squeeze Page)</span>
+          </div>
+          <span class="step-agent">Phụ trách: Agent 08 (Landing Copy)</span>
+        </div>
+        <p class="step-desc">Đổi Cẩm nang tự độ xe kèm mockup sách A4 thực chiến lấy Email, Tên và Số Zalo. Xóa bỏ rào cản chi phí và sợ hỏng phôi cho 97% khách hàng lạnh.</p>
+        <div class="step-details-grid">
+          <div class="step-detail-item">
+            <strong>Sản phẩm trao đổi:</strong>
+            <span>Ebook PDF Thực Chiến + Bảng Cứu Xe Khẩn Cấp Dưới 150k</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>6 Fascination Bullets:</strong>
+            <span>Mở tán rivet không nứt kính, uốn trục chữ U lăn mượt, sơn lót 2 lớp...</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>KPI kỳ vọng:</strong>
+            <span>Opt-in Rate: 28% · Thu được 1.050 Leads · CPL: 5.238đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow-connector">
+        <div class="arrow-line" style="background: var(--color-capture);"></div>
+        <div class="conv-pill">Opt-in: <span class="metric">28%</span> ➔ Thu 1.050 Leads</div>
+        <div class="arrow-head" style="border-top-color: var(--color-nurture);"></div>
+      </div>
+
+      <!-- STEP 3: THANK YOU & BRIDGE OFFER -->
+      <div class="flow-step nurture">
+        <div class="step-top">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="step-badge" style="background: var(--color-nurture); color: #000;">BƯỚC 3 · NURTURE & BRIDGE</span>
+            <span class="step-title">Trang Cảm Ơn, Micro-VSL (3 Phút) & Voucher 100k</span>
+          </div>
+          <span class="step-agent">Phụ trách: Agent 08 & 09 (VSL)</span>
+        </div>
+        <p class="step-desc">Giao link đọc sách ngay lập tức + Trình chiếu video 3 phút test xe lăn bánh trên mặt kính + Tặng Voucher 100.000đ độc quyền giữ chỗ độ xe tại xưởng trong tuần.</p>
+        <div class="step-details-grid">
+          <div class="step-detail-item">
+            <strong>Nội dung Micro-VSL:</strong>
+            <span>Âm thanh cơ khí (ASMR), cận cảnh nước sơn 2K gương và độ trượt bánh mượt mà</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>Lời đề nghị nối cầu (Bridge):</strong>
+            <span>Tặng Voucher 100k cho độc giả cẩm nang · Giới hạn 8 suất nhận xe tuần này</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>CTA kép:</strong>
+            <span>[1] Đọc Ebook ngay · [2] Bấm chat Zalo nhận Voucher & giữ slot độ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Split Arrow -->
+      <div class="arrow-connector">
+        <div class="arrow-line" style="background: var(--color-nurture);"></div>
+        <div class="conv-pill">Phân Luồng Chuyển Đổi: Khách Nóng (1.52%) & Khách Cần Nuôi Dưỡng (98.48%)</div>
+        <div class="arrow-head" style="border-top-color: #8B5CF6;"></div>
+      </div>
+
+      <!-- TWO PATHWAYS (HOT vs NURTURE) -->
+      <div class="branch-container">
+
+        <!-- Pathway A: Nurture Emails -->
+        <div class="flow-step nurture" style="margin: 0;">
+          <div class="step-top">
+            <span class="step-badge" style="background: #10B981; color: #000;">LƯU LƯỢNG 98.5%</span>
+            <span class="step-agent">Agent 10 (Email Closer)</span>
+          </div>
+          <strong style="font-size: 1.1rem; color: #FFF; display: block; margin-bottom: 8px;">Chuỗi 5 Email Nuôi Dưỡng Tự Động</strong>
+          <ul style="font-size: 0.84rem; color: #CBD5E1; padding-left: 18px; line-height: 1.7;">
+            <li><strong>Email 1:</strong> Gửi link Ebook + Hộp đồ nghề 150k</li>
+            <li><strong>Email 2:</strong> Tại sao keo 502 phá hủy trục xe?</li>
+            <li><strong>Email 3:</strong> Desk Therapy: Chiếc xe xả stress sau giờ code</li>
+            <li><strong>Email 4:</strong> Hộp xốp định hình CNC 3 lớp chống shipper</li>
+            <li><strong>Email 5:</strong> 12 giờ cuối Voucher 100k & 8 slot tuần</li>
+          </ul>
+          <div style="margin-top: 14px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 0.8rem; color: #4ADE80;">
+            Chuyển đổi thêm: <strong>1.71% (18 khách hàng)</strong>
+          </div>
+        </div>
+
+        <!-- Pathway B: Direct Hot Buyers -->
+        <div class="flow-step sales" style="margin: 0;">
+          <div class="step-top">
+            <span class="step-badge" style="background: #8B5CF6; color: #FFF;">LƯU LƯỢNG 1.5%</span>
+            <span class="step-agent">Agent 12 (Sales Call)</span>
+          </div>
+          <strong style="font-size: 1.1rem; color: #FFF; display: block; margin-bottom: 8px;">Chốt Đơn Zalo 1-1 Nóng</strong>
+          <p style="font-size: 0.84rem; color: #CBD5E1; margin-bottom: 10px;">
+            Khách bấm nhận Voucher 100k vào Zalo ngay sau khi xem video lăn bánh ở trang Thank You.
+          </p>
+          <ul style="font-size: 0.84rem; color: #CBD5E1; padding-left: 18px; line-height: 1.7;">
+            <li>Gửi ảnh phôi có sẵn hoặc chọn mẫu Mini GT</li>
+            <li>Chọn mã màu sơn 2K (Chameleon / Candy)</li>
+            <li>Chốt cọc qua mã QR ngân hàng (Sepay)</li>
+            <li>Kích hoạt tiến độ chế tác trong 7–10 ngày</li>
+          </ul>
+          <div style="margin-top: 14px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 0.8rem; color: #A78BFA;">
+            Chốt tức thì: <strong>1.52% (16 khách hàng)</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow-connector">
+        <div class="arrow-line" style="background: linear-gradient(180deg, #10B981, #8B5CF6);"></div>
+        <div class="conv-pill">Hội tụ tại Trang Bán Hàng & Chốt Đơn ➔ <span class="metric">34 Khách / Tháng</span></div>
+        <div class="arrow-head" style="border-top-color: var(--color-sales);"></div>
+      </div>
+
+      <!-- STEP 5: SALES PAGE -->
+      <div class="flow-step sales">
+        <div class="step-top">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="step-badge" style="background: var(--color-sales); color: #FFF;">BƯỚC 5 · SALES PAGE</span>
+            <span class="step-title">Trang Bán Hàng 17 Bước — Gói Chế Tác Tri-Armor 1-of-1™</span>
+          </div>
+          <span class="step-agent">Phụ trách: Agent 08 (Sales Copy)</span>
+        </div>
+        <p class="step-desc">Trang bán hàng toàn diện áp dụng công thức 17 bước Sabri Suby. Trình bày Value Stack 1.320.000đ, 4 quà tặng kèm (MAGIC 778k) và 2 cam kết Godfather Guarantee.</p>
+        <div class="step-details-grid">
+          <div class="step-detail-item">
+            <strong>2 Lựa chọn giá:</strong>
+            <span>Gửi phôi: 380k (-100k = 280k) · Bao xe Mini GT: 890k (-100k = 790k)</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>2 Cam kết hoàn tiền:</strong>
+            <span>[1] Bánh lăn không mượt hoàn 100% · [2] Đền mới 100% nếu shipper làm vỡ</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>Giới hạn khan hiếm:</strong>
+            <span>Chỉ 8 suất nhận xe mỗi tuần do thợ nắn nót thủ công từng chi tiết</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow-connector">
+        <div class="arrow-line" style="background: var(--color-sales);"></div>
+        <div class="conv-pill">Khách xác nhận cọc thành công ➔ Đề xuất mua kèm (Upsell)</div>
+        <div class="arrow-head" style="border-top-color: var(--color-upsell);"></div>
+      </div>
+
+      <!-- STEP 6: UPSELL -->
+      <div class="flow-step upsell">
+        <div class="step-top">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="step-badge" style="background: var(--color-upsell); color: #000;">BƯỚC 6 · UPSELL</span>
+            <span class="step-title">Mua Kèm Sa Bàn Garage Diorama LED USB 350.000đ</span>
+          </div>
+          <span class="step-agent">Phụ trách: Agent 08 (Upsell Copy)</span>
+        </div>
+        <p class="step-desc">Xuất hiện ngay sau khi chốt đơn cọc. Giải quyết nỗi sợ bụi bẩn và nâng tầm cỗ máy độc bản thành một "Living Desk Garage" phát sáng lung linh cạnh bàn phím.</p>
+        <div class="step-details-grid">
+          <div class="step-detail-item">
+            <strong>Ưu đãi đi kèm xe độ:</strong>
+            <span>Trợ giá từ 450.000đ xuống còn 350.000đ (Tiết kiệm ngay 100k)</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>Tỷ lệ chuyển đổi kỳ vọng:</strong>
+            <span>25% khách hàng chọn mua thêm (Tăng AOV thêm 87.500đ/đơn)</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>Tùy chọn khách hàng:</strong>
+            <span>Nút 1: Mua kèm 350k · Nút 2: Từ chối để xe trần ngoài bàn</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow-connector">
+        <div class="arrow-line" style="background: var(--color-upsell);"></div>
+        <div class="conv-pill">Giao Hàng Hoàn Hảo & Onboarding Hội Viên VIP</div>
+        <div class="arrow-head" style="border-top-color: var(--color-deliver);"></div>
+      </div>
+
+      <!-- STEP 7: DELIVER & VIP CONTINUITY -->
+      <div class="flow-step deliver">
+        <div class="step-top">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="step-badge" style="background: var(--color-deliver); color: #000;">BƯỚC 7 · GIAO XE & VIP</span>
+            <span class="step-title">Nghiệm Thu Video Macro 1-1, Giao Hàng & KAR Collector VIP</span>
+          </div>
+          <span class="step-agent">Phụ trách: Xưởng & Agent 11</span>
+        </div>
+        <p class="step-desc">Quy trình bàn giao thỏa mãn tột đỉnh: Gửi video test lăn bánh qua Zalo ➔ Đóng hộp xốp 3 lớp CNC ➔ Nhận xe an toàn ➔ Mời tham gia Câu Lạc Bộ VIP định kỳ.</p>
+        <div class="step-details-grid">
+          <div class="step-detail-item">
+            <strong>Nghiệm thu Zalo:</strong>
+            <span>Video macro 4K test nước sơn 2K và trượt bánh trên bàn phím</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>KAR Collector VIP:</strong>
+            <span>199.000đ/tháng (Tặng 1 bộ mâm hiếm + Miễn phí phủ bóng + Ưu tiên 3 ngày)</span>
+          </div>
+          <div class="step-detail-item">
+            <strong>Mục tiêu LTV 6 tháng:</strong>
+            <span>Tăng từ 673.500đ lên 1.250.000đ / khách hàng</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copywriting Matrix Table -->
+    <div class="matrix-section">
+      <h2>BẢNG PHÂN CÔNG THỰC THI NỘI DUNG (COPYWRITING MATRIX)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Trạm Nội Dung</th>
+            <th>Loại Trang</th>
+            <th>Agent Phụ Trách</th>
+            <th>Tài Liệu Căn Cứ</th>
+            <th>Trạng Thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>5 Mẫu Ads Facebook/TikTok</strong></td>
+            <td>Quảng cáo (Ads)</td>
+            <td class="agent-col">Agent 08 — Ad Copy</td>
+            <td>01-avatar.md, 06-hvco-leadmagnet.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Trang Nhận Cẩm Nang (Opt-in)</strong></td>
+            <td>Thu thập Lead (Capture)</td>
+            <td class="agent-col">Agent 08 — Ad Copy</td>
+            <td>06-hvco-leadmagnet.md, 07-funnel-blueprint.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Trang Cảm Ơn & Bridge Voucher</strong></td>
+            <td>Nuôi dưỡng (Nurture)</td>
+            <td class="agent-col">Agent 08 — Ad Copy</td>
+            <td>05-offer.md, 07-funnel-blueprint.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kịch Bản Video Micro-VSL (3 Phút)</strong></td>
+            <td>Bán hàng (VSL)</td>
+            <td class="agent-col">Agent 09 — VSL Script</td>
+            <td>03-hero-mechanism.md, 05-offer.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Chuỗi 5 Email Nurture Tự Động</strong></td>
+            <td>Nuôi dưỡng (Nurture)</td>
+            <td class="agent-col">Agent 10 — Email Closer</td>
+            <td>02-brand-voice.md, 07-funnel-blueprint.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Trang Bán Hàng Đầy Đủ (17 Bước)</strong></td>
+            <td>Bán hàng (Sales)</td>
+            <td class="agent-col">Agent 08 — Ad Copy</td>
+            <td>05-offer.md, 17-step-selling-system.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Trang Bán Thêm Sa Bàn LED 350k</strong></td>
+            <td>Bán thêm (Upsell)</td>
+            <td class="agent-col">Agent 08 — Ad Copy</td>
+            <td>04-money-model.md, 05-offer.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kịch Bản Zalo Bám Đuổi & Khảo Sát</strong></td>
+            <td>Bám đuổi (Follow-up)</td>
+            <td class="agent-col">Agent 11 — Follow-Up</td>
+            <td>01-avatar.md, 05-offer.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kịch Bản Tư Vấn & Chốt Đơn 1-1</strong></td>
+            <td>Tư vấn (Sales Call)</td>
+            <td class="agent-col">Agent 12 — Sales Script</td>
+            <td>02-brand-voice.md, 05-offer.md</td>
+            <td><span class="badge-status">Sẵn sàng viết</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+</html>

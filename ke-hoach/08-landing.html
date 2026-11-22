@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gói Chế Tác Xe Diecast 1:64 Độc Bản Tri-Armor 1-of-1™ — KAR HOBBY Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090D14;
+      --bg-card: #121824;
+      --bg-card-hover: #182234;
+      --border: #202B3E;
+      --primary: #38BDF8;
+      --primary-hover: #0EA5E9;
+      --accent-gold: #F59E0B;
+      --accent-green: #10B981;
+      --text: #F1F5F9;
+      --text-muted: #94A3B8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Top Urgency Bar */
+    .top-bar {
+      background: linear-gradient(90deg, #B45309, #D97706, #B45309);
+      color: #FFF;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .top-bar span {
+      background: rgba(0,0,0,0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-left: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 13, 20, 0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: #FFF;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge-audience {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--primary);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: 0.03em;
+    }
+
+    h1.hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFFFFF 40%, #94A3B8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #000;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 18px 38px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(245, 158, 11, 0.45);
+      background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    }
+
+    .hero-guarantee-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Video / Showcase Banner */
+    .showcase-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 70px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .video-mockup {
+      width: 100%;
+      height: 480px;
+      background: #0B111A;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed #2A3850;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-mockup-overlay {
+      position: absolute;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      background: rgba(56, 189, 248, 0.9);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .play-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #000;
+      margin-left: 4px;
+    }
+
+    /* Problem vs Solution Section */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .compare-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .compare-card.bad {
+      border-color: rgba(239, 68, 68, 0.3);
+      background: linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, var(--bg-card) 100%);
+    }
+
+    .compare-card.good {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-card) 100%);
+    }
+
+    .compare-header {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-list {
+      list-style: none;
+    }
+
+    .compare-list li {
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    /* Mechanism 4 Steps */
+    .mechanism-section {
+      background: #0E1420;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 0;
+      margin-bottom: 80px;
+    }
+
+    .mech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .mech-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .mech-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .mech-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #FFF;
+    }
+
+    .mech-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Offer Pricing Cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 30px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent-gold);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, var(--bg-card) 100%);
+    }
+
+    .badge-pop {
+      position: absolute;
+      top: -14px;
+      right: 28px;
+      background: var(--accent-gold);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card p.plan-sub {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .price-box {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #64748B;
+      font-size: 1.1rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .actual-price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #FFF;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .voucher-discount-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .plan-features li {
+      font-size: 0.92rem;
+      color: #CBD5E1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Bonuses Box */
+    .bonus-box {
+      background: linear-gradient(180deg, #1A2234 0%, var(--bg-card) 100%);
+      border: 1px solid #334464;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 70px;
+    }
+
+    .bonus-box h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--accent-gold);
+      text-align: center;
+    }
+
+    .bonus-box p.bonus-sub {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .bonus-item {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .bonus-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .bonus-item h4 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .bonus-item span.val {
+      font-size: 0.82rem;
+      color: #94A3B8;
+      display: block;
+    }
+
+    /* Guarantees */
+    .guarantee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .guarantee-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+    }
+
+    .guarantee-icon {
+      font-size: 2.2rem;
+    }
+
+    .guarantee-card h4 {
+      font-size: 1.15rem;
+      color: var(--accent-green);
+      margin-bottom: 8px;
+    }
+
+    .guarantee-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto 80px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      padding: 18px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-a {
+      padding: 0 24px 20px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .faq-item.active .faq-a {
+      display: block;
+    }
+
+    /* Floating CTA Bar on Mobile */
+    .sticky-mobile-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(9, 13, 20, 0.95);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+    }
+
+    .sticky-mobile-cta a {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      h1.hero-title {
+        font-size: 2rem;
+      }
+      .compare-grid, .pricing-grid, .guarantee-grid {
+        grid-template-columns: 1fr;
+      }
+      .sticky-mobile-cta {
+        display: block;
+      }
+      body {
+        padding-bottom: 80px;
+      }
+      .video-mockup {
+        height: 280px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      color: #64748B;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Urgency Bar -->
+  <div class="top-bar">
+    🔥 TUẦN NÀY CHỈ CÒN 3/8 SUẤT CHẾ TÁC THỦ CÔNG — VOUCHER 100K HẾT HẠN TRONG: 
+    <span id="countdown">23:59:45</span>
+  </div>
+
+  <!-- Header -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">
+        🚗 KAR HOBBY <span>WORKSHOP</span>
+      </div>
+      <a href="https://zalo.me/0912345678" target="_blank" class="nav-cta">
+        📲 Chat Zalo Với Thợ
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge-audience">
+        DÀNH RIÊNG CHO ANH EM IT, VĂN PHÒNG & TÍN ĐỒ XE MÔ HÌNH TĨNH JDM
+      </div>
+      <h1 class="hero-title">
+        SỞ HỮU BẢN ĐỘ DIECAST 1:64 ĐỘC BẢN TRI-ARMOR 1-OF-1™<br>
+        BÁNH BÉO LĂN MƯỢT & SƠN 2K BÓNG GƯƠNG TRÊN BÀN PHÍM CƠ
+      </h1>
+      <p class="hero-sub">
+        Không cần tốn bạc triệu mua máy nén khí, không lo hít mùi sơn độc hại và không sợ kẹt cứng bánh khi tự làm tại nhà. Liệu pháp Desk Therapy xả sạch 100% căng thẳng sau những giờ họp hành căng thẳng.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#pricing" class="btn-main">
+          👉 ĐẶT CỌC GIỮ SUẤT ĐỘ TUẦN NÀY (GIẢM 100K)
+        </a>
+        <div class="hero-guarantee-note">
+          🛡️ Cam kết: Nghiệm thu video macro 1-1 qua Zalo, bánh lăn không mượt hoàn tiền 100%.
+        </div>
+      </div>
+
+      <!-- Video / Showcase Area -->
+      <div class="showcase-box">
+        <div class="video-mockup">
+          <div class="video-mockup-overlay">
+            <div class="play-btn" onclick="alert('Đang mở video cận cảnh test lăn bánh xe Nissan Skyline R34 Chameleon trên mặt kính...')">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <h3 style="color: #FFF; font-size: 1.15rem; margin-bottom: 4px;">XEM VIDEO TEST LĂN BÁNH TRÊN BÀN PHÍM (3 PHÚT)</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Âm thanh cơ khí chân thật (ASMR) & Nước sơn đổi màu 2K không một hạt bụi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="container">
+    <div class="section-title">
+      <h2>TẠI SAO XE ZIN NGOÀI TIỆM KHÔNG THỂ LÀM BẠN THỎA MÃN?</h2>
+      <p>Sự khác biệt một trời một vực giữa đồ chơi sản xuất hàng loạt và tác phẩm thủ công độc bản</p>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <div class="compare-header" style="color: #EF4444;">
+          ❌ XE MÔ HÌNH ZIN ĐẠI TRÀ & TỰ ĐỘ TẠI NHÀ
+        </div>
+        <ul class="compare-list">
+          <li>❌ <strong>Đụng hàng 100%:</strong> Hàng triệu chiếc đúc khuôn giống hệt nhau, không có cá tính riêng.</li>
+          <li>❌ <strong>Bánh xe thụt sâu:</strong> Dáng xe cao lêu nghêu, không đúng tinh thần thể thao Stance JDM.</li>
+          <li>❌ <strong>Sơn công nghiệp dễ xỉn:</strong> Rất dễ xước dăm và tróc từng mảng khi dính mồ hôi tay.</li>
+          <li>❌ <strong>Tự độ dễ hỏng phôi:</strong> Dùng keo 502 làm kẹt cứng bánh, bốc khói mờ kính mica zin.</li>
+          <li>❌ <strong>Mùi sơn độc hại:</strong> Xịt sơn trong phòng ngủ gây nhức đầu và ảnh hưởng sức khỏe.</li>
+        </ul>
+      </div>
+
+      <div class="compare-card good">
+        <div class="compare-header" style="color: #10B981;">
+          ✔️ BẢN ĐỘ TRI-ARMOR 1-OF-1™ TẠI KAR HOBBY
+        </div>
+        <ul class="compare-list">
+          <li>✔️ <strong>Độc bản duy nhất:</strong> Dập biển số tên riêng của bác + Thẻ chứng nhận kim loại 1-of-1.</li>
+          <li>✔️ <strong>Hạ gầm Stance bánh béo:</strong> Mở vè trong 0.3mm, camber âm sát đất nhưng bánh vẫn lăn mượt mà.</li>
+          <li>✔️ <strong>Sơn phủ 2K bóng gương:</strong> Sơn Chameleon đổi màu 3 chiều, bóng lộn như ngọc dưới đèn bàn.</li>
+          <li>✔️ <strong>Desk Therapy đích thực:</strong> Mỗi cú gạt bánh xe lướt êm ru trên bàn phím giúp xả sạch áp lực code/họp.</li>
+          <li>✔️ <strong>Bảo hiểm vận chuyển 100%:</strong> Đóng hộp xốp CNC 3 lớp, shipper làm hỏng xưởng đền mới ngay.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Stages Mechanism -->
+  <section class="mechanism-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>HỆ THỐNG CHẾ TÁC TRI-ARMOR & MICRO-MECHANIC 1:64™</h2>
+        <p>Quy chuẩn 4 công đoạn kỹ thuật cao cấp giúp chiếc xe đạt độ hoàn mỹ tối đa</p>
+      </div>
+
+      <div class="mech-grid">
+        <div class="mech-card">
+          <div class="mech-num">01</div>
+          <h3>Micro-Decap Không Nứt Kính</h3>
+          <p>Mở chốt tán Rivet kim loại bằng mũi khoan tay chậm, giữ nguyên 100% độ trong suốt của kính mica zin và không gãy chân phôi.</p>
+        </div>
+        <div class="mech-card">
+          <div class="mech-num">02</div>
+          <h3>Lót Kép Primer 2K Chống Tróc</h3>
+          <p>Xịt lót 2 lớp giãn cách đúng 15 phút, tạo chân bám vĩnh viễn trên hợp kim Zamac, triệt tiêu hoàn toàn hiện tượng sùi bọt da cam.</p>
+        </div>
+        <div class="mech-card">
+          <div class="mech-num">03</div>
+          <h3>Trục Chữ U Lăn Bánh Mượt Mà</h3>
+          <p>Kỹ thuật uốn trục thép độc quyền kết hợp mở vè 0.3mm: Hạ gầm sát sàn sạt mà 4 bánh béo cao su vẫn lăn bon bon không cạ gầm.</p>
+        </div>
+        <div class="mech-card">
+          <div class="mech-num">04</div>
+          <h3>Nghiệm Thu Zalo & Hộp Xốp 3 Lớp</h3>
+          <p>Quay video macro 1-1 gửi qua Zalo cho bác duyệt trước khi gửi. Đóng hộp xốp định hình CNC ôm sát thân xe chống mọi va đập.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Table -->
+  <section class="container" id="pricing">
+    <div class="section-title">
+      <h2>CHỌN GÓI ĐẦU TƯ BẢN ĐỘ CỦA BÁC</h2>
+      <p>Áp dụng ngay Voucher 100.000 VNĐ dành cho độc giả tải Cẩm nang hôm nay</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Option 1: Send Base -->
+      <div class="pricing-card">
+        <div>
+          <h3>GÓI DỊCH VỤ CUSTOM</h3>
+          <p class="plan-sub">Bác tự gửi phôi xe có sẵn ở nhà qua xưởng lột xác</p>
+
+          <div class="price-box">
+            <span class="original-price">380.000đ</span>
+            <div class="actual-price">
+              280.000₫ <span class="voucher-discount-badge">-100k Voucher</span>
+            </div>
+          </div>
+
+          <ul class="plan-features">
+            <li>✔️ Mở tán Rivet & Tẩy sơn zin Zamac an toàn</li>
+            <li>✔️ Lót Primer 2 lớp + Sơn màu tự chọn</li>
+            <li>✔️ Dàn chân mâm đúc hợp kim + Lốp cao su</li>
+            <li>✔️ Hạ gầm Stance bánh lăn mượt</li>
+            <li>✔️ Phủ bóng gương 2K bảo vệ chống UV</li>
+            <li>✔️ Nghiệm thu video macro 1-1 qua Zalo</li>
+          </ul>
+        </div>
+
+        <a href="https://zalo.me/0912345678?text=Toi-muon-gui-phoi-do-280k" target="_blank" class="btn-main" style="width: 100%; font-size: 1rem;">
+          ĐẶT CỌC GÓI GỬI PHÔI (280K)
+        </a>
+      </div>
+
+      <!-- Option 2: Full Car -->
+      <div class="pricing-card featured">
+        <div class="badge-pop">ĐƯỢC CHỌN NHIỀU NHẤT</div>
+        <div>
+          <h3 style="color: var(--accent-gold);">TRỌN GÓI MINI GT 1-OF-1</h3>
+          <p class="plan-sub">Xưởng bao trọn gói xe Mini GT kim loại chính hãng mới 100%</p>
+
+          <div class="price-box">
+            <span class="original-price">890.000đ</span>
+            <div class="actual-price" style="color: var(--accent-gold);">
+              790.000₫ <span class="voucher-discount-badge">-100k Voucher</span>
+            </div>
+          </div>
+
+          <ul class="plan-features">
+            <li>✔️ <strong>Bao sẵn phôi Mini GT chính hãng (nguyên seal)</strong></li>
+            <li>✔️ Mở tán vi phẫu & Lót kép 2K chuyên sâu</li>
+            <li>✔️ Sơn Chameleon đổi màu 3 chiều độc quyền</li>
+            <li>✔️ Dàn chân bánh béo camber âm lăn mượt êm ru</li>
+            <li>✔️ Thiết kế tem Decal nước & Biển số dập tên bác</li>
+            <li>✔️ Phủ bóng gương 2K Mirror-Clear cao cấp</li>
+            <li>✔️ <strong>TẶNG TRỌN BỘ 4 QUÀ TẶNG MAGIC (778K)</strong></li>
+          </ul>
+        </div>
+
+        <a href="https://zalo.me/0912345678?text=Toi-muon-dat-goi-MiniGT-1of1-790k" target="_blank" class="btn-main" style="width: 100%; font-size: 1rem;">
+          ĐẶT CỌC GÓI MINI GT (790K)
+        </a>
+      </div>
+    </div>
+
+    <!-- 4 Bonuses Box -->
+    <div class="bonus-box">
+      <h3>🎁 BỘ 4 QUÀ TẶNG ĐỘC QUYỀN TRỊ GIÁ 778.000 VNĐ</h3>
+      <p class="bonus-sub">Dành riêng cho anh em đặt cọc giữ slot chế tác trước 24h00 Chủ Nhật tuần này</p>
+
+      <div class="bonus-grid">
+        <div class="bonus-item">
+          <div class="bonus-tag">Quà tặng 1</div>
+          <h4>Thẻ Kim Loại Khắc Tên 1-of-1</h4>
+          <span class="val">Dập chìm tên bác & ngày xuất xưởng (Trị giá 150.000đ)</span>
+        </div>
+        <div class="bonus-item">
+          <div class="bonus-tag">Quà tặng 2</div>
+          <h4>Bộ 3 Sticker Decal JDM</h4>
+          <span class="val">Cán màng cát chống nước dán laptop/case PC (Trị giá 99.000đ)</span>
+        </div>
+        <div class="bonus-item">
+          <div class="bonus-tag">Quà tặng 3</div>
+          <h4>Sổ Tay Lau Bóng Xe Sơn 2K</h4>
+          <span class="val">File PDF hướng dẫn bảo quản xe không xước (Trị giá 79.000đ)</span>
+        </div>
+        <div class="bonus-item">
+          <div class="bonus-tag">Quà tặng 4</div>
+          <h4>Trợ Giá Sa Bàn LED USB 350k</h4>
+          <span class="val">Trợ giá sa bàn garage LED từ 450k còn 350k (Tiết kiệm 100.000đ)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Godfather Guarantees -->
+    <div class="guarantee-grid">
+      <div class="guarantee-card">
+        <div class="guarantee-icon">🛡️</div>
+        <div>
+          <h4>BÁNH LĂN MƯỢT HOẶC HOÀN TIỀN 100%</h4>
+          <p>Xưởng quay video test lăn bánh trên kính gửi Zalo. Nếu bác thấy sơn cộm hoặc bánh bị kẹt — xưởng hoàn trả 100% tiền cọc ngay lập tức không hỏi thêm lời nào.</p>
+        </div>
+      </div>
+      <div class="guarantee-card">
+        <div class="guarantee-icon">📦</div>
+        <div>
+          <h4>BẢO HIỂM VẬN CHUYỂN ĐỀN MỚI 100%</h4>
+          <p>Xe đóng trong khay xốp định hình 3 lớp cắt CNC. Nếu shipper làm gãy gương hoặc trầy xước — xưởng đổi mới chiếc khác hoặc hoàn tiền trong 24 giờ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="container faq-section">
+    <div class="section-title">
+      <h2>CÂU HỎI THƯỜNG GẶP</h2>
+      <p>Tất cả những gì bác cần biết trước khi gửi xe độ tại xưởng</p>
+    </div>
+
+    <div class="faq-item active">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        1. Thời gian từ lúc đặt cọc đến khi nhận xe là bao lâu? <span>▾</span>
+      </div>
+      <div class="faq-a">
+        Thời gian hoàn thiện trung bình từ 7 – 10 ngày làm việc. Cứ 3 ngày một lần, thợ xưởng sẽ gửi ảnh/video tiến độ (tẩy sơn, sơn lót, ráp dàn chân) qua Zalo để bác đồng hành cùng tác phẩm của mình.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        2. Bánh xe sau khi hạ gầm có thực sự lăn bon bon không? <span>▾</span>
+      </div>
+      <div class="faq-a">
+        Chắc chắn lăn mượt 100%! Xưởng sử dụng kỹ thuật mở vè trong 0.3mm và uốn trục thép chữ U vi cơ khí, tuyệt đối không dùng keo 502 dán chết bánh như thợ dạo. Xe trượt dốc kính 15 độ êm ru.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        3. Tôi ở xa (Hà Nội, Đà Nẵng, Cần Thơ) gửi xe vào xưởng thế nào? <span>▾</span>
+      </div>
+      <div class="faq-a">
+        Bác chỉ cần bọc xe vào giấy xốp gửi qua bưu điện/Viettel Post theo địa chỉ xưởng cung cấp. Khi hoàn thiện, xưởng đóng hộp xốp CNC 3 lớp và chịu trách nhiệm bảo hiểm vận chuyển 100% cho bác.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        4. Tôi chưa có phôi xe thì xưởng có hỗ trợ không? <span>▾</span>
+      </div>
+      <div class="faq-a">
+        Bác chỉ cần chọn Gói Trọn Gói Mini GT 1-of-1 (790k). Xưởng sẽ chuẩn bị sẵn phôi xe Mini GT mới nguyên hộp (Nissan GT-R, Honda Civic Type R, Porsche 911...) theo gu màu bác thích.
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Mobile CTA -->
+  <div class="sticky-mobile-cta">
+    <a href="https://zalo.me/0912345678" target="_blank" class="btn-main" style="padding: 14px 20px; font-size: 1rem;">
+      👉 NHẬN VOUCHER 100K & GIỮ SUẤT QUA ZALO
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;"><strong>KAR HOBBY WORKSHOP — XƯỞNG CHẾ TÁC MÔ HÌNH TĨNH ĐỘC BẢN 1:64</strong></p>
+      <p>Địa chỉ xưởng: TP. Hồ Chí Minh · Hotline/Zalo: 0912.345.678 · Website: karhobby.io.vn</p>
+      <p style="margin-top: 12px; font-size: 0.78rem;">© 2026 KAR HOBBY. Bản quyền thuộc về nghệ thuật cơ khí vi mô Việt Nam.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // Dynamic Countdown Timer
+    let totalSeconds = 24 * 3600 - 15;
+    const countdownEl = document.getElementById('countdown');
+    setInterval(() => {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        countdownEl.innerText = `${hours}:${minutes}:${seconds}`;
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>

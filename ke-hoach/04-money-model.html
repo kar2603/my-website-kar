@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Đồ Dòng Tiền (Money Model) — KAR HOBBY Workshop</title>
+  <style>
+    :root {
+      --color-background-primary: #0f172a;
+      --color-background-secondary: #1e293b;
+      --color-background-card: #1e293b;
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #94a3b8;
+      --color-border: #334155;
+      
+      --color-attraction: #38bdf8;
+      --color-upsell: #eab308;
+      --color-downsell: #fb923c;
+      --color-continuity: #4ade80;
+
+      --status-have: #1D9E75;
+      --status-have-bg: rgba(29, 158, 117, 0.15);
+      --status-missing: #E24B4A;
+      --status-missing-bg: rgba(226, 75, 74, 0.15);
+      --status-attention: #EF9F27;
+      --status-attention-bg: rgba(239, 159, 39, 0.15);
+      
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --color-background-primary: #f8fafc;
+        --color-background-secondary: #ffffff;
+        --color-background-card: #ffffff;
+        --color-text-primary: #0f172a;
+        --color-text-secondary: #475569;
+        --color-border: #e2e8f0;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--color-background-primary);
+      color: var(--color-text-primary);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      padding: 32px 16px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(234, 179, 8, 0.12));
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      background-color: rgba(234, 179, 8, 0.2);
+      color: var(--color-upsell);
+      border: 1px solid var(--color-upsell);
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background-color: var(--color-upsell);
+      color: #0f172a;
+      border: none;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+
+    .btn-secondary {
+      background-color: var(--color-background-secondary);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+    .btn-secondary:hover { background-color: var(--color-border); }
+
+    /* 4-COLUMN MONEY MODEL GRID */
+    .money-columns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 992px) {
+      .money-columns { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .money-columns { grid-template-columns: 1fr; }
+    }
+
+    .column {
+      background: var(--color-background-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .col-header {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .col-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .col-desc {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    .col-attraction .col-title { color: var(--color-attraction); }
+    .col-upsell .col-title { color: var(--color-upsell); }
+    .col-downsell .col-title { color: var(--color-downsell); }
+    .col-continuity .col-title { color: var(--color-continuity); }
+
+    .offer-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .offer-card.status-have { border-left: 4px solid var(--status-have); }
+    .offer-card.status-missing { border-left: 4px solid var(--status-missing); }
+    .offer-card.status-attention { border-left: 4px solid var(--status-attention); }
+
+    .offer-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--color-text-primary);
+    }
+
+    .offer-type-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .tag-have { background: var(--status-have-bg); color: var(--status-have); }
+    .tag-missing { background: var(--status-missing-bg); color: var(--status-missing); }
+    .tag-attention { background: var(--status-attention-bg); color: var(--status-attention); }
+
+    .offer-desc {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .forecast-card {
+      background: var(--color-background-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .table-finance {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .table-finance th, .table-finance td {
+      border: 1px solid var(--color-border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .table-finance th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--color-text-primary);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--color-upsell);
+      color: #0f172a;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      display: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <span class="badge">ASSP Framework · Agent 04</span>
+    <h1>BẢN ĐỒ DÒNG TIỀN (MONEY MODEL) — KAR HOBBY WORKSHOP</h1>
+    <p>Hệ thống 4 nhóm Offer tối ưu giá trị trọn đời (LTV) từ 380k lên 1.500.000đ – 3.000.000đ+ · Mục tiêu 35.000.000 VNĐ / tháng (~420 triệu / năm).</p>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="copyMarkdown()">📋 Copy 04-money-model.md</button>
+      <button class="btn btn-secondary" onclick="downloadMarkdown()">💾 Download 04-money-model.md</button>
+      <a href="04-money-model.md" target="_blank" class="btn btn-secondary">📄 Mở file Markdown</a>
+    </div>
+  </div>
+
+  <!-- 4 COLUMNS GRID -->
+  <div class="money-columns">
+    
+    <!-- 1. ATTRACTION -->
+    <div class="column col-attraction">
+      <div class="col-header">
+        <div class="col-title">🧲 1. ATTRACTION</div>
+        <div class="col-desc">Kéo người lạ vào phễu</div>
+      </div>
+
+      <div class="offer-card status-have">
+        <div class="offer-name">Cẩm Nang Tự Độ Xe 1:64</div>
+        <span class="offer-type-tag tag-have">Free Goodwill · Đã có</span>
+        <div class="offer-desc">Tặng Ebook SOP 7 phần miễn phí đổi lấy Zalo & Email dân văn phòng/IT mê xe.</div>
+      </div>
+
+      <div class="offer-card status-attention">
+        <div class="offer-name">Combo Phôi + Mâm 99k</div>
+        <span class="offer-type-tag tag-attention">Decoy Offer · Cần triển khai</span>
+        <div class="offer-desc">Bán mâm + phôi tự ráp 99k. Khi khách hỏi cách ráp → giới thiệu dịch vụ xưởng.</div>
+      </div>
+
+      <div class="offer-card status-attention">
+        <div class="offer-name">Giveaway Khoe Góc Setup</div>
+        <span class="offer-type-tag tag-attention">Giveaway · Kế hoạch Q1</span>
+        <div class="offer-desc">Tặng xe Full Custom 1.34M trên group Nghiện Setup, tặng voucher 100k cho tất cả người tham gia.</div>
+      </div>
+    </div>
+
+    <!-- 2. UPSELL -->
+    <div class="column col-upsell">
+      <div class="col-header">
+        <div class="col-title">🚀 2. UPSELL</div>
+        <div class="col-desc">Tăng giá trị khi mua</div>
+      </div>
+
+      <div class="offer-card status-have">
+        <div class="offer-name">Bù 200k lên Full Paint 2K</div>
+        <span class="offer-type-tag tag-have">Classic Upsell · Đang chạy</span>
+        <div class="offer-desc">Khách đặt gói gầm 180k → gợi ý bù 200k sơn Chameleon đổi màu bóng gương 2K.</div>
+      </div>
+
+      <div class="offer-card status-have">
+        <div class="offer-name">Sa Bàn Garage Diorama LED</div>
+        <span class="offer-type-tag tag-have">Classic Upsell · 350k (gốc 450k)</span>
+        <div class="offer-desc">Trợ giá khi mua kèm xe độ: cắm cổng USB sáng đèn lung linh cạnh bàn phím cơ.</div>
+      </div>
+
+      <div class="offer-card status-have">
+        <div class="offer-name">Anchor Gundam / Xe Lớn</div>
+        <span class="offer-type-tag tag-have">Anchor Upsell · 2.35M</span>
+        <div class="offer-desc">Trưng bày tác phẩm sa trường 2.35M giúp các gói xe 380k - 890k trở nên cực kỳ hợp lý.</div>
+      </div>
+    </div>
+
+    <!-- 3. DOWNSELL -->
+    <div class="column col-downsell">
+      <div class="col-header">
+        <div class="col-title">🛡️ 3. DOWNSELL</div>
+        <div class="col-desc">Giữ chân người từ chối</div>
+      </div>
+
+      <div class="offer-card status-have">
+        <div class="offer-name">Gói Đổi Mâm Nhanh 180k</div>
+        <span class="offer-type-tag tag-have">Feature Downsell · Đã có</span>
+        <div class="offer-desc">Khách chê 380k đắt → chỉ thay dàn chân mâm béo và dán biển số cá nhân hóa.</div>
+      </div>
+
+      <div class="offer-card status-attention">
+        <div class="offer-name">Kit Mâm + Ebook Tự Làm 99k</div>
+        <span class="offer-type-tag tag-attention">Feature Downsell · Cần đóng gói</span>
+        <div class="offer-desc">Khách sợ gửi xe đi xa → bán kit mâm kèm file Ebook để tự trải nghiệm tại nhà.</div>
+      </div>
+
+      <div class="offer-card status-have">
+        <div class="offer-name">Rollover Credit 100%</div>
+        <span class="offer-type-tag tag-have">Rollover Upsell · Đột phá</span>
+        <div class="offer-desc">Tự độ bị hỏng → trừ 100% tiền đã mua mâm/ebook vào chi phí gửi xưởng làm lại!</div>
+      </div>
+    </div>
+
+    <!-- 4. CONTINUITY -->
+    <div class="column col-continuity">
+      <div class="col-header">
+        <div class="col-title">🔄 4. CONTINUITY</div>
+        <div class="col-desc">Dòng tiền định kỳ đều đặn</div>
+      </div>
+
+      <div class="offer-card status-attention">
+        <div class="offer-name">KAR Collector VIP (199k/tháng)</div>
+        <span class="offer-type-tag tag-attention">Continuity Bonus · Mũi nhọn</span>
+        <div class="offer-desc">Mỗi tháng nhận 1 bộ mâm hiếm + Free bảo dưỡng 2 xe/tháng + Ưu tiên xưởng 3 ngày.</div>
+      </div>
+
+      <div class="offer-card status-attention">
+        <div class="offer-name">Gói Hội Viên Năm (1.99M/năm)</div>
+        <span class="offer-type-tag tag-attention">Continuity Bonus · Siêu hời</span>
+        <div class="offer-desc">Đăng ký năm tặng ngay Sa Bàn Garage LED 450k + 1 lượt Full Paint 2K trị giá 380k.</div>
+      </div>
+
+      <div class="offer-card status-missing">
+        <div class="offer-name">Bảo Dưỡng Bộ Sưu Tập Định Kỳ</div>
+        <span class="offer-type-tag tag-missing">Continuity Discount · Kế hoạch</span>
+        <div class="offer-desc">Chăm sóc vệ sinh bộ sưu tập 6 tháng, giảm 20% các bản độ phát sinh.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BẢNG TÍNH DOANH THU -->
+  <div class="forecast-card">
+    <h2 style="font-size: 18px; margin-bottom: 8px;">🎯 Kế Hoạch Đạt 35.000.000 VNĐ / Tháng (~422 Triệu / Năm)</h2>
+    <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 16px;">Phân bổ doanh thu đa luồng giúp xưởng không bị áp lực cày cuốc từng chiếc xe thủ công:</p>
+    
+    <table class="table-finance">
+      <thead>
+        <tr>
+          <th>Hạng mục sản phẩm</th>
+          <th>Đơn giá TB</th>
+          <th>Sản lượng / tháng</th>
+          <th>Doanh thu / tháng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Gói Độ Chuyên Sâu 2K & Trọn Gói 1-of-1</strong></td>
+          <td>550.000đ</td>
+          <td>22 xe</td>
+          <td>12.100.000đ</td>
+        </tr>
+        <tr>
+          <td><strong>Sa bàn Diorama Garage LED USB (Bán kèm & Lẻ)</strong></td>
+          <td>380.000đ</td>
+          <td>18 bộ</td>
+          <td>6.840.000đ</td>
+        </tr>
+        <tr>
+          <td><strong>Gói Độ Cơ Bản & Phụ Kiện Mâm Bánh Béo</strong></td>
+          <td>180.000đ</td>
+          <td>25 lượt</td>
+          <td>4.500.000đ</td>
+        </tr>
+        <tr>
+          <td><strong>Sản phẩm số (Ebook, File 3D STL, SOP Pack)</strong></td>
+          <td>85.000đ</td>
+          <td>45 đơn</td>
+          <td>3.825.000đ</td>
+        </tr>
+        <tr style="background: rgba(74, 222, 128, 0.08);">
+          <td><strong>Hội viên VIP Continuity (Thu nhập thụ động hàng tháng)</strong></td>
+          <td>199.000đ</td>
+          <td>40 thành viên</td>
+          <td><strong>7.960.000đ</strong></td>
+        </tr>
+        <tr style="font-weight: 700; background: rgba(234, 179, 8, 0.1);">
+          <td colspan="3">TỔNG DOANH THU DỰ KIẾN HÀNG THÁNG</td>
+          <td style="color: var(--color-upsell); font-size: 15px;">35.225.000 VNĐ / tháng</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="toast" class="toast">Đã copy toàn bộ nội dung 04-money-model.md!</div>
+
+<script>
+  function copyMarkdown() {
+    fetch('04-money-model.md')
+      .then(res => res.text())
+      .then(text => { navigator.clipboard.writeText(text).then(() => { showToast(); }); })
+      .catch(() => { showToast(); });
+  }
+
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2500);
+  }
+
+  function downloadMarkdown() {
+    const link = document.createElement('a');
+    link.href = '04-money-model.md';
+    link.download = '04-money-model.md';
+    link.click();
+  }
+</script>
+
+</body>
+</html>
